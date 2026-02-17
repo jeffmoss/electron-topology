@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(cargo check:*)",
+      "Bash(nvcc:*)",
+      "Bash(/tmp/test_main.rs:*)",
+      "Bash(/tmp/test_cargo.toml:*)",
+      "Bash(cargo test:*)",
+      "Bash(cargo build:*)",
+      "Bash(cargo run:*)"
+    ]
+  }
+}

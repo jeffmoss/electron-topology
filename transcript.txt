@@ -1,0 +1,854 @@
+[00:00] Hey everyone, this video is a bit
+[00:03] different from the previous ones because
+[00:05] today I want to discuss the structure of
+[00:07] the electron. Since JJ Thompson
+[00:09] demonstrated the electron's existence in
+[00:12] 1897, scientists have measured many of
+[00:15] its properties like its charge, mass,
+[00:17] dimensions, magnetic dipole moment, and
+[00:20] spin. But despite all these properties,
+[00:22] the electron is often still considered a
+[00:24] pointlike entity. mainly because so far
+[00:27] it has been impossible to measure its
+[00:29] exact size or reveal its internal
+[00:32] structure. In this video, we'll look at
+[00:34] the electron from a somewhat
+[00:35] unconventional angle. I will discuss a
+[00:38] model for the electron that was proposed
+[00:40] by John Graeham Williamson and Martin
+[00:42] Fondomar in 1997. In that year, they
+[00:44] wrote a paper with the title, is the
+
+[00:47] electron a photon with tooidal topology.
+[00:50] As you can see, the title is formulated
+[00:52] as a question rather than a firm
+[00:55] statement, which I think represents the
+[00:57] inquisitive nature of the paper. When it
+[01:00] was published, it received the usual
+[01:02] polite silence, which I think is quite
+[01:04] common for papers that challenge the
+[01:06] mainstream scientific perspective, but I
+[01:08] think it's still worthwhile to discuss
+[01:10] it here because to me personally, it
+[01:12] offered some interesting views on the
+[01:14] properties of the electron. Let's listen
+
+[01:16] to what John Williamson said when asked
+[01:18] about the origin of the theory that he
+[01:20] developed with Fonder Mark
+[01:22] >> worked in Hi physics [music] CERN in
+[01:24] Switzerland to see if we could analyze
+[01:26] and learn about how stuff worked. Take
+[01:28] electron apostron put them together and
+[01:32] they anhilate to give pure energy in the
+[01:34] form of light and what the inspiration
+[01:36] was was maybe maybe these [music]
+[01:38] particles are made of light.
+[01:41] >> Okay, so this will be the main question
+
+[01:43] that I'm going to discuss. What if
+[01:45] particles are actually made of light?
+[01:48] It's an interesting thought, although
+[01:49] using the word light when referring to
+[01:51] gamma radiation will probably be
+[01:53] stretching the imagination of many. But
+[01:56] of course, gamma radiation is also
+[01:58] electromagnetic field energy only with a
+[02:01] much higher frequency than visible
+[02:03] light.
+[02:04] In the clip, Williamson referred to the
+[02:06] anhilation process of an electron and
+[02:09] posetron that results in gamma radiation
+[02:11] with identical total energy content.
+[02:14] Conversely, electron positron pairs can
+[02:17] be created from very high energy gamma
+[02:20] radiation. So, it's not that weird to
+[02:22] think that what's on either side of
+[02:24] these processes are basically two states
+[02:26] of the same thing and that electrons and
+[02:29] posetrons may be self-confined
+[02:31] electromagnetic energy. Now, a moment
+[02:34] ago I mentioned that the electron is
+[02:36] generally considered a pointlike entity
+[02:39] and this is based on experimental
+[02:41] evidence. for example, high energy
+[02:43] collision experiments. But if you assume
+[02:45] that an electron is a point without any
+[02:47] internal structure, you need to impose
+[02:50] all those properties onto that point
+[02:52] without any physical basis of how they
+[02:55] arise. And the point-like view also
+[02:57] creates some very fundamental questions.
+[03:00] For example, how can we calculate the
+[03:02] energy contained in a column field
+[03:04] resulting from a point charge? As it
+[03:07] turns out, we can calculate the energy
+[03:09] of a field outside from a radius with
+[03:11] respect to where charge resides in
+[03:13] space. But for a point entity, this
+[03:16] radius is by definition zero. Which
+[03:18] means that the field of any pointlike
+[03:21] charge would have to contain an infinite
+[03:23] amount of energy. But we know that this
+[03:25] is not the case. The total energy
+[03:27] contained in an electron at rest is
+[03:30] equal to its rest mass times the speed
+[03:32] of light squared which we can calculate
+[03:34] to be approximately half a mega electron
+[03:36] volt. So without using some kind of
+[03:39] renormalization of this infinity there
+[03:42] must be a limit to the minimum
+[03:44] dimensions of where charge as a property
+[03:46] must live in space. Now by combining
+[03:49] these two formulas we can arrive at the
+[03:52] so-called classical electron radius
+[03:54] which must be equal or larger than 2.8 *
+[03:58] 10us 15 m. That's a very small value but
+[04:01] several orders of magnitude larger than
+[04:03] the interaction radius derived from high
+[04:06] energy collision experiments.
+[04:08] But there are other properties of the
+[04:10] electron that are rather incompatible
+[04:12] with a pointlike entity. For example,
+[04:15] magnetic dipole moment and spin. It's
+[04:18] impossible to imagine how properties
+[04:20] with a spatial asymmetry can be
+[04:22] physically present in a pointlike
+[04:24] entity. And this is where the theory of
+[04:26] Williamson and Fenomark is different. It
+[04:28] deres the properties of the electron
+[04:30] such as charge, magnetic moment and spin
+[04:34] basically by assuming that internally
+[04:36] the electron is just electromagnetic
+[04:38] field energy.
+[04:40] Unfortunately, the authors of this paper
+[04:42] have both died in recent years, but I'll
+[04:45] try to do my best to explain what they
+[04:47] came up with. And if the ideas presented
+[04:49] in this video appeal to you, there is
+[04:52] actually a website dedicated to this
+[04:53] paper and the later work done by John
+[04:56] Williamson. A link can be found in the
+[04:58] description of this video.
+[05:01] Now, the paper isn't easy reading. So
+[05:03] before we dive into it, there are two
+[05:06] concepts that are key to understanding
+[05:08] the paper which are Compton wavelength
+[05:10] and circular polarization in
+[05:12] electromagnetic fields. It might be that
+[05:15] you are already familiar with these. So
+[05:17] in that case you can skip ahead to
+[05:19] either of these moments in the video.
+[05:23] Let's start with Compton wavelength. The
+[05:26] Compton wavelength is named in honor of
+[05:28] Arthur Compton who did a set of
+[05:29] experiments involving X-ray scattering.
+[05:32] And these experiments were vital for
+[05:34] demonstrating the quantized nature of
+[05:36] light especially in the high frequency
+[05:38] domain. I'm not going to explain the
+[05:40] experiments here. Instead, I'll point
+[05:42] you to a very good video on the subject.
+[05:44] Here I'll explain the meaning of content
+[05:46] wavelength and give some context related
+[05:49] to electromagnetic fields.
+[05:52] Electromagnetic fields can be described
+[05:54] classically by the Maxwell equations.
+[05:56] Basically such a field consists of an
+[05:59] electric and magnetic field component
+[06:00] that are directly related and are
+[06:02] orthogonal to each other. A field
+[06:05] carries momentum and energy and has
+[06:07] amplitude and wavelength or frequency.
+[06:10] And of course this wavelength and
+[06:12] frequency are related to each other by
+[06:14] the propagation speed which is the speed
+[06:17] of light C. Now if you look at the
+[06:19] Maxwell equations that describe this
+[06:21] type of field, the speed of light is
+[06:24] nowhere to be found. And that is because
+[06:26] field propagation speed is the result of
+[06:28] two constants in these differential
+[06:30] equations called electric permitivity
+[06:33] and magnetic permeability.
+[06:35] These are two very fundamental
+[06:37] properties of the vacuum that together
+[06:39] describe the elastic behavior of the
+[06:41] field as a result of charge being
+[06:43] accelerated in space.
+[06:46] Now the energy and momentum contained in
+[06:48] radiation can also be transferred to
+[06:50] matter and this is where photons enter
+[06:52] the picture.
+[06:54] There are different ways that you can
+[06:56] look at photons in the high energy
+[06:58] regime. I guess it's okay to think as
+[07:00] photons in terms of particles of light
+[07:02] because the field actually starts to
+[07:04] behave very particle-like. But in my
+[07:07] opinion, the best way to understand
+[07:08] photons is to state that they're not the
+[07:11] field, but the energy transactions or
+[07:13] interactions with the field. The reason
+[07:16] why I personally prefer this view is
+[07:18] that it allows for interference to be
+[07:20] understood intuitively.
+[07:23] So a field might for example transfer an
+[07:25] amount of energy to an atom leading to
+[07:27] an excited state. And this means that
+[07:30] energy previously contained in the field
+[07:32] is now stored locally in the atom. for
+[07:35] example, as electrostatic energy in the
+[07:37] electron configuration around the
+[07:39] nucleus or as kinetic energy transferred
+[07:42] to an electron being expelled. And so
+[07:44] this exchange is in fact the absorption
+[07:47] of a photon of energy by the atom.
+[07:51] Now the remarkable thing about this
+[07:52] energy exchange is that it occurs in
+[07:55] well-defined discrete amounts or quanta.
+[07:58] Additionally, the energy in a quantum is
+[08:01] not related to field strength but merely
+[08:03] to the frequency of the radiation. And
+[08:06] this relationship between energy and
+[08:08] frequency is actually a linear one. And
+[08:10] this is described by this factor which
+[08:12] is plank's constant. And we can
+[08:15] experimentally demonstrate that field
+[08:17] frequency is a key parameter regarding
+[08:19] the amount of energy transferred in a
+[08:21] photon. For example, in the
+[08:23] photoelectric effect. Now, as a side
+[08:26] note, the probability of an energy
+[08:28] transfer actually happening is related
+[08:30] to the intensity of the radiation. In
+[08:32] other words, to field amplitude squared.
+[08:36] Okay. Now, we get to the definition of
+[08:37] Compton wavelength. The Compton
+[08:39] wavelength is not some given number or
+[08:42] constant. It's actually unique to a
+[08:44] specific particle. We can for example
+[08:46] talk about the Compton wavelength of the
+[08:48] electron. As I've just discussed, the
+[08:51] energy exchange in a quantum between
+[08:53] field and matter is related to
+[08:54] wavelength. Now, at very short
+[08:56] wavelengths, we can get to a point where
+[08:59] the energy exchange in a quantum is so
+[09:01] high that it allows for the creation of
+[09:04] matter in the form of particles with
+[09:06] mass. And that is because there's also a
+[09:08] relationship between energy and mass,
+[09:11] which is Einstein's famous ESMC squ
+[09:13] relation.
+[09:15] Now in this case you see that the
+[09:17] creation of matter involves two
+[09:19] particles at the same time an electron
+[09:21] and a posetron and that is because the
+[09:23] creation of matter is bound to certain
+[09:25] symmetry conditions like conservation of
+[09:28] charge which for this case means that
+[09:30] you cannot create a single electron from
+[09:32] a photon. But the creation of two
+[09:34] particles would actually require double
+[09:36] the amount of energy and so double the
+[09:39] radiative frequency. Just for reference,
+[09:42] the energy required to create these two
+[09:44] particles is a little over 1 mega
+[09:46] electron volt, which is approximately
+[09:48] half a million times higher than the
+[09:50] energy contained in a photon of visible
+[09:53] light. But the Compton wavelength of a
+[09:56] particle merely relates the wavelength
+[09:58] of radiation to the energy required to
+[10:01] create it. And with the electron
+[10:03] containing 0.511
+[10:05] mega electron volt of energy, its
+[10:07] Compton wavelength is equal to 2.4 4 *
+[10:10] 10 -12 m.
+[10:13] So that is the Compton wavelength of a
+[10:15] particle. The wavelength of the
+[10:16] radiation required to make a photon with
+[10:19] sufficient energy to create that
+[10:22] particle.
+[10:25] In the previous schematics, I
+[10:26] illustrated an electromagnetic field
+[10:28] like this, which schematically shows the
+[10:30] electric and magnetic field values along
+[10:32] a specific line of points in space. In
+[10:35] the real world, fields are way more
+[10:37] complex and propagate in 3D space. This
+[10:40] animation was made by Grant Sanderson of
+[10:42] Three Blue, One Brown. It shows the
+[10:44] electric field factors around a linearly
+[10:47] accelerated charge. In 3D, it looks a
+[10:50] bit busy and it's easier to understand
+[10:52] by just considering the values in a
+[10:55] single plane or even just what it looks
+[10:57] like along a single line. Here you
+[11:00] observe that in every single point along
+[11:02] the line the electric field alternates
+[11:04] between positive and negative values.
+[11:07] But there are also electromagnetic
+[11:09] fields that look somewhat different. For
+[11:11] example, circularly polarized fields
+[11:13] associated with circularly accelerated
+[11:16] charge. What you notice in this case is
+[11:18] that the electric field value is never
+[11:20] zero but has a constant magnitude while
+[11:23] its direction rotates. I wanted to show
+[11:26] you this because circular polarization
+[11:28] also plays a role in the model
+[11:30] presented. And since it's so different
+[11:32] from how most people imagine the
+[11:34] propagation of electromagnetic field
+[11:35] energy, I wanted to show you this
+[11:37] animation, if only to emphasize how
+[11:40] limited and simplified the schematics
+[11:42] are that I've used so far to visualize
+[11:44] fields.
+[11:49] The way that Williamson and Fondmark
+[11:51] imagined an electron is as follows. And
+[11:53] I must warn you that the visualizations
+[11:55] they use are highly schematic and
+[11:57] conceptual. Visualize a Compton
+[11:59] wavelength of circularly polarized
+[12:02] electromagnetic field as sort of a
+[12:04] twisted strip. The electric and magnetic
+[12:06] field components are indicated by E and
+[12:08] B. The magnetic component is oriented in
+[12:11] the plane of the strip and E is
+[12:13] perpendicular to the plane either
+[12:15] directed towards or away from us. The
+[12:18] direction of linear momentum and the
+[12:20] propagation speed are indicated as L and
+[12:23] C which are both pointing to the right.
+[12:26] Now imagine that you are able to bend
+[12:28] this strip into a closed loop that forms
+[12:31] a double helix and this then results in
+[12:33] a continuously curved field. So the
+[12:35] total length contained in this double
+[12:37] helix is still one Compton wavelength.
+[12:40] But if you now look at the model, it's
+[12:41] clear that the linear momentum that was
+[12:44] originally contained in the field has
+[12:46] now been converted to angular momentum.
+[12:48] And due to the internal orientation of
+[12:50] the magnetic field, the helical shape
+[12:52] also results in a net magnetic dipole
+[12:54] moment. Also, due to the bend shape, the
+[12:58] electric field on the outside always
+[13:00] points in the same direction. And
+[13:02] finally, because of the confinement of
+[13:04] field energy and momentum in space, this
+[13:07] structure would automatically represent
+[13:09] its energy worth of inertial mass.
+[13:14] So, let me show you how this works using
+[13:16] a bit of tinkering. Here you see me
+[13:18] drawing the electric and magnetic field
+[13:20] orientations and the energy propagation
+[13:22] direction on a strip of paper. And I'll
+[13:25] do the same on the other side.
+[13:29] So if I take this strip and bend it into
+[13:31] a configuration that represents circular
+[13:33] polarization, I can connect the
+[13:35] beginning and end such that the field is
+[13:37] continuous and arrive at this double
+[13:40] helix. And if we now examine the outside
+[13:42] of this helix, we indeed observe the
+[13:44] indicated electric and magnetic field
+[13:46] directions of the schematic.
+[13:50] Okay, this model is kind of crude. So
+[13:52] let's now refine it a bit. What the
+[13:54] authors propose is that the field and
+[13:56] its internal momentum is distributed
+[13:59] through space in what looks like a donut
+[14:01] or tooid. In this image, a chunk of the
+[14:04] donut is cut out to reveal its internal
+[14:06] structure, showing several nested toid
+[14:09] shapes. This representation might
+[14:11] suggest that the electron is a little
+[14:13] donut, but that's not what this figure
+[14:16] tries to express. It's actually a
+[14:18] schematic of how energy flows and how
+[14:20] the momentum is distributed in this
+[14:22] model for the electron.
+[14:25] On the surface of the donut, the authors
+[14:27] have drawn curved lines which are called
+[14:29] geodessics. Each geodessic curves over
+[14:32] the surface of the donut in a closed
+[14:34] loop and is one Compton wavelength long.
+[14:37] One of the geodessics is accentuated and
+[14:39] shows the direction of momentum and the
+[14:42] flow of energy. And if you follow along
+[14:44] its path, you see that it indeed
+[14:46] describes a double loop. The nested
+[14:49] toids are drawn here to indicate that
+[14:50] the internal momentum is not located in
+[14:53] a single surface, but is contained in a
+[14:55] continuous structure that expands both
+[14:58] inward as well as outward.
+[15:01] Because a single Compton wavelength is
+[15:03] contained in a double helix, the radius
+[15:05] R is equal to the Compton wavelength
+[15:07] divided by 4 pi, which would suggest
+[15:10] that the core of the structure is
+[15:12] somewhat smaller than the Compton
+[15:13] wavelength. From a physics perspective,
+[15:16] it would actually be impossible to
+[15:18] contain all the energy inside a space
+[15:20] that is smaller than approximately half
+[15:22] a wavelength. So the characteristic size
+[15:24] of this object would be in the order of
+[15:26] between half and one content wavelength.
+[15:29] But as we'll see later, the exact size
+[15:31] is not really that relevant.
+[15:35] Let's now dive a bit deeper into the
+[15:37] electromagnetic configuration as
+[15:39] described in the model. So what the
+[15:40] authors propose is that the magnetic
+[15:42] field is always parallel to the surfaces
+[15:45] indicated in the toid. So the magnetic
+[15:47] field lines shown here in blue form
+[15:49] closed loops. Given the direction of the
+[15:52] internal momentum, the electric field
+[15:54] must therefore be perpendicular to the
+[15:56] surface. This results in the electric
+[15:59] field component shown in red to be
+[16:01] orthogonal everywhere to the surface.
+[16:04] Since the electron is negatively
+[16:06] charged, the field is pointing inwards
+[16:08] according to the conventions of how to
+[16:10] describe field direction. But of course,
+[16:12] a situation where the magnetic field
+[16:14] lines run in the opposite direction is
+[16:16] equally feasible and would represent
+[16:19] positive charge. Because we're
+[16:20] considering the electron, let's stick
+[16:22] with the negative charge representation
+[16:24] for now.
+[16:26] So if you look at how the field itself
+[16:28] rotates along the surface of a tooid,
+[16:30] it's very similar to circularly
+[16:32] polarized light. It actually rotates
+[16:34] over two pi along the toid surface and
+[16:38] over 4 pi inside the toid shape in a
+[16:41] double loop.
+[16:42] Now I guess the most difficult aspect in
+[16:45] this field description is how can you
+[16:47] bend light such that it follows a curved
+[16:49] path in space and I will get back to
+[16:52] this near the end of the video. Let me
+[16:54] first elaborate a bit on the current
+[16:56] model. The magnetic field lines are now
+[16:59] oriented such that this structure has a
+[17:01] net magnetic moment as indicated by the
+[17:04] large blue arrow through the center. But
+[17:06] there's something else that I want to
+[17:08] point out about this structure that is
+[17:10] much less obvious. If you take the
+[17:12] mirror image of this object, the
+[17:14] momentum is flowing in the opposite
+[17:16] direction. This results in the magnetic
+[17:18] moment pointing downwards instead of
+[17:20] upwards. But if you now try rotating
+[17:23] this structure back on itself, you're
+[17:25] actually not going to get the exact same
+[17:28] thing back. And that is because the
+[17:30] geodessics will be following a different
+[17:32] rotational path along the toid surface.
+[17:36] So these particles come in two different
+[17:37] flavors that have different kyality and
+[17:40] internally have two unique spin states
+[17:43] for a part of the internally contained
+[17:45] momentum. But both of these lead to an
+[17:48] identical charge distribution and value
+[17:50] for the magnetic dipole moment.
+[17:54] If we analyze the internal momentum
+[17:56] along one specific geodessic, we can
+[17:58] distinguish two types of angular
+[18:00] momentum. One due to the momentum
+[18:02] rotating around the toidal axis over 4
+[18:05] pi and the other due to a rotation of 2
+[18:08] pi along the toidal surface. And as a
+[18:11] consequence, the entity as a whole will
+[18:13] not be some static momentum distribution
+[18:15] in space, but one that is constantly
+[18:18] reorienting itself due to precession
+[18:21] with the energy racing around at the
+[18:22] speed of light inside a volume that is
+[18:24] the size of a Compton wavelength or
+[18:26] smaller. The internal oscillation
+[18:28] frequency will occur at two times the
+[18:31] Compton frequency, which results in a
+[18:33] rather large value for the internal
+[18:35] oscillation frequency. What this
+[18:37] effectively means is that the electron
+[18:39] and its resulting external field will
+[18:41] appear as fully spherosymmetric at any
+[18:44] measurable time scale.
+[18:47] Of course, everything I stated so far is
+[18:50] also valid for the situation that the
+[18:52] electric field lines are pointing
+[18:53] outwards and the magnetic field is
+[18:56] rotating in the other direction. And
+[18:57] this state represents the positron which
+[19:00] we know has an identical charge but of
+[19:02] opposite sign and has an identical value
+[19:04] for the magnetic moment. And the
+[19:06] posetron like the electron can also have
+[19:09] two unique internal spin states.
+[19:13] So let me quickly summarize what just
+[19:15] happened. By assuming a toidally shaped
+[19:18] electromagnetic field distribution in
+[19:19] the electron, charge and magnetic moment
+[19:22] are emergent properties. The resulting
+[19:25] electric field is sphere or symmetric
+[19:27] and allows for two opposing field
+[19:29] directions indicative of positive and
+[19:31] negative charge. And each of these two
+[19:33] differently charged entities can have
+[19:36] two distinct internal spin states. Now
+[19:38] the paper describes these ideas in much
+[19:41] more detail. For example, it
+[19:42] demonstrates how this configuration
+[19:44] leads to half integral spin values or
+[19:47] how to calculate a magnetic dipole
+[19:49] moment that matches experiments. I will
+[19:51] not replicate these derivations here.
+[19:54] But what I will do is quickly show you
+[19:56] the calculation for the value of the
+[19:58] charge.
+[20:01] The derivation of charge from photon
+[20:03] energy works as follows. We assume that
+[20:05] there is some dimension R that
+[20:07] represents its size and has a direct
+[20:10] relationship with Compton wavelength.
+[20:12] This allows us to estimate the
+[20:14] electron's volume. We're also assuming
+[20:17] that the energy density in the electron
+[20:19] is stored in equal amounts in the
+[20:21] electric and magnetic field density.
+[20:24] This results in the electric field
+[20:25] energy density to be half of the total
+[20:28] energy density.
+[20:31] We actually know the total internal
+[20:32] energy based on the constant wavelength
+[20:34] of the electron. And this allows us to
+[20:36] relate field value at dimension r to the
+[20:39] total energy contained in the electron.
+[20:42] So by combining all these relationships
+[20:44] we can calculate the average resulting
+[20:46] field value. And what we'll do next is
+[20:49] relate this field value to the field of
+[20:52] a classical kum charge at radius r.
+[20:57] Here are the two equations together. To
+[20:59] the left our particle and to the right
+[21:01] the field at radius r for a classical
+[21:03] colum charge with a charge value q. And
+[21:06] what we can do is combine these two
+[21:08] formulas and extract the charge value Q
+[21:11] that satisfies the equality. Now in the
+[21:14] paper this elaborate equation is
+[21:16] simplified a bit first. But by using
+[21:18] this final result we can now fill in the
+[21:21] values and arrive at 1.47 * 10us 19 k
+[21:25] for the charge generated by the model.
+[21:28] If you compare this value to the value
+[21:30] experimentally measured for the
+[21:31] electron, you see that it's quite close
+[21:34] but not exactly the same. It's about 9%
+[21:37] lower. However, it illustrates how with
+[21:40] relatively simple reasoning, we can
+[21:42] calculate a value for charge that is
+[21:44] remarkably close to the experimental
+[21:46] value.
+[21:48] Now, you might not have noticed at this
+[21:50] point, but this formula for charge does
+[21:52] not contain a radius or a Compton
+[21:55] wavelength. And that is because we've
+[21:57] made a specific assumption about the
+[21:59] relationship between radius R and
+[22:01] Compton wavelength. And the charge value
+[22:04] that emerges under these assumptions is
+[22:06] a consequence of the tooidal
+[22:08] configuration and the internally stored
+[22:10] energy. So the model would allow for
+[22:13] tweaking of the theoretical value of the
+[22:15] charge using some smudge factor in the
+[22:18] relation between radius and quantum
+[22:19] wavelength. However, the authors decided
+[22:22] not to go down this path in the current
+[22:24] paper.
+[22:27] Okay, so that's in a nutshell how a
+[22:29] fairly realistic value for charge
+[22:31] emerges from the tooidal model. What I
+[22:33] want to do next is discuss two questions
+[22:36] that I'm pretty sure a lot of viewers
+[22:38] might have now. And those are how can
+[22:40] you justify that a particle with the
+[22:43] size of a content wavelength interacts
+[22:45] pointlike in high energy collision
+[22:47] experiments? And second, what could be
+[22:50] behind the apparent curvature of space
+[22:52] that leads to this type of field
+[22:54] confinement?
+[22:57] Let's start with the first question.
+[22:59] From the model, a typical dimension for
+[23:02] the electron in the order of a Compton
+[23:04] wavelength emerges. But in high energy
+[23:07] collision experiments where electrons
+[23:08] are accelerated very close to the speed
+[23:11] of light, neither their size nor their
+[23:13] internal structure is revealed. So why
+[23:16] would electrons interact point-like when
+[23:18] they aren't? To explain this
+[23:20] discrepancy, the authors refer to the
+[23:22] theory of Louis de Bruy called harmony
+[23:24] of faces. And this theory states that
+[23:27] the phase associated with the internal
+[23:29] oscillation should remain synchronized
+[23:32] between different inertial reference
+[23:34] frames. So this theory tries to
+[23:36] reconcile the relativistic effects of
+[23:38] time dilation with the internal phase or
+[23:41] clock of the energy oscillating within a
+[23:44] moving particle. And the conclusion of
+[23:46] the Bruy was that every moving particle
+[23:49] must have an accompanying wave with a
+[23:51] wavelength that is dependent on its
+[23:53] momentum. In other words, dependent on
+[23:56] its internal mass and velocity. And
+[23:58] under relativistic conditions, you'd
+[24:00] have to add the Laurens factor in the
+[24:03] momentum calculation.
+[24:05] So where does this wave behavior in
+[24:07] particles come from? Well, basically
+[24:10] it's the result of interference between
+[24:12] the Doppler shifted parts that make up
+[24:15] the total internal momentum.
+[24:18] Let me try to explain this using some
+[24:20] simplified schematics. Here we have a
+[24:22] particle that is static with respect to
+[24:25] the reference frame we're currently in.
+[24:27] And for illustrative purposes, we assume
+[24:29] that the internal energy is running in
+[24:31] circles with the speed of light like a
+[24:33] little clock. Now because this particle
+[24:36] is static its velocity and therefore its
+[24:39] momentum is zero. So according to the
+[24:41] formula a particle at rest would have an
+[24:44] infinitively long debris wavelength. But
+[24:47] this statement is actually meaningless
+[24:49] because defining a debris wavelength
+[24:51] only makes sense for particles that are
+[24:53] actually moving through space as
+[24:56] hopefully will become clear.
+[24:58] Consider the same particle moving with
+[25:00] velocity V in our reference frame. To
+[25:04] maintain internal phase synchronization,
+[25:06] part of the internal oscillation must be
+[25:09] redshifted to a lower frequency and
+[25:11] another part blue shifted to a higher
+[25:13] frequency. And the red and blue shifts
+[25:15] are of course intended as an analogy to
+[25:18] visible light to indicate this change in
+[25:21] frequency. So for a moving particle,
+[25:24] internal momentum and energy is
+[25:26] distributed over a range of frequencies.
+[25:29] And these frequency components are not
+[25:31] spatially separated as this schematic
+[25:34] illustration implies. They're actually
+[25:36] superimposed and produce a net phase
+[25:39] interference in the internal momentum
+[25:41] distribution. And it's this interference
+[25:43] that results in a beat frequency. Now
+[25:46] the de bruy wavelength corresponds to
+[25:48] the wavelength of this beat pattern as a
+[25:51] particle moves through space.
+[25:54] So the fact that every moving particle
+[25:56] has a de wavelength does not mean that a
+[26:00] particle is actually a wave. It means
+[26:02] that the internal oscillation of energy
+[26:04] and momentum manifests itself as a
+[26:06] wavelike distribution within a specific
+[26:09] inertial reference frame. So with this
+[26:12] in mind we can understand why a faster
+[26:14] moving particle has a shorter debris
+[26:16] wavelength. It's because the red and
+[26:18] blue shifts are larger in this case and
+[26:20] the interference results in a higher
+[26:22] beat frequency. And if we now consider a
+[26:25] particle with larger mass in other words
+[26:27] a particle with a shorter content
+[26:29] wavelength and a higher internal
+[26:31] frequency the resulting de wavelength
+[26:33] will be shorter than that of a lighter
+[26:35] particle at the same velocity.
+[26:39] The characteristic wavelength revealed
+[26:41] in this way is inversely proportional to
+[26:44] the momentum of the particle. And yes,
+[26:47] it's real. It can be experimentally
+[26:49] observed in basically every particle
+[26:51] that has momentum. And this made the
+[26:53] equation of the bri to one of the
+[26:55] pillars of modern physics.
+[26:59] What I just described is actually very
+[27:01] closely related to the Heisenberg
+[27:03] uncertainty principle. If you compare
+[27:05] the distribution of momentum circulating
+[27:08] in a particle that is moving to that of
+[27:10] a stationary one, it must be wider due
+[27:13] to a shift to higher and lower
+[27:15] frequencies within the total momentum
+[27:17] distribution. And so the uncertainty in
+[27:20] momentum widens as a particle moves
+[27:22] faster, which allows for the uncertainty
+[27:25] of a particle's position to shrink in
+[27:27] measurements because of the uncertainty
+[27:30] relationship between the two.
+[27:33] Determining the size of a particle in
+[27:35] experiments is all about observing its
+[27:37] interaction with other particles. And
+[27:40] the authors determined that the
+[27:41] resolving power of one particle with
+[27:44] respect to another one is equal to the
+[27:46] de wavelength divided by two. But in the
+[27:49] paper they also show that the
+[27:51] characteristic dimension of the electron
+[27:54] due to relativistic effects must be
+[27:56] smaller than this value. And this
+[27:58] effectively means that you cannot
+[28:00] resolve the internal structure of an
+[28:02] electron using an electron.
+[28:07] The last question that I want to discuss
+[28:09] here is the mechanism behind the energy
+[28:11] self-confinement. So how can an
+[28:14] electromagnetic field curve such that it
+[28:17] becomes a local oscillation in space?
+[28:20] Now in search of an explanation, the
+[28:22] authors consider several mechanisms. Can
+[28:24] the curvature leading to the
+[28:26] confinement, for example, be
+[28:27] gravitational?
+[28:28] Light is known to bend around heavy
+[28:30] objects and cause gravitational lensing.
+[28:32] And of course, an electron is not a
+[28:34] heavy object, but the effects of gravity
+[28:37] are not related to mass per se, but to
+[28:39] the energy density in space. And the
+[28:42] electron might locally contain a high
+[28:44] energy density. However, we can rule out
+[28:47] gravitation as a cause because the
+[28:49] effects expected based on the local
+[28:51] energy density would be way too small to
+[28:54] offer any kind of explanation.
+[28:58] Okay, so what about some kind of
+[28:59] magnetic confinement? In the model, we
+[29:02] observe that the magnetic field lines
+[29:04] are neatly aligned in closed loops. So
+[29:06] maybe this creates some kind of energy
+[29:08] minimum which keeps the field in the
+[29:10] current state. Williamson and Fenomark
+[29:13] don't rule out this option, but they
+[29:15] argue that it cannot be the only
+[29:17] mechanism responsible and that is
+[29:19] because this type of confinement should
+[29:21] be scalable and allow for different
+[29:23] values of the internal energy. In other
+[29:25] words, it would not by itself have to
+[29:27] lead to a single unique internal energy
+[29:30] of half a mega electron volt. So the
+[29:33] distinct energy value indicates that
+[29:35] there must be some additional mechanisms
+[29:37] at play
+[29:39] which brings us to whether the
+[29:40] confinement involves nonlinear
+[29:42] phenomena. It's known that intense
+[29:44] electromagnetic fields can also curve
+[29:46] space time and the field value where
+[29:49] this is expected to happen is known as
+[29:51] the swinger limit. It refers to a
+[29:53] critical field value of approximately
+[29:55] 1.3 * 10 18 volt per meter which is
+[29:59] extremely high. At this field value, the
+[30:01] polarization of space becomes so strong
+[30:04] that the vacuum cannot support the field
+[30:06] anymore. And it's at these field values
+[30:08] that matter can emerge from an
+[30:10] electromagnetic field. However, if we
+[30:13] estimate the average field value inside
+[30:15] the electron based on the current
+[30:17] configuration, it's quite a bit smaller
+[30:19] than the swinger limit value. So I guess
+[30:21] the curvature of space cannot be
+[30:23] explained from the field value being at
+[30:25] the swinger limit here.
+[30:28] However, the shrinking limit could of
+[30:30] course serve as a barrier between two
+[30:32] different types of electromagnetic field
+[30:34] behavior. One where the field can frolic
+[30:36] around freely and one where it got
+[30:38] trapped locally in space. And in that
+[30:40] sense, it's interesting to think about
+[30:42] how the energy confined in an electron
+[30:44] could escape spontaneously.
+[30:48] Electrons are considered to be stable
+[30:50] because they do not decay in isolation
+[30:53] unlike for example much heavier
+[30:55] elementary particles like the muon or
+[30:57] composite particles like the neutron
+[30:59] which both have relatively short
+[31:01] lifetimes. But electrons and posetrons
+[31:04] are stable and they also have the lowest
+[31:06] mass of all charged elementary
+[31:08] particles. There are actually two other
+[31:10] fundamental particles that contain less
+[31:12] internal energy, but these are nutrinos.
+[31:15] So they do not have charge, which means
+[31:17] that an isolated electron cannot
+[31:20] annihilate to form a bunch of nutrinos,
+[31:23] nor can it convert back to photon energy
+[31:25] because such a conversion would also
+[31:28] violate the conservation of charge. In
+[31:30] fact, the conservation of charge is a
+[31:32] super powerful principle that applies to
+[31:35] every creation and annihilation process.
+[31:38] Now in this model, charge arises from
+[31:40] how energy is contained in a very
+[31:43] peculiar magnetic field configuration.
+[31:46] And this configuration appears to be a
+[31:48] topologically continuous and self-closed
+[31:50] entity. This seems to be the main
+[31:53] difference between these two
+[31:55] electromagnetic field configurations,
+[31:57] which would mean that going from one
+[31:59] state to the other is all about closing
+[32:01] and opening this magnetic
+[32:03] self-ontinuity.
+[32:05] something that can apparently only
+[32:06] happen when the vacuum itself breaks
+[32:08] down temporarily under extreme field
+[32:11] conditions.
+[32:13] So, is an electron a photon with tooidal
+[32:15] topology? I would be very interested to
+[32:18] know what you think. Is this indeed a
+[32:20] model to be politely ignored or does it
+[32:23] resonate with you? Please let me know in
+[32:25] the comments. What I personally like is
+[32:27] how it turns an abstract and pointlike
+[32:29] entity into something that is truly
+[32:32] physical. How charge, magnetic moment
+[32:35] and spin emerge by confinement of a
+[32:37] field in a tooidal shape and the fact
+[32:40] that we cannot measure its size or
+[32:42] structure is a consequence of
+[32:44] relativistic physics. In fact, in this
+[32:47] theory, there's just one building block
+[32:49] for everything, the vacuum. Okay, vacuum
+[32:52] spiced up with a bit of energy. But all
+[32:55] you need for a theory of everything is
+[32:56] how this vacuum behaves, especially
+[32:59] under high frequency strain. So my
+[33:02] suggestion would be let's just keep
+[33:04] questioning the universe.
