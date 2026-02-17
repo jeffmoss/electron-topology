@@ -10,7 +10,12 @@
       "Bash(/tmp/test_cargo.toml:*)",
       "Bash(cargo test:*)",
       "Bash(cargo build:*)",
-      "Bash(cargo run:*)"
+      "Bash(cargo run:*)",
+      "Bash(uv:*)",
+      "Bash(dpkg:*)",
+      "Bash(sudo apt install:*)",
+      "Bash(curl:*)",
+      "Bash(/home/jmoss/.local/bin/pip install:*)"
     ]
   }
 }
