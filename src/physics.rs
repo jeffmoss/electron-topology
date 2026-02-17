@@ -15,6 +15,9 @@ pub const ELECTRON_MASS: f64 = 0.51099895;
 pub const MUON_MASS: f64 = 105.6583755;
 pub const TAU_MASS: f64 = 1776.86;
 
+// Tau/electron mass ratio
+pub const TAU_ELECTRON_RATIO: f64 = 3477.48;
+
 // Aspden cavity resonance value
 pub const ASPDEN_VALUE: f64 = 206.7683078;
 

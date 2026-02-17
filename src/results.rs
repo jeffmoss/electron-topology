@@ -78,6 +78,33 @@ impl ResultCollector {
         items
     }
 
+    /// Remove duplicate candidates: merge entries with the same mode pair
+    /// encoding (p == p, q == q) and nearly identical rho (within 1e-8).
+    /// Keeps only the best (lowest) score for each unique geometry.
+    pub fn dedup(&mut self) {
+        let mut items: Vec<GeometryCandidate> =
+            self.heap.drain().map(|r| r.0).collect();
+        items.sort_by(|a, b| a.score.partial_cmp(&b.score).unwrap_or(Ordering::Equal));
+
+        let mut kept: Vec<GeometryCandidate> = Vec::new();
+        for candidate in items {
+            let dominated = kept.iter().any(|k| {
+                k.p == candidate.p
+                    && k.q == candidate.q
+                    && (k.rho - candidate.rho).abs() < 1e-8
+            });
+            if !dominated {
+                kept.push(candidate);
+            }
+        }
+
+        // Re-insert into a fresh heap
+        self.heap = BinaryHeap::with_capacity(self.max_candidates + 1);
+        for c in kept.into_iter().take(self.max_candidates) {
+            self.heap.push(OrdCandidate(c));
+        }
+    }
+
     /// Serialize all kept candidates to a JSON file.
     pub fn save_json(&self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
         let candidates = self.top_n(self.max_candidates);

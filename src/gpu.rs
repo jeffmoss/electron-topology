@@ -44,6 +44,38 @@ impl GpuContext {
         Ok(func)
     }
 
+    /// Compile a CUDA source file once and return multiple named functions from
+    /// the same module.  Avoids redundant NVRTC compilations when a single .cu
+    /// file exports several entry points.
+    pub fn compile_kernel_multi(
+        &self,
+        source_path: &str,
+        function_names: &[&str],
+    ) -> Result<Vec<CudaFunction>, Box<dyn std::error::Error>> {
+        let mut source = std::fs::read_to_string(source_path)?;
+
+        // Manually inline #include "common.cuh"
+        if source.contains("#include \"common.cuh\"") {
+            let common = std::fs::read_to_string("kernels/common.cuh")?;
+            source = source.replace("#include \"common.cuh\"", &common);
+        }
+
+        let ptx = compile_ptx_with_opts(
+            source,
+            CompileOptions {
+                arch: Some("compute_89"),
+                ..Default::default()
+            },
+        )?;
+
+        let module = self.ctx.load_module(ptx)?;
+        let mut funcs = Vec::with_capacity(function_names.len());
+        for name in function_names {
+            funcs.push(module.load_function(name)?);
+        }
+        Ok(funcs)
+    }
+
     /// Allocate a zero-initialized device buffer of `len` elements.
     pub fn alloc_zeros<T: cudarc::driver::ValidAsZeroBits + cudarc::driver::DeviceRepr>(
         &self,
