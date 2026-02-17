@@ -1,0 +1,1122 @@
+   Compiling physics v0.1.0 (/home/jmoss/code/physics)
+warning: constant `COMPTON_WAVELENGTH` is never used
+ --> src/physics.rs:7:11
+  |
+7 | pub const COMPTON_WAVELENGTH: f64 = 2.4263102175e-12;
+  |           ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` on by default
+
+warning: constant `TARGET_UNCERTAINTY` is never used
+  --> src/physics.rs:11:11
+   |
+11 | pub const TARGET_UNCERTAINTY: f64 = 0.0000052;
+   |           ^^^^^^^^^^^^^^^^^^
+
+warning: constant `ASPDEN_VALUE` is never used
+  --> src/physics.rs:22:11
+   |
+22 | pub const ASPDEN_VALUE: f64 = 206.7683078;
+   |           ^^^^^^^^^^^^
+
+warning: methods `best` and `save_json` are never used
+   --> src/results.rs:61:12
+    |
+44  | impl ResultCollector {
+    | -------------------- methods in this implementation
+...
+61  |     pub fn best(&self) -> Option<&GeometryCandidate> {
+    |            ^^^^
+...
+109 |     pub fn save_json(&self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    |            ^^^^^^^^^
+
+warning: fields `rho_min`, `rho_max`, `num_rho`, and `max_winding` are never read
+ --> src/search.rs:4:9
+  |
+3 | pub struct Phase1Params {
+  |            ------------ fields in this struct
+4 |     pub rho_min: f64,
+  |         ^^^^^^^
+5 |     pub rho_max: f64,
+  |         ^^^^^^^
+6 |     pub num_rho: u32,
+  |         ^^^^^^^
+7 |     pub max_winding: i32,
+  |         ^^^^^^^^^^^
+
+warning: struct `Phase2Params` is never constructed
+  --> src/search.rs:21:12
+   |
+21 | pub struct Phase2Params {
+   |            ^^^^^^^^^^^^
+
+warning: fields `candidates` and `quadrature_points` are never read
+  --> src/search.rs:31:9
+   |
+30 | pub struct Phase3Params {
+   |            ------------ fields in this struct
+31 |     pub candidates: Vec<GeometryCandidate>,
+   |         ^^^^^^^^^^
+32 |     pub quadrature_points: usize,
+   |         ^^^^^^^^^^^^^^^^^
+
+warning: function `generate_rho_values` is never used
+  --> src/search.rs:45:8
+   |
+45 | pub fn generate_rho_values(min: f64, max: f64, count: u32) -> Vec<f64> {
+   |        ^^^^^^^^^^^^^^^^^^^
+
+warning: function `estimate_search_size` is never used
+  --> src/search.rs:54:8
+   |
+54 | pub fn estimate_search_size(params: &Phase1Params, num_pq: usize) -> u64 {
+   |        ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `generate_batches` is never used
+  --> src/search.rs:60:8
+   |
+60 | pub fn generate_batches(total: u64, batch_size: u64) -> Vec<(u64, u64)> {
+   |        ^^^^^^^^^^^^^^^^
+
+warning: function `check_tau_poincare_spectral` is never used
+   --> src/spectral.rs:747:4
+    |
+747 | fn check_tau_poincare_spectral(lambda: f64, max_j: i32) -> (f64, String) {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `check_aspden_reproduction` is never used
+   --> src/verify.rs:282:8
+    |
+282 | pub fn check_aspden_reproduction(value: f64) -> bool {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `physics` (bin "physics") generated 12 warnings
+    Finished `release` profile [optimized] target(s) in 1.14s
+     Running `target/release/physics`
+=== Topological Resonance Simulation ===
+=== Multi-Topology Framework: Torus + S³ Quotients + Nil ===
+Target muon/electron mass ratio: 206.7682843000
+
+Verifying CPU reference (torus)... OK
+Verifying CPU reference (Berger)... OK
+Verifying Poincaré selection rule... OK
+Verifying Nil eigenvalues... OK
+Verifying polyhedral subset chain... OK
+GPU initialized: device 0
+
+--- Phase 0: Direct-Solve Spectral Analysis ---
+(Exact algebraic solutions — no scanning needed)
+
+  Torus eigenvalues (modes up to 100)... found 230995 exact solutions (score < 1e-6)
+  Berger sphere eigenvalues (j up to 50)... found 6167 exact solutions (score < 1e-6)
+  Lens space direct solve (windings up to 30)... found 2 exact solutions (score < 1e-6)
+  Poincare homology sphere (j up to 50)... found 0 exact solutions (score < 1e-6)
+  Nil manifold eigenvalues (modes up to 30)... found 18792 exact solutions (score < 1e-6)
+  Dihedral D3 quotient (j up to 50)... found 1027 exact solutions (score < 1e-6)
+  Dihedral D4 quotient (j up to 50)... found 786 exact solutions (score < 1e-6)
+  Dihedral D5 quotient (j up to 50)... found 579 exact solutions (score < 1e-6)
+  Tetrahedral quotient (j up to 50)... found 772 exact solutions (score < 1e-6)
+  Octahedral quotient (j up to 50)... found 362 exact solutions (score < 1e-6)
+
+  Top spectral solutions:
+    # 1: [torus-spectral] param=0.796923645792 (1,18)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=1.79e-1 (63,52)÷(1,1) *** DUAL HIT ***
+    # 2: [torus-spectral] param=0.652028437466 (1,22)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=2.00e-1 (50,76)÷(1,1) *** DUAL HIT ***
+    # 3: [torus-spectral] param=0.531282430528 (1,27)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=3.06e-1 (86,5)÷(1,2) *** DUAL HIT ***
+    # 4: [torus-spectral] param=0.409846446407 (1,35)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=7.05e-2 (58,26)÷(1,0) *** DUAL HIT ***
+    # 5: [torus-spectral] param=0.398461822896 (1,36)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=2.48e-1 (60,52)÷(1,1) *** DUAL HIT ***
+    # 6: [torus-spectral] param=0.349868917665 (1,41)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=8.31e-2 (62,22)÷(1,1) *** DUAL HIT ***
+    # 7: [torus-spectral] param=0.333595944750 (1,43)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=2.76e-1 (80,71)÷(1,3) *** DUAL HIT ***
+    # 8: [torus-spectral] param=0.326014218733 (1,44)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=2.08e-1 (57,75)÷(1,1) *** DUAL HIT ***
+    # 9: [torus-spectral] param=0.281267169103 (1,51)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=1.41e-2 (100,67)÷(1,5) *** DUAL HIT ***
+    #10: [torus-spectral] param=0.265641215264 (1,54)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=9.82e-2 (61,5)÷(1,1) *** DUAL HIT ***
+    #11: [torus-spectral] param=0.243129247869 (1,59)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=5.01e-2 (56,76)÷(1,0) *** DUAL HIT ***
+    #12: [torus-spectral] param=0.204923223204 (1,70)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=7.05e-2 (58,52)÷(1,0) *** DUAL HIT ***
+    #13: [torus-spectral] param=0.199230911448 (1,72)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=1.60e-1 (100,78)÷(1,7) *** DUAL HIT ***
+    #14: [torus-spectral] param=0.191261674990 (1,75)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=3.21e-2 (98,54)÷(1,7) *** DUAL HIT ***
+    #15: [torus-spectral] param=0.186293839276 (1,77)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=7.72e-2 (96,71)÷(1,7) *** DUAL HIT ***
+    #16: [torus-spectral] param=0.181577539548 (1,79)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=5.31e-2 (87,33)÷(1,6) *** DUAL HIT ***
+    #17: [torus-spectral] param=0.174934458832 (1,82)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=2.85e-2 (78,42)÷(1,5) *** DUAL HIT ***
+    #18: [torus-spectral] param=0.168760301462 (1,85)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=3.71e-2 (99,23)÷(1,8) *** DUAL HIT ***
+    #19: [torus-spectral] param=0.166797972375 (1,86)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=1.74e-1 (62,27)÷(1,2) *** DUAL HIT ***
+    #20: [torus-spectral] param=0.164880754302 (1,87)÷(1,0) ratio=206.768284300000 score=0.00e0 | tau_score=3.59e-3 (90,19)÷(1,7) *** DUAL HIT ***
+
+  *** 20 DUAL HITS: geometries that predict BOTH muon AND tau ratios! ***
+
+  Checking for recognizable constants in optimal parameters...
+    [torus-spectral] param=0.398461822896 ≈ 1/√(2π) (0.398942280401), diff = 4.804575e-4
+    [torus-spectral] param=0.333595944750 ≈ 1/3 (0.333333333333), diff = 2.626114e-4
+    [torus-spectral] param=0.326014218733 ≈ 1/π (0.318309886184), diff = 7.704333e-3
+    [torus-spectral] param=0.326014218733 ≈ 1/3 (0.333333333333), diff = 7.319115e-3
+    [torus-spectral] param=0.243129247869 ≈ 1/4 (0.250000000000), diff = 6.870752e-3
+    [torus-spectral] param=0.168760301462 ≈ 1/(2π) (0.159154943092), diff = 9.605358e-3
+    [torus-spectral] param=0.166797972375 ≈ 1/(2π) (0.159154943092), diff = 7.643029e-3
+    [torus-spectral] param=0.164880754302 ≈ 1/(2π) (0.159154943092), diff = 5.725811e-3
+    [torus-spectral] param=0.163007109367 ≈ 1/(2π) (0.159154943092), diff = 3.852166e-3
+    [torus-spectral] param=0.161175568812 ≈ 1/(2π) (0.159154943092), diff = 2.020626e-3
+    [torus-spectral] param=0.157633248618 ≈ 1/(2π) (0.159154943092), diff = 1.521694e-3
+    [torus-spectral] param=0.154243286282 ≈ 1/(2π) (0.159154943092), diff = 4.911657e-3
+    [torus-spectral] param=0.150996059203 ≈ 1/(2π) (0.159154943092), diff = 8.158884e-3
+    [torus-spectral] param=0.150996059203 ≈ 1/7 (0.142857142857), diff = 8.138916e-3
+    [torus-spectral] param=0.374728234211 ≈ 1/e (0.367879441171), diff = 6.848793e-3
+    [torus-spectral] param=0.316437175556 ≈ 1/π (0.318309886184), diff = 1.872711e-3
+    [torus-spectral] param=0.254279873215 ≈ 1/4 (0.250000000000), diff = 4.279873e-3
+    [torus-spectral] param=0.241350388136 ≈ 1/4 (0.250000000000), diff = 8.649612e-3
+    [torus-spectral] param=0.158218587778 ≈ 1/(2π) (0.159154943092), diff = 9.363553e-4
+    [torus-spectral] param=0.153114762366 ≈ 1/(2π) (0.159154943092), diff = 6.040181e-3
+    [torus-spectral] param=0.149891293685 ≈ 1/(2π) (0.159154943092), diff = 9.263649e-3
+    [torus-spectral] param=0.149891293685 ≈ 1/7 (0.142857142857), diff = 7.034151e-3
+    [torus-spectral] param=0.145302784694 ≈ 1/7 (0.142857142857), diff = 2.445642e-3
+    [torus-spectral] param=0.143835079798 ≈ 1/7 (0.142857142857), diff = 9.779369e-4
+
+Phase 0 complete: 611.385s, 259482 exact solutions, best score: 0.000000e0
+
+--- Phase 1: Torus Geodesic Scan ---
+Torus Geodesic kernel compiled
+Using 38,730 mode pairs
+    Progress: 6.9% (536,797,800 evals, best: 1.797693e308)
+    Progress: 13.9% (1,073,595,600 evals, best: 1.797693e308)
+    Progress: 20.8% (1,610,393,400 evals, best: 1.797693e308)
+    Progress: 27.7% (2,147,191,200 evals, best: 1.797693e308)
+    Progress: 34.6% (2,683,989,000 evals, best: 1.797693e308)
+    Progress: 41.6% (3,220,786,800 evals, best: 1.797693e308)
+    Progress: 48.5% (3,757,584,600 evals, best: 1.797693e308)
+    Progress: 55.4% (4,294,382,400 evals, best: 1.797693e308)
+    Progress: 62.4% (4,831,180,200 evals, best: 1.797693e308)
+    Progress: 69.3% (5,367,978,000 evals, best: 1.797693e308)
+    Progress: 76.2% (5,904,775,800 evals, best: 1.797693e308)
+    Progress: 83.2% (6,441,573,600 evals, best: 1.797693e308)
+    Progress: 90.1% (6,978,371,400 evals, best: 1.797693e308)
+    Progress: 97.0% (7,515,169,200 evals, best: 1.797693e308)
+  Band 1/7 [ultra-thin]: rho=[0.0001,0.0010] x 200,000 pts x 38,730 pairs = 7,746,000,000 evals | best: 1.797693e308 (103.57s)
+    Progress: 6.9% (536,797,800 evals, best: 1.797693e308)
+    Progress: 13.9% (1,073,595,600 evals, best: 1.797693e308)
+    Progress: 20.8% (1,610,393,400 evals, best: 1.797693e308)
+    Progress: 27.7% (2,147,191,200 evals, best: 1.797693e308)
+    Progress: 34.6% (2,683,989,000 evals, best: 1.797693e308)
+    Progress: 41.6% (3,220,786,800 evals, best: 1.797693e308)
+    Progress: 48.5% (3,757,584,600 evals, best: 2.714495e-5)
+    Progress: 55.4% (4,294,382,400 evals, best: 2.714495e-5)
+    Progress: 62.4% (4,831,180,200 evals, best: 2.714495e-5)
+    Progress: 69.3% (5,367,978,000 evals, best: 2.714495e-5)
+    Progress: 76.2% (5,904,775,800 evals, best: 2.714495e-5)
+    Progress: 83.2% (6,441,573,600 evals, best: 2.714495e-5)
+    Progress: 90.1% (6,978,371,400 evals, best: 2.714495e-5)
+    Progress: 97.0% (7,515,169,200 evals, best: 6.330897e-6)
+  Band 2/7 [thin]: rho=[0.0010,0.0100] x 200,000 pts x 38,730 pairs = 7,746,000,000 evals | best: 6.330897e-6 (104.09s)
+    Progress: 13.9% (536,797,800 evals, best: 6.330897e-6)
+    Progress: 27.7% (1,073,595,600 evals, best: 6.330897e-6)
+    Progress: 41.6% (1,610,393,400 evals, best: 6.330897e-6)
+    Progress: 55.4% (2,147,191,200 evals, best: 6.330897e-6)
+    Progress: 69.3% (2,683,989,000 evals, best: 2.089515e-6)
+    Progress: 83.2% (3,220,786,800 evals, best: 2.089515e-6)
+    Progress: 97.0% (3,757,584,600 evals, best: 2.089515e-6)
+  Band 3/7 [moderate]: rho=[0.0100,0.1000] x 100,000 pts x 38,730 pairs = 3,873,000,000 evals | best: 2.089515e-6 (52.13s)
+    Progress: 27.7% (536,797,800 evals, best: 2.089515e-6)
+    Progress: 55.4% (1,073,595,600 evals, best: 2.089515e-6)
+    Progress: 83.2% (1,610,393,400 evals, best: 2.089515e-6)
+  Band 4/7 [thick]: rho=[0.1000,0.9990] x 50,000 pts x 38,730 pairs = 1,936,500,000 evals | best: 2.089515e-6 (26.09s)
+    Progress: 1.4% (536,797,800 evals, best: 2.089515e-6)
+    Progress: 2.8% (1,073,595,600 evals, best: 2.089515e-6)
+    Progress: 4.2% (1,610,393,400 evals, best: 2.089515e-6)
+    Progress: 5.5% (2,147,191,200 evals, best: 2.089515e-6)
+    Progress: 6.9% (2,683,989,000 evals, best: 2.089515e-6)
+    Progress: 8.3% (3,220,786,800 evals, best: 2.089515e-6)
+    Progress: 9.7% (3,757,584,600 evals, best: 2.089515e-6)
+    Progress: 11.1% (4,294,382,400 evals, best: 2.089515e-6)
+    Progress: 12.5% (4,831,180,200 evals, best: 2.089515e-6)
+    Progress: 13.9% (5,367,978,000 evals, best: 2.089515e-6)
+    Progress: 15.2% (5,904,775,800 evals, best: 2.089515e-6)
+    Progress: 16.6% (6,441,573,600 evals, best: 2.089515e-6)
+    Progress: 18.0% (6,978,371,400 evals, best: 2.089515e-6)
+    Progress: 19.4% (7,515,169,200 evals, best: 2.089515e-6)
+    Progress: 20.8% (8,051,967,000 evals, best: 2.089515e-6)
+    Progress: 22.2% (8,588,764,800 evals, best: 2.089515e-6)
+    Progress: 23.6% (9,125,562,600 evals, best: 2.089515e-6)
+    Progress: 24.9% (9,662,360,400 evals, best: 2.089515e-6)
+    Progress: 26.3% (10,199,158,200 evals, best: 2.089515e-6)
+    Progress: 27.7% (10,735,956,000 evals, best: 2.089515e-6)
+    Progress: 29.1% (11,272,753,800 evals, best: 2.089515e-6)
+    Progress: 30.5% (11,809,551,600 evals, best: 2.089515e-6)
+    Progress: 31.9% (12,346,349,400 evals, best: 2.089515e-6)
+    Progress: 33.3% (12,883,147,200 evals, best: 2.089515e-6)
+    Progress: 34.6% (13,419,945,000 evals, best: 2.089515e-6)
+    Progress: 36.0% (13,956,742,800 evals, best: 2.089515e-6)
+    Progress: 37.4% (14,493,540,600 evals, best: 2.089515e-6)
+    Progress: 38.8% (15,030,338,400 evals, best: 2.089515e-6)
+    Progress: 40.2% (15,567,136,200 evals, best: 2.089515e-6)
+    Progress: 41.6% (16,103,934,000 evals, best: 2.089515e-6)
+    Progress: 43.0% (16,640,731,800 evals, best: 2.089515e-6)
+    Progress: 44.4% (17,177,529,600 evals, best: 2.089515e-6)
+    Progress: 45.7% (17,714,327,400 evals, best: 2.089515e-6)
+    Progress: 47.1% (18,251,125,200 evals, best: 2.089515e-6)
+    Progress: 48.5% (18,787,923,000 evals, best: 2.089515e-6)
+    Progress: 49.9% (19,324,720,800 evals, best: 2.089515e-6)
+    Progress: 51.3% (19,861,518,600 evals, best: 2.089515e-6)
+    Progress: 52.7% (20,398,316,400 evals, best: 2.089515e-6)
+    Progress: 54.1% (20,935,114,200 evals, best: 2.089515e-6)
+    Progress: 55.4% (21,471,912,000 evals, best: 2.089515e-6)
+    Progress: 56.8% (22,008,709,800 evals, best: 2.089515e-6)
+    Progress: 58.2% (22,545,507,600 evals, best: 2.089515e-6)
+    Progress: 59.6% (23,082,305,400 evals, best: 2.089515e-6)
+    Progress: 61.0% (23,619,103,200 evals, best: 2.089515e-6)
+    Progress: 62.4% (24,155,901,000 evals, best: 2.089515e-6)
+    Progress: 63.8% (24,692,698,800 evals, best: 2.089515e-6)
+    Progress: 65.1% (25,229,496,600 evals, best: 2.089515e-6)
+    Progress: 66.5% (25,766,294,400 evals, best: 2.089515e-6)
+    Progress: 67.9% (26,303,092,200 evals, best: 2.089515e-6)
+    Progress: 69.3% (26,839,890,000 evals, best: 2.089515e-6)
+    Progress: 70.7% (27,376,687,800 evals, best: 2.089515e-6)
+    Progress: 72.1% (27,913,485,600 evals, best: 2.089515e-6)
+    Progress: 73.5% (28,450,283,400 evals, best: 2.089515e-6)
+    Progress: 74.8% (28,987,081,200 evals, best: 2.089515e-6)
+    Progress: 76.2% (29,523,879,000 evals, best: 2.089515e-6)
+    Progress: 77.6% (30,060,676,800 evals, best: 2.089515e-6)
+    Progress: 79.0% (30,597,474,600 evals, best: 2.089515e-6)
+    Progress: 80.4% (31,134,272,400 evals, best: 2.089515e-6)
+    Progress: 81.8% (31,671,070,200 evals, best: 2.089515e-6)
+    Progress: 83.2% (32,207,868,000 evals, best: 2.089515e-6)
+    Progress: 84.5% (32,744,665,800 evals, best: 2.089515e-6)
+    Progress: 85.9% (33,281,463,600 evals, best: 2.089515e-6)
+    Progress: 87.3% (33,818,261,400 evals, best: 2.089515e-6)
+    Progress: 88.7% (34,355,059,200 evals, best: 2.089515e-6)
+    Progress: 90.1% (34,891,857,000 evals, best: 2.089515e-6)
+    Progress: 91.5% (35,428,654,800 evals, best: 2.089515e-6)
+    Progress: 92.9% (35,965,452,600 evals, best: 2.089515e-6)
+    Progress: 94.2% (36,502,250,400 evals, best: 2.089515e-6)
+    Progress: 95.6% (37,039,048,200 evals, best: 2.089515e-6)
+    Progress: 97.0% (37,575,846,000 evals, best: 2.089515e-6)
+    Progress: 98.4% (38,112,643,800 evals, best: 2.089515e-6)
+    Progress: 99.8% (38,649,441,600 evals, best: 2.089515e-6)
+  Band 5/7 [target region (rho ~ 1/207)]: rho=[0.0030,0.0070] x 1,000,000 pts x 38,730 pairs = 38,730,000,000 evals | best: 2.089515e-6 (521.74s)
+    Progress: 2.8% (536,797,800 evals, best: 2.089515e-6)
+    Progress: 5.5% (1,073,595,600 evals, best: 2.089515e-6)
+    Progress: 8.3% (1,610,393,400 evals, best: 2.089515e-6)
+    Progress: 11.1% (2,147,191,200 evals, best: 2.089515e-6)
+    Progress: 13.9% (2,683,989,000 evals, best: 2.089515e-6)
+    Progress: 16.6% (3,220,786,800 evals, best: 2.089515e-6)
+    Progress: 19.4% (3,757,584,600 evals, best: 2.089515e-6)
+    Progress: 22.2% (4,294,382,400 evals, best: 2.089515e-6)
+    Progress: 24.9% (4,831,180,200 evals, best: 2.089515e-6)
+    Progress: 27.7% (5,367,978,000 evals, best: 2.089515e-6)
+    Progress: 30.5% (5,904,775,800 evals, best: 2.089515e-6)
+    Progress: 33.3% (6,441,573,600 evals, best: 2.089515e-6)
+    Progress: 36.0% (6,978,371,400 evals, best: 2.089515e-6)
+    Progress: 38.8% (7,515,169,200 evals, best: 2.089515e-6)
+    Progress: 41.6% (8,051,967,000 evals, best: 2.089515e-6)
+    Progress: 44.4% (8,588,764,800 evals, best: 2.089515e-6)
+    Progress: 47.1% (9,125,562,600 evals, best: 2.089515e-6)
+    Progress: 49.9% (9,662,360,400 evals, best: 2.089515e-6)
+    Progress: 52.7% (10,199,158,200 evals, best: 2.089515e-6)
+    Progress: 55.4% (10,735,956,000 evals, best: 2.089515e-6)
+    Progress: 58.2% (11,272,753,800 evals, best: 2.089515e-6)
+    Progress: 61.0% (11,809,551,600 evals, best: 2.089515e-6)
+    Progress: 63.8% (12,346,349,400 evals, best: 2.089515e-6)
+    Progress: 66.5% (12,883,147,200 evals, best: 2.089515e-6)
+    Progress: 69.3% (13,419,945,000 evals, best: 2.089515e-6)
+    Progress: 72.1% (13,956,742,800 evals, best: 2.089515e-6)
+    Progress: 74.8% (14,493,540,600 evals, best: 2.089515e-6)
+    Progress: 77.6% (15,030,338,400 evals, best: 2.089515e-6)
+    Progress: 80.4% (15,567,136,200 evals, best: 2.089515e-6)
+    Progress: 83.2% (16,103,934,000 evals, best: 2.089515e-6)
+    Progress: 85.9% (16,640,731,800 evals, best: 2.089515e-6)
+    Progress: 88.7% (17,177,529,600 evals, best: 2.089515e-6)
+    Progress: 91.5% (17,714,327,400 evals, best: 2.089515e-6)
+    Progress: 94.2% (18,251,125,200 evals, best: 2.089515e-6)
+    Progress: 97.0% (18,787,923,000 evals, best: 2.089515e-6)
+    Progress: 99.8% (19,324,720,800 evals, best: 2.089515e-6)
+  Band 6/7 [alpha region]: rho=[0.0050,0.0120] x 500,000 pts x 38,730 pairs = 19,365,000,000 evals | best: 2.089515e-6 (260.38s)
+    Progress: 2.8% (536,797,800 evals, best: 2.089515e-6)
+    Progress: 5.5% (1,073,595,600 evals, best: 2.089515e-6)
+    Progress: 8.3% (1,610,393,400 evals, best: 2.089515e-6)
+    Progress: 11.1% (2,147,191,200 evals, best: 2.089515e-6)
+    Progress: 13.9% (2,683,989,000 evals, best: 2.089515e-6)
+    Progress: 16.6% (3,220,786,800 evals, best: 2.089515e-6)
+    Progress: 19.4% (3,757,584,600 evals, best: 2.089515e-6)
+    Progress: 22.2% (4,294,382,400 evals, best: 2.089515e-6)
+    Progress: 24.9% (4,831,180,200 evals, best: 2.089515e-6)
+    Progress: 27.7% (5,367,978,000 evals, best: 2.089515e-6)
+    Progress: 30.5% (5,904,775,800 evals, best: 2.089515e-6)
+    Progress: 33.3% (6,441,573,600 evals, best: 2.089515e-6)
+    Progress: 36.0% (6,978,371,400 evals, best: 2.089515e-6)
+    Progress: 38.8% (7,515,169,200 evals, best: 2.089515e-6)
+    Progress: 41.6% (8,051,967,000 evals, best: 2.089515e-6)
+    Progress: 44.4% (8,588,764,800 evals, best: 2.089515e-6)
+    Progress: 47.1% (9,125,562,600 evals, best: 2.089515e-6)
+    Progress: 49.9% (9,662,360,400 evals, best: 2.089515e-6)
+    Progress: 52.7% (10,199,158,200 evals, best: 2.089515e-6)
+    Progress: 55.4% (10,735,956,000 evals, best: 2.089515e-6)
+    Progress: 58.2% (11,272,753,800 evals, best: 2.089515e-6)
+    Progress: 61.0% (11,809,551,600 evals, best: 2.089515e-6)
+    Progress: 63.8% (12,346,349,400 evals, best: 2.089515e-6)
+    Progress: 66.5% (12,883,147,200 evals, best: 2.089515e-6)
+    Progress: 69.3% (13,419,945,000 evals, best: 2.089515e-6)
+    Progress: 72.1% (13,956,742,800 evals, best: 2.089515e-6)
+    Progress: 74.8% (14,493,540,600 evals, best: 2.089515e-6)
+    Progress: 77.6% (15,030,338,400 evals, best: 2.089515e-6)
+    Progress: 80.4% (15,567,136,200 evals, best: 2.089515e-6)
+    Progress: 83.2% (16,103,934,000 evals, best: 2.089515e-6)
+    Progress: 85.9% (16,640,731,800 evals, best: 2.089515e-6)
+    Progress: 88.7% (17,177,529,600 evals, best: 2.089515e-6)
+    Progress: 91.5% (17,714,327,400 evals, best: 2.089515e-6)
+    Progress: 94.2% (18,251,125,200 evals, best: 2.089515e-6)
+    Progress: 97.0% (18,787,923,000 evals, best: 2.089515e-6)
+    Progress: 99.8% (19,324,720,800 evals, best: 2.089515e-6)
+  Band 7/7 [tau hint region]: rho=[0.0001,0.0010] x 500,000 pts x 38,730 pairs = 19,365,000,000 evals | best: 2.089515e-6 (260.75s)
+
+Torus Geodesic scan complete: 1328.918s, 98,761,500,000 total evaluations, best score: 2.089515e-6
+  BEST: (22,13)÷(1,0) rho=0.0632319323 ratio=206.7682822105 score=2.089515e-6
+--- Phase 1 Summary ---
+Evaluated: 98,761,500,000 candidates in 1328.92s
+Best score: 2.09e-6
+Top candidates:
+  (22013,1000) rho=0.063232 eps=0.00e0 path=82.14861425 ratio=206.7682822105 score=2.09e-6 [geodesic (22,13)÷(1,0)]
+  (10001,1000) rho=0.004842 eps=0.00e0 path=6.29054653 ratio=206.7682818624 score=2.44e-6 [geodesic (10,1)÷(1,0)]
+  (2001,1000) rho=0.004837 eps=0.00e0 path=6.28347926 ratio=206.7682880741 score=3.77e-6 [geodesic (2,1)÷(1,0)]
+  (21001,1000) rho=0.004861 eps=0.00e0 path=6.31584405 ratio=206.7682881201 score=3.82e-6 [geodesic (21,1)÷(1,0)]
+  (13002,1000) rho=0.009692 eps=0.00e0 path=12.59128264 ratio=206.7682906309 score=6.33e-6 [geodesic (13,2)÷(1,0)]
+  (29001,1000) rho=0.004885 eps=0.00e0 path=6.34591151 ratio=206.7682747513 score=9.55e-6 [geodesic (29,1)÷(1,0)]
+  (7001,1000) rho=0.004839 eps=0.00e0 path=6.28678907 ratio=206.7682730351 score=1.13e-5 [geodesic (7,1)÷(1,0)]
+  (9008,1000) rho=0.038727 eps=0.00e0 path=50.31320247 ratio=206.7682701777 score=1.41e-5 [geodesic (9,8)÷(1,0)]
+  (22001,1000) rho=0.004864 eps=0.00e0 path=6.31905593 ratio=206.7682992782 score=1.50e-5 [geodesic (22,1)÷(1,0)]
+  (11001,1000) rho=0.004843 eps=0.00e0 path=6.29209567 ratio=206.7682996107 score=1.53e-5 [geodesic (11,1)÷(1,0)]
+  (23001,1000) rho=0.004867 eps=0.00e0 path=6.32242243 ratio=206.7682685254 score=1.58e-5 [geodesic (23,1)÷(1,0)]
+  (29018,1000) rho=0.087926 eps=0.00e0 path=114.23072866 ratio=206.7682676198 score=1.67e-5 [geodesic (29,18)÷(1,0)]
+  (17001,1000) rho=0.004853 eps=0.00e0 path=6.30453019 ratio=206.7682638124 score=2.05e-5 [geodesic (17,1)÷(1,0)]
+  (5001,1000) rho=0.004838 eps=0.00e0 path=6.28502319 ratio=206.7683052190 score=2.09e-5 [geodesic (5,1)÷(1,0)]
+  (27002,1000) rho=0.009756 eps=0.00e0 path=12.67490190 ratio=206.7683091516 score=2.49e-5 [geodesic (27,2)÷(1,0)]
+  (12001,1000) rho=0.004844 eps=0.00e0 path=6.29379367 ratio=206.7682567082 score=2.76e-5 [geodesic (12,1)÷(1,0)]
+  (18001,1000) rho=0.004855 eps=0.00e0 path=6.30712999 ratio=206.7683121412 score=2.78e-5 [geodesic (18,1)÷(1,0)]
+  (6001,1000) rho=0.004838 eps=0.00e0 path=6.28583237 ratio=206.7682559235 score=2.84e-5 [geodesic (6,1)÷(1,0)]
+  (5002,1000) rho=0.009675 eps=0.00e0 path=12.57004651 ratio=206.7683142710 score=3.00e-5 [geodesic (5,2)÷(1,0)]
+  (21010,1000) rho=0.048615 eps=0.00e0 path=63.15867146 ratio=206.7682464984 score=3.78e-5 [geodesic (21,10)÷(1,0)]
+  (4001,1000) rho=0.004837 eps=0.00e0 path=6.28436137 ratio=206.7682444579 score=3.98e-5 [geodesic (4,1)÷(1,0)]
+  (16001,1000) rho=0.004851 eps=0.00e0 path=6.30208188 ratio=206.7682414680 score=4.28e-5 [geodesic (16,1)÷(1,0)]
+  (3001,1000) rho=0.004837 eps=0.00e0 path=6.28384676 ratio=206.7682399180 score=4.44e-5 [geodesic (3,1)÷(1,0)]
+  (26001,1000) rho=0.004875 eps=0.00e0 path=6.33345679 ratio=206.7683291031 score=4.48e-5 [geodesic (26,1)÷(1,0)]
+  (19001,1000) rho=0.004857 eps=0.00e0 path=6.30988188 ratio=206.7682354661 score=4.88e-5 [geodesic (19,1)÷(1,0)]
+  (13001,1000) rho=0.004846 eps=0.00e0 path=6.29564087 ratio=206.7683351015 score=5.08e-5 [geodesic (13,1)÷(1,0)]
+  (17002,1000) rho=0.009706 eps=0.00e0 path=12.60906185 ratio=206.7683368572 score=5.26e-5 [geodesic (17,2)÷(1,0)]
+  (11002,1000) rho=0.009686 eps=0.00e0 path=12.58419198 ratio=206.7682314094 score=5.29e-5 [geodesic (11,2)÷(1,0)]
+  (15001,1000) rho=0.004849 eps=0.00e0 path=6.29978455 ratio=206.7682280727 score=5.62e-5 [geodesic (15,1)÷(1,0)]
+  (25001,1000) rho=0.004872 eps=0.00e0 path=6.32962200 ratio=206.7683406209 score=5.63e-5 [geodesic (25,1)÷(1,0)]
+  (30001,1000) rho=0.004888 eps=0.00e0 path=6.35038272 ratio=206.7683424048 score=5.81e-5 [geodesic (30,1)÷(1,0)]
+  (20001,1000) rho=0.004859 eps=0.00e0 path=6.31278637 ratio=206.7682210839 score=6.32e-5 [geodesic (20,1)÷(1,0)]
+  (27020,1000) rho=0.097565 eps=0.00e0 path=126.75345707 ratio=206.7682149921 score=6.93e-5 [geodesic (27,20)÷(1,0)]
+  (28001,1000) rho=0.004881 eps=0.00e0 path=6.34160073 ratio=206.7683545319 score=7.02e-5 [geodesic (28,1)÷(1,0)]
+  (24001,1000) rho=0.004869 eps=0.00e0 path=6.32594403 ratio=206.7682120398 score=7.23e-5 [geodesic (24,1)÷(1,0)]
+  (21002,1000) rho=0.009723 eps=0.00e0 path=12.63168946 ratio=206.7683587468 score=7.44e-5 [geodesic (21,2)÷(1,0)]
+  (27001,1000) rho=0.004878 eps=0.00e0 path=6.33744935 ratio=206.7682094223 score=7.49e-5 [geodesic (27,1)÷(1,0)]
+  (14001,1000) rho=0.004847 eps=0.00e0 path=6.29763771 ratio=206.7682076191 score=7.67e-5 [geodesic (14,1)÷(1,0)]
+  (9001,1000) rho=0.004841 eps=0.00e0 path=6.28914590 ratio=206.7683630836 score=7.88e-5 [geodesic (9,1)÷(1,0)]
+  (8001,1000) rho=0.004840 eps=0.00e0 path=6.28789350 ratio=206.7683630900 score=7.88e-5 [geodesic (8,1)÷(1,0)]
+  (3002,1000) rho=0.009674 eps=0.00e0 path=12.56769357 ratio=206.7682049152 score=7.94e-5 [geodesic (3,2)÷(1,0)]
+  (29020,1000) rho=0.097697 eps=0.00e0 path=126.92416196 ratio=206.7682038608 score=8.04e-5 [geodesic (29,20)÷(1,0)]
+  (23002,1000) rho=0.009733 eps=0.00e0 path=12.64484818 ratio=206.7682011156 score=8.32e-5 [geodesic (23,2)÷(1,0)]
+  (7002,1000) rho=0.009678 eps=0.00e0 path=12.57357840 ratio=206.7683694191 score=8.51e-5 [geodesic (7,2)÷(1,0)]
+  (15002,1000) rho=0.009698 eps=0.00e0 path=12.59957022 ratio=206.7683808409 score=9.65e-5 [geodesic (15,2)÷(1,0)]
+  (19002,1000) rho=0.009714 eps=0.00e0 path=12.61976564 ratio=206.7681872439 score=9.71e-5 [geodesic (19,2)÷(1,0)]
+  (29002,1000) rho=0.009769 eps=0.00e0 path=12.69182762 ratio=206.7681851489 score=9.92e-5 [geodesic (29,2)÷(1,0)]
+  (21013,1000) rho=0.063200 eps=0.00e0 path=82.10648218 ratio=206.7681846078 score=9.97e-5 [geodesic (21,13)÷(1,0)]
+  (25002,1000) rho=0.009744 eps=0.00e0 path=12.65924758 ratio=206.7684044409 score=1.20e-4 [geodesic (25,2)÷(1,0)]
+  (19008,1000) rho=0.038855 eps=0.00e0 path=50.47921101 ratio=206.7681628768 score=1.21e-4 [geodesic (19,8)÷(1,0)]
+
+GPU-CPU consistency check (torus)...
+  Checked 10, mismatches: 0, max relative error: 4.811532e-7
+
+--- Phase 1: Berger Sphere Scan ---
+Berger Sphere kernel compiled
+Using 38,730 mode pairs
+    Progress: 6.9% (536,797,800 evals, best: 3.372138e-4)
+    Progress: 13.9% (1,073,595,600 evals, best: 7.492062e-5)
+    Progress: 20.8% (1,610,393,400 evals, best: 7.492062e-5)
+    Progress: 27.7% (2,147,191,200 evals, best: 2.627510e-5)
+    Progress: 34.6% (2,683,989,000 evals, best: 2.627510e-5)
+    Progress: 41.6% (3,220,786,800 evals, best: 2.627510e-5)
+    Progress: 48.5% (3,757,584,600 evals, best: 2.627510e-5)
+    Progress: 55.4% (4,294,382,400 evals, best: 2.627510e-5)
+    Progress: 62.4% (4,831,180,200 evals, best: 2.627510e-5)
+    Progress: 69.3% (5,367,978,000 evals, best: 2.627510e-5)
+    Progress: 76.2% (5,904,775,800 evals, best: 2.521434e-5)
+    Progress: 83.2% (6,441,573,600 evals, best: 1.831001e-5)
+    Progress: 90.1% (6,978,371,400 evals, best: 1.831001e-5)
+    Progress: 97.0% (7,515,169,200 evals, best: 1.831001e-5)
+  Band 1/5 [thin fibers]: λ=[0.0010,0.1000] x 200,000 pts x 38,730 pairs = 7,746,000,000 evals | best: 1.831001e-5 (97.00s)
+    Progress: 6.9% (536,797,800 evals, best: 1.831001e-5)
+    Progress: 13.9% (1,073,595,600 evals, best: 1.831001e-5)
+    Progress: 20.8% (1,610,393,400 evals, best: 1.831001e-5)
+    Progress: 27.7% (2,147,191,200 evals, best: 1.831001e-5)
+    Progress: 34.6% (2,683,989,000 evals, best: 1.831001e-5)
+    Progress: 41.6% (3,220,786,800 evals, best: 1.831001e-5)
+    Progress: 48.5% (3,757,584,600 evals, best: 1.831001e-5)
+    Progress: 55.4% (4,294,382,400 evals, best: 1.831001e-5)
+    Progress: 62.4% (4,831,180,200 evals, best: 1.831001e-5)
+    Progress: 69.3% (5,367,978,000 evals, best: 1.831001e-5)
+    Progress: 76.2% (5,904,775,800 evals, best: 1.831001e-5)
+    Progress: 83.2% (6,441,573,600 evals, best: 1.831001e-5)
+    Progress: 90.1% (6,978,371,400 evals, best: 1.831001e-5)
+    Progress: 97.0% (7,515,169,200 evals, best: 1.831001e-5)
+  Band 2/5 [sub-round]: λ=[0.1000,1.0000] x 200,000 pts x 38,730 pairs = 7,746,000,000 evals | best: 1.831001e-5 (97.90s)
+    Progress: 6.9% (536,797,800 evals, best: 1.831001e-5)
+    Progress: 13.9% (1,073,595,600 evals, best: 1.831001e-5)
+    Progress: 20.8% (1,610,393,400 evals, best: 1.831001e-5)
+    Progress: 27.7% (2,147,191,200 evals, best: 1.831001e-5)
+    Progress: 34.6% (2,683,989,000 evals, best: 1.831001e-5)
+    Progress: 41.6% (3,220,786,800 evals, best: 1.831001e-5)
+    Progress: 48.5% (3,757,584,600 evals, best: 1.831001e-5)
+    Progress: 55.4% (4,294,382,400 evals, best: 1.831001e-5)
+    Progress: 62.4% (4,831,180,200 evals, best: 1.831001e-5)
+    Progress: 69.3% (5,367,978,000 evals, best: 1.831001e-5)
+    Progress: 76.2% (5,904,775,800 evals, best: 1.653265e-5)
+    Progress: 83.2% (6,441,573,600 evals, best: 1.653265e-5)
+    Progress: 90.1% (6,978,371,400 evals, best: 1.653265e-5)
+    Progress: 97.0% (7,515,169,200 evals, best: 1.653265e-5)
+  Band 3/5 [super-round]: λ=[1.0000,10.0000] x 200,000 pts x 38,730 pairs = 7,746,000,000 evals | best: 1.653265e-5 (99.73s)
+    Progress: 2.8% (536,797,800 evals, best: 1.653265e-5)
+    Progress: 5.5% (1,073,595,600 evals, best: 1.653265e-5)
+    Progress: 8.3% (1,610,393,400 evals, best: 1.653265e-5)
+    Progress: 11.1% (2,147,191,200 evals, best: 1.653265e-5)
+    Progress: 13.9% (2,683,989,000 evals, best: 1.653265e-5)
+    Progress: 16.6% (3,220,786,800 evals, best: 1.653265e-5)
+    Progress: 19.4% (3,757,584,600 evals, best: 1.653265e-5)
+    Progress: 22.2% (4,294,382,400 evals, best: 1.653265e-5)
+    Progress: 24.9% (4,831,180,200 evals, best: 1.299935e-5)
+    Progress: 27.7% (5,367,978,000 evals, best: 1.299935e-5)
+    Progress: 30.5% (5,904,775,800 evals, best: 1.299935e-5)
+    Progress: 33.3% (6,441,573,600 evals, best: 1.299935e-5)
+    Progress: 36.0% (6,978,371,400 evals, best: 1.299935e-5)
+    Progress: 38.8% (7,515,169,200 evals, best: 1.299935e-5)
+    Progress: 41.6% (8,051,967,000 evals, best: 1.299935e-5)
+    Progress: 44.4% (8,588,764,800 evals, best: 1.299935e-5)
+    Progress: 47.1% (9,125,562,600 evals, best: 1.299935e-5)
+    Progress: 49.9% (9,662,360,400 evals, best: 8.667106e-6)
+    Progress: 52.7% (10,199,158,200 evals, best: 8.667106e-6)
+    Progress: 55.4% (10,735,956,000 evals, best: 8.667106e-6)
+    Progress: 58.2% (11,272,753,800 evals, best: 8.667106e-6)
+    Progress: 61.0% (11,809,551,600 evals, best: 2.477642e-6)
+    Progress: 63.8% (12,346,349,400 evals, best: 2.477642e-6)
+    Progress: 66.5% (12,883,147,200 evals, best: 2.477642e-6)
+    Progress: 69.3% (13,419,945,000 evals, best: 2.477642e-6)
+    Progress: 72.1% (13,956,742,800 evals, best: 2.477642e-6)
+    Progress: 74.8% (14,493,540,600 evals, best: 2.477642e-6)
+    Progress: 77.6% (15,030,338,400 evals, best: 2.477642e-6)
+    Progress: 80.4% (15,567,136,200 evals, best: 2.477642e-6)
+    Progress: 83.2% (16,103,934,000 evals, best: 2.477642e-6)
+    Progress: 85.9% (16,640,731,800 evals, best: 1.978069e-6)
+    Progress: 88.7% (17,177,529,600 evals, best: 1.978069e-6)
+    Progress: 91.5% (17,714,327,400 evals, best: 1.978069e-6)
+    Progress: 94.2% (18,251,125,200 evals, best: 1.978069e-6)
+    Progress: 97.0% (18,787,923,000 evals, best: 1.978069e-6)
+    Progress: 99.8% (19,324,720,800 evals, best: 1.978069e-6)
+  Band 4/5 [target region]: λ=[0.0100,0.0500] x 500,000 pts x 38,730 pairs = 19,365,000,000 evals | best: 1.978069e-6 (241.12s)
+    Progress: 2.8% (536,797,800 evals, best: 1.978069e-6)
+    Progress: 5.5% (1,073,595,600 evals, best: 1.978069e-6)
+    Progress: 8.3% (1,610,393,400 evals, best: 1.978069e-6)
+    Progress: 11.1% (2,147,191,200 evals, best: 1.978069e-6)
+    Progress: 13.9% (2,683,989,000 evals, best: 1.978069e-6)
+    Progress: 16.6% (3,220,786,800 evals, best: 1.978069e-6)
+    Progress: 19.4% (3,757,584,600 evals, best: 1.978069e-6)
+    Progress: 22.2% (4,294,382,400 evals, best: 1.978069e-6)
+    Progress: 24.9% (4,831,180,200 evals, best: 1.978069e-6)
+    Progress: 27.7% (5,367,978,000 evals, best: 1.362353e-6)
+    Progress: 30.5% (5,904,775,800 evals, best: 1.362353e-6)
+    Progress: 33.3% (6,441,573,600 evals, best: 1.362353e-6)
+    Progress: 36.0% (6,978,371,400 evals, best: 1.362353e-6)
+    Progress: 38.8% (7,515,169,200 evals, best: 1.362353e-6)
+    Progress: 41.6% (8,051,967,000 evals, best: 1.362353e-6)
+    Progress: 44.4% (8,588,764,800 evals, best: 1.362353e-6)
+    Progress: 47.1% (9,125,562,600 evals, best: 1.362353e-6)
+    Progress: 49.9% (9,662,360,400 evals, best: 1.362353e-6)
+    Progress: 52.7% (10,199,158,200 evals, best: 1.362353e-6)
+    Progress: 55.4% (10,735,956,000 evals, best: 1.362353e-6)
+    Progress: 58.2% (11,272,753,800 evals, best: 1.362353e-6)
+    Progress: 61.0% (11,809,551,600 evals, best: 1.362353e-6)
+    Progress: 63.8% (12,346,349,400 evals, best: 1.362353e-6)
+    Progress: 66.5% (12,883,147,200 evals, best: 1.362353e-6)
+    Progress: 69.3% (13,419,945,000 evals, best: 1.362353e-6)
+    Progress: 72.1% (13,956,742,800 evals, best: 1.362353e-6)
+    Progress: 74.8% (14,493,540,600 evals, best: 1.362353e-6)
+    Progress: 77.6% (15,030,338,400 evals, best: 1.362353e-6)
+    Progress: 80.4% (15,567,136,200 evals, best: 1.362353e-6)
+    Progress: 83.2% (16,103,934,000 evals, best: 1.362353e-6)
+    Progress: 85.9% (16,640,731,800 evals, best: 1.362353e-6)
+    Progress: 88.7% (17,177,529,600 evals, best: 1.362353e-6)
+    Progress: 91.5% (17,714,327,400 evals, best: 1.362353e-6)
+    Progress: 94.2% (18,251,125,200 evals, best: 1.362353e-6)
+    Progress: 97.0% (18,787,923,000 evals, best: 1.362353e-6)
+    Progress: 99.8% (19,324,720,800 evals, best: 1.362353e-6)
+  Band 5/5 [ultra-thin fibers]: λ=[0.0030,0.0100] x 500,000 pts x 38,730 pairs = 19,365,000,000 evals | best: 1.362353e-6 (241.68s)
+
+Berger Sphere scan complete: 777.509s, 61,968,000,000 total evaluations, best score: 1.362353e-6
+  BEST: (10,1)÷(1,0) λ=0.0048419977 ratio=206.7682829376 score=1.362353e-6
+--- Phase 1 Summary ---
+Evaluated: 61,968,000,000 candidates in 777.51s
+Best score: 1.36e-6
+Top candidates:
+  (10001,1000) rho=0.004842 eps=0.00e0 path=6.29054635 ratio=206.7682829376 score=1.36e-6 [berger (10,1)÷(1,0)]
+  (19009,1000) rho=0.043712 eps=0.00e0 path=56.78870495 ratio=206.7682862781 score=1.98e-6 [berger (19,9)÷(1,0)]
+  (27007,1000) rho=0.034147 eps=0.00e0 path=44.36192083 ratio=206.7682818224 score=2.48e-6 [berger (27,7)÷(1,0)]
+  (15002,1000) rho=0.009698 eps=0.00e0 path=12.59956713 ratio=206.7682874854 score=3.19e-6 [berger (15,2)÷(1,0)]
+  (9001,1000) rho=0.004841 eps=0.00e0 path=6.28914577 ratio=206.7682800205 score=4.28e-6 [berger (9,1)÷(1,0)]
+  (13009,1000) rho=0.043613 eps=0.00e0 path=56.66066009 ratio=206.7682897382 score=5.44e-6 [berger (13,9)÷(1,0)]
+  (25006,1000) rho=0.029232 eps=0.00e0 path=37.97760996 ratio=206.7682756329 score=8.67e-6 [berger (25,6)÷(1,0)]
+  (28009,1000) rho=0.043931 eps=0.00e0 path=57.07389482 ratio=206.7682751662 score=9.13e-6 [berger (28,9)÷(1,0)]
+  (17009,1000) rho=0.043675 eps=0.00e0 path=56.74058645 ratio=206.7682957913 score=1.15e-5 [berger (17,9)÷(1,0)]
+  (21004,1000) rho=0.019446 eps=0.00e0 path=25.26335063 ratio=206.7682972993 score=1.30e-5 [berger (21,4)÷(1,0)]
+  (7004,1000) rho=0.019356 eps=0.00e0 path=25.14715343 ratio=206.7682990240 score=1.47e-5 [berger (7,4)÷(1,0)]
+  (27005,1) rho=7.724294 eps=0.00e0 path=1299.16334203 ratio=206.7682677674 score=1.65e-5 [berger (27,5)÷(0,1)]
+  (21010,1000) rho=0.048614 eps=0.00e0 path=63.15805323 ratio=206.7683020128 score=1.77e-5 [berger (21,10)÷(1,0)]
+  (21016,1000) rho=0.077782 eps=0.00e0 path=101.05192353 ratio=206.7682659900 score=1.83e-5 [berger (21,16)÷(1,0)]
+  (5002,1000) rho=0.009675 eps=0.00e0 path=12.57004616 ratio=206.7682658990 score=1.84e-5 [berger (5,2)÷(1,0)]
+  (25008,1000) rho=0.038976 eps=0.00e0 path=50.63669018 ratio=206.7683034639 score=1.92e-5 [berger (25,8)÷(1,0)]
+  (19001,1000) rho=0.004857 eps=0.00e0 path=6.30988124 ratio=206.7683056663 score=2.14e-5 [berger (19,1)÷(1,0)]
+  (19010,1000) rho=0.048569 eps=0.00e0 path=63.09850130 ratio=206.7683080580 score=2.38e-5 [berger (19,10)÷(1,0)]
+  (26015,1000) rho=0.073124 eps=0.00e0 path=94.99983234 ratio=206.7683095143 score=2.52e-5 [berger (26,15)÷(1,0)]
+  (27011,1) rho=8.055225 eps=0.00e0 path=1299.16360896 ratio=206.7683102516 score=2.60e-5 [berger (27,11)÷(0,1)]
+  (9005,1000) rho=0.024205 eps=0.00e0 path=31.44572044 ratio=206.7683103066 score=2.60e-5 [berger (9,5)÷(1,0)]
+  (8005,1000) rho=0.024200 eps=0.00e0 path=31.43946038 ratio=206.7682580249 score=2.63e-5 [berger (8,5)÷(1,0)]
+  (18013,1000) rho=0.063111 eps=0.00e0 path=81.99206754 ratio=206.7683106294 score=2.63e-5 [berger (18,13)÷(1,0)]
+  (21005,1000) rho=0.024307 eps=0.00e0 path=31.57917095 ratio=206.7683113342 score=2.70e-5 [berger (21,5)÷(1,0)]
+  (29006,1000) rho=0.029308 eps=0.00e0 path=38.07530382 ratio=206.7682570542 score=2.72e-5 [berger (29,6)÷(1,0)]
+  (27008,1000) rho=0.039025 eps=0.00e0 path=50.69926081 ratio=206.7683148194 score=3.05e-5 [berger (27,8)÷(1,0)]
+  (7002,1000) rho=0.009678 eps=0.00e0 path=12.57357772 ratio=206.7683156530 score=3.14e-5 [berger (7,2)÷(1,0)]
+  (4001,1000) rho=0.004837 eps=0.00e0 path=6.28436134 ratio=206.7682505076 score=3.38e-5 [berger (4,1)÷(1,0)]
+  (18005,1000) rho=0.024274 eps=0.00e0 path=31.53561341 ratio=206.7682491198 score=3.52e-5 [berger (18,5)÷(1,0)]
+  (29004,1000) rho=0.019538 eps=0.00e0 path=25.38359547 ratio=206.7682485904 score=3.57e-5 [berger (29,4)÷(1,0)]
+  (29008,1000) rho=0.039077 eps=0.00e0 path=50.76690502 ratio=206.7682481552 score=3.61e-5 [berger (29,8)÷(1,0)]
+  (29009,1000) rho=0.043961 eps=0.00e0 path=57.11265423 ratio=206.7682472814 score=3.70e-5 [berger (29,9)÷(1,0)]
+  (22015,1000) rho=0.072958 eps=0.00e0 path=94.78440333 ratio=206.7683223249 score=3.80e-5 [berger (22,15)÷(1,0)]
+  (23002,1000) rho=0.009733 eps=0.00e0 path=12.64484001 ratio=206.7683225517 score=3.83e-5 [berger (23,2)÷(1,0)]
+  (22007,1000) rho=0.034047 eps=0.00e0 path=44.23324368 ratio=206.7682456273 score=3.87e-5 [berger (22,7)÷(1,0)]
+  (25019,1000) rho=0.092567 eps=0.00e0 path=120.25909801 ratio=206.7683234211 score=3.91e-5 [berger (25,19)÷(1,0)]
+  (10007,1000) rho=0.033894 eps=0.00e0 path=44.03379553 ratio=206.7682445697 score=3.97e-5 [berger (10,7)÷(1,0)]
+  (29005,1000) rho=0.024423 eps=0.00e0 path=31.72946060 ratio=206.7683250215 score=4.07e-5 [berger (29,5)÷(1,0)]
+  (29002,1000) rho=0.009769 eps=0.00e0 path=12.69181561 ratio=206.7682435125 score=4.08e-5 [berger (29,2)÷(1,0)]
+  (28003,1) rho=7.405287 eps=0.00e0 path=1299.16370755 ratio=206.7683259418 score=4.16e-5 [berger (28,3)÷(0,1)]
+  (9008,1000) rho=0.038727 eps=0.00e0 path=50.31313095 ratio=206.7682422840 score=4.20e-5 [berger (9,8)÷(1,0)]
+  (18017,1000) rho=0.082530 eps=0.00e0 path=107.21982233 ratio=206.7683269138 score=4.26e-5 [berger (18,17)÷(1,0)]
+  (20007,1000) rho=0.034014 eps=0.00e0 path=44.18938286 ratio=206.7682410142 score=4.33e-5 [berger (20,7)÷(1,0)]
+  (23009,1000) rho=0.043799 eps=0.00e0 path=56.90145936 ratio=206.7682383035 score=4.60e-5 [berger (23,9)÷(1,0)]
+  (13001,1000) rho=0.004846 eps=0.00e0 path=6.29564058 ratio=206.7683320917 score=4.78e-5 [berger (13,1)÷(1,0)]
+  (21002,1000) rho=0.009723 eps=0.00e0 path=12.63168459 ratio=206.7682364929 score=4.78e-5 [berger (21,2)÷(1,0)]
+  (17006,1000) rho=0.029117 eps=0.00e0 path=37.82712533 ratio=206.7683344209 score=5.01e-5 [berger (17,6)÷(1,0)]
+  (29001,1000) rho=0.004885 eps=0.00e0 path=6.34591005 ratio=206.7682318686 score=5.24e-5 [berger (29,1)÷(1,0)]
+  (26005,1000) rho=0.024375 eps=0.00e0 path=31.66720651 ratio=206.7683378375 score=5.35e-5 [berger (26,5)÷(1,0)]
+  (15004,1000) rho=0.019396 eps=0.00e0 path=25.19912487 ratio=206.7683383764 score=5.41e-5 [berger (15,4)÷(1,0)]
+
+--- Phase 1: Lens Space Scan ---
+Lens Space kernel compiled
+Using 38,730 mode pairs
+    Progress: 47.8% (18,519,524,100 evals, best: 2.365596e-6)
+    Progress: 96.3% (37,307,447,100 evals, best: 2.365596e-6)
+  Band 1/4 [full range]: σ=[0.0010,0.9990] x 1,000,000 pts x 38,730 pairs = 38,730,000,000 evals | best: 2.365596e-6 (10.47s)
+    Progress: 97.0% (18,787,923,000 evals, best: 2.365596e-6)
+  Band 2/4 [extreme thin]: σ=[0.0010,0.0100] x 500,000 pts x 38,730 pairs = 19,365,000,000 evals | best: 2.365596e-6 (5.22s)
+    Progress: 94.2% (18,251,125,200 evals, best: 1.618614e-8)
+  Band 3/4 [extreme thick]: σ=[0.9900,0.9990] x 500,000 pts x 38,730 pairs = 19,365,000,000 evals | best: 1.618614e-8 (5.36s)
+    Progress: 47.8% (18,519,524,100 evals, best: 1.618614e-8)
+    Progress: 96.3% (37,307,447,100 evals, best: 1.618614e-8)
+  Band 4/4 [target region]: σ=[0.0030,0.0070] x 1,000,000 pts x 38,730 pairs = 38,730,000,000 evals | best: 1.618614e-8 (10.40s)
+
+Lens Space scan complete: 31.497s, 116,190,000,000 total evaluations, best score: 1.618614e-8
+  BEST: (19,13)÷(0,1) σ=0.9957880916 ratio=206.7682842838 score=1.618614e-8
+--- Phase 1 Summary ---
+Evaluated: 116,190,000,000 candidates in 31.50s
+Best score: 1.62e-8
+Top candidates:
+  (19013,1) rho=0.995788 eps=0.00e0 path=18.95747961 ratio=206.7682842838 score=1.62e-8 [lens (19,13)÷(0,1)]
+  (20009,1) rho=0.995346 eps=0.00e0 path=19.92580054 ratio=206.7682847163 score=4.16e-7 [lens (20,9)÷(0,1)]
+  (25013,1) rho=0.992741 eps=0.00e0 path=24.86773353 ratio=206.7682861298 score=1.83e-6 [lens (25,13)÷(0,1)]
+  (19016,1) rho=0.995780 eps=0.00e0 path=18.97671126 ratio=206.7682862499 score=1.95e-6 [lens (19,16)÷(0,1)]
+  (13005,1000) rho=0.024222 eps=0.00e0 path=5.00844177 ratio=206.7682866656 score=2.37e-6 [lens (13,5)÷(1,0)]
+  (26005,1) rho=0.992182 eps=0.00e0 path=25.80428188 ratio=206.7682873769 score=3.08e-6 [lens (26,5)÷(0,1)]
+  (28003,1) rho=0.990953 eps=0.00e0 path=27.74961637 ratio=206.7682875029 score=3.20e-6 [lens (28,3)÷(0,1)]
+  (29020,1) rho=0.990217 eps=0.00e0 path=28.85157923 ratio=206.7682876245 score=3.32e-6 [lens (29,20)÷(0,1)]
+  (16001,1000) rho=0.004851 eps=0.00e0 path=1.00299565 ratio=206.7682798675 score=4.43e-6 [lens (16,1)÷(1,0)]
+  (28025,1) rho=0.990823 eps=0.00e0 path=27.94807841 ratio=206.7682895290 score=5.23e-6 [lens (28,25)÷(0,1)]
+  (5001,1000) rho=0.004838 eps=0.00e0 path=1.00028080 ratio=206.7682784660 score=5.83e-6 [lens (5,1)÷(1,0)]
+  (23002,1) rho=0.993870 eps=0.00e0 path=22.86006967 ratio=206.7682778930 score=6.41e-6 [lens (23,2)÷(0,1)]
+  (29009,1) rho=0.990289 eps=0.00e0 path=28.74562748 ratio=206.7682910313 score=6.73e-6 [lens (29,9)÷(0,1)]
+  (25012,1) rho=0.992746 eps=0.00e0 path=24.86054263 ratio=206.7682775477 score=6.75e-6 [lens (25,12)÷(0,1)]
+  (13001,1000) rho=0.004846 eps=0.00e0 path=1.00197058 ratio=206.7682921949 score=7.89e-6 [lens (13,1)÷(1,0)]
+  (21008,1) rho=0.994874 eps=0.00e0 path=20.90801815 ratio=206.7682761048 score=8.20e-6 [lens (21,8)÷(0,1)]
+  (25004,1) rho=0.992767 eps=0.00e0 path=24.82382278 ratio=206.7682757775 score=8.52e-6 [lens (25,4)÷(0,1)]
+  (25021,1) rho=0.992695 eps=0.00e0 path=24.94637578 ratio=206.7682757188 score=8.58e-6 [lens (25,21)÷(0,1)]
+  (29006,1) rho=0.990299 eps=0.00e0 path=28.73077501 ratio=206.7682751229 score=9.18e-6 [lens (29,6)÷(0,1)]
+  (29021,1) rho=0.990208 eps=0.00e0 path=28.86528197 ratio=206.7682748190 score=9.48e-6 [lens (29,21)÷(0,1)]
+  (24001,1000) rho=0.004869 eps=0.00e0 path=1.00679326 ratio=206.7682939329 score=9.63e-6 [lens (24,1)÷(1,0)]
+  (27002,1) rho=0.991581 eps=0.00e0 path=26.77394042 ratio=206.7682739146 score=1.04e-5 [lens (27,2)÷(0,1)]
+  (26001,1) rho=0.992187 eps=0.00e0 path=25.79715071 ratio=206.7682949875 score=1.07e-5 [lens (26,1)÷(0,1)]
+  (27008,1) rho=0.991569 eps=0.00e0 path=26.79243368 ratio=206.7682950334 score=1.07e-5 [lens (27,8)÷(0,1)]
+  (27001,1000) rho=0.004878 eps=0.00e0 path=1.00862430 ratio=206.7682735120 score=1.08e-5 [lens (27,1)÷(1,0)]
+  (29017,1) rho=0.990242 eps=0.00e0 path=28.81457923 ratio=206.7682952579 score=1.10e-5 [lens (29,17)÷(0,1)]
+  (22017,1) rho=0.994349 eps=0.00e0 path=21.94999921 ratio=206.7682953513 score=1.11e-5 [lens (22,17)÷(0,1)]
+  (28015,1) rho=0.990908 eps=0.00e0 path=27.81872474 ratio=206.7682731048 score=1.12e-5 [lens (28,15)÷(0,1)]
+  (24011,1) rho=0.993312 eps=0.00e0 path=23.87330042 ratio=206.7682701916 score=1.41e-5 [lens (24,11)÷(0,1)]
+  (29025,1) rho=0.990166 eps=0.00e0 path=28.92701863 ratio=206.7682986229 score=1.43e-5 [lens (29,25)÷(0,1)]
+  (22001,1) rho=0.994387 eps=0.00e0 path=21.87677154 ratio=206.7682989207 score=1.46e-5 [lens (22,1)÷(0,1)]
+  (15002,1000) rho=0.009698 eps=0.00e0 path=2.00518934 ratio=206.7682694214 score=1.49e-5 [lens (15,2)÷(1,0)]
+  (27005,1) rho=0.991577 eps=0.00e0 path=26.78040868 ratio=206.7682690759 score=1.52e-5 [lens (27,5)÷(0,1)]
+  (11001,1000) rho=0.004843 eps=0.00e0 path=1.00140637 ratio=206.7682687634 score=1.55e-5 [lens (11,1)÷(1,0)]
+  (25006,1) rho=0.992764 eps=0.00e0 path=24.82954957 ratio=206.7683009718 score=1.67e-5 [lens (25,6)÷(0,1)]
+  (19006,1) rho=0.995801 eps=0.00e0 path=18.92819221 ratio=206.7683017363 score=1.74e-5 [lens (19,6)÷(0,1)]
+  (25014,1) rho=0.992737 eps=0.00e0 path=24.87550672 ratio=206.7683019476 score=1.76e-5 [lens (25,14)÷(0,1)]
+  (23011,1) rho=0.993853 eps=0.00e0 path=22.89103295 ratio=206.7683040849 score=1.98e-5 [lens (23,11)÷(0,1)]
+  (2001,1000) rho=0.004837 eps=0.00e0 path=1.00003509 ratio=206.7682636781 score=2.06e-5 [lens (2,1)÷(1,0)]
+  (29012,1) rho=0.990275 eps=0.00e0 path=28.76645965 ratio=206.7683051839 score=2.09e-5 [lens (29,12)÷(0,1)]
+  (29023,1) rho=0.990188 eps=0.00e0 path=28.89475886 ratio=206.7683053249 score=2.10e-5 [lens (29,23)÷(0,1)]
+  (20011,1000) rho=0.053374 eps=0.00e0 path=11.03606875 ratio=206.7682624318 score=2.19e-5 [lens (20,11)÷(1,0)]
+  (21005,1) rho=0.994879 eps=0.00e0 path=20.89857165 ratio=206.7683071958 score=2.29e-5 [lens (21,5)÷(0,1)]
+  (11008,1) rho=0.998586 eps=0.00e0 path=10.99267453 ratio=206.7683072157 score=2.29e-5 [lens (11,8)÷(0,1)]
+  (25011,1) rho=0.992749 eps=0.00e0 path=24.85393250 ratio=206.7682592316 score=2.51e-5 [lens (25,11)÷(0,1)]
+  (16005,1) rho=0.997018 eps=0.00e0 path=15.95694948 ratio=206.7683100549 score=2.58e-5 [lens (16,5)÷(0,1)]
+  (25018,1) rho=0.992715 eps=0.00e0 path=24.91245674 ratio=206.7683103632 score=2.61e-5 [lens (25,18)÷(0,1)]
+  (29011,1) rho=0.990280 eps=0.00e0 path=28.75884891 ratio=206.7682578452 score=2.65e-5 [lens (29,11)÷(0,1)]
+  (29010,1) rho=0.990285 eps=0.00e0 path=28.75190534 ratio=206.7682578067 score=2.65e-5 [lens (29,10)÷(0,1)]
+  (18001,1) rho=0.996232 eps=0.00e0 path=17.93238782 ratio=206.7682576745 score=2.66e-5 [lens (18,1)÷(0,1)]
+
+--- Phase 1: Poincaré Homology Sphere Scan ---
+Poincaré Homology Sphere kernel compiled
+Using 315 mode pairs
+  Band 1/5 [thin fibers]: λ=[0.0010,0.1000] x 200,000 pts x 315 pairs = 63,000,000 evals | best: 1.797693e308 (0.81s)
+  Band 2/5 [sub-round]: λ=[0.1000,1.0000] x 200,000 pts x 315 pairs = 63,000,000 evals | best: 1.797693e308 (0.81s)
+  Band 3/5 [super-round]: λ=[1.0000,10.0000] x 200,000 pts x 315 pairs = 63,000,000 evals | best: 1.797693e308 (0.83s)
+  Band 4/5 [target region]: λ=[0.0100,0.0500] x 500,000 pts x 315 pairs = 157,500,000 evals | best: 1.797693e308 (2.03s)
+  Band 5/5 [ultra-thin fibers]: λ=[0.0030,0.0100] x 500,000 pts x 315 pairs = 157,500,000 evals | best: 1.797693e308 (2.03s)
+
+Poincaré Homology Sphere scan complete: 6.628s, 504,000,000 total evaluations, best score: 1.797693e308
+--- Phase 1 Summary ---
+Evaluated: 504,000,000 candidates in 6.63s
+Best score: 1.80e308
+Top candidates:
+
+--- Phase 1: Nil Manifold Scan ---
+Nil Manifold kernel compiled
+Using 95,853 mode pairs
+    Progress: 40.9% (19,592,353,200 evals, best: 3.504221e-8)
+    Progress: 82.3% (39,453,094,800 evals, best: 2.391891e-8)
+  Band 1/4 [sub-unity tau]: τ=[0.0010,1.0000] x 500,000 pts x 95,853 pairs = 47,926,500,000 evals | best: 2.391891e-8 (12.14s)
+    Progress: 43.7% (20,934,295,200 evals, best: 2.391891e-8)
+    Progress: 87.4% (41,868,590,400 evals, best: 2.391891e-8)
+  Band 2/4 [super-unity tau]: τ=[1.0000,10.0000] x 500,000 pts x 95,853 pairs = 47,926,500,000 evals | best: 2.391891e-8 (11.47s)
+    Progress: 44.2% (21,202,683,600 evals, best: 5.040505e-9)
+    Progress: 86.2% (41,331,813,600 evals, best: 1.019430e-9)
+  Band 3/4 [target region]: τ=[0.0100,0.1000] x 500,000 pts x 95,853 pairs = 47,926,500,000 evals | best: 1.019430e-9 (11.70s)
+    Progress: 47.0% (22,544,625,600 evals, best: 1.019430e-9)
+    Progress: 94.1% (45,089,251,200 evals, best: 1.019430e-9)
+  Band 4/4 [extreme thin tau]: τ=[0.0010,0.0100] x 500,000 pts x 95,853 pairs = 47,926,500,000 evals | best: 1.019430e-9 (10.76s)
+
+Nil Manifold scan complete: 46.119s, 191,706,000,000 total evaluations, best score: 1.019430e-9
+  BEST: (10,15)÷(5,1) τ=0.0599713399 ratio=206.7682843010 score=1.019430e-9
+--- Phase 1 Summary ---
+Evaluated: 191,706,000,000 candidates in 46.12s
+Best score: 1.02e-9
+Top candidates:
+  (10015,5001) rho=0.059971 eps=0.00e0 path=8896.84261712 ratio=206.7682843010 score=1.02e-9 [nil (10,15)÷(5,1)]
+  (20030,10002) rho=0.059971 eps=0.00e0 path=35587.37046846 ratio=206.7682843010 score=1.02e-9 [nil (20,30)÷(10,2)]
+  (17029,8002) rho=0.032801 eps=0.00e0 path=33213.62463381 ratio=206.7682842950 score=5.04e-9 [nil (17,29)÷(8,2)]
+  (27015,2001) rho=0.431160 eps=0.00e0 path=14232.77890424 ratio=206.7682843239 score=2.39e-8 [nil (27,15)÷(2,1)]
+  (5023,4000) rho=0.401396 eps=0.00e0 path=21043.10074774 ratio=206.7682842650 score=3.50e-8 [nil (5,23)÷(4,0)]
+  (29015,1007) rho=3.952204 eps=0.00e0 path=527484.91974042 ratio=206.7682843631 score=6.31e-8 [nil (29,15)÷(1,7)]
+  (30025,2006) rho=9.669537 eps=0.00e0 path=3346781.15943997 ratio=206.7682842077 score=9.23e-8 [nil (30,25)÷(2,6)]
+  (30021,2004) rho=6.270357 eps=0.00e0 path=1414378.81970919 ratio=206.7682841992 score=1.01e-7 [nil (30,21)÷(2,4)]
+  (17029,7002) rho=0.037616 eps=0.00e0 path=33217.49275360 ratio=206.7682844242 score=1.24e-7 [nil (17,29)÷(7,2)]
+  (16007,1003) rho=6.066614 eps=0.00e0 path=373891.19479898 ratio=206.7682844363 score=1.36e-7 [nil (16,7)÷(1,3)]
+  (16029,6002) rho=0.044018 eps=0.00e0 path=33220.93159110 ratio=206.7682841209 score=1.79e-7 [nil (16,29)÷(6,2)]
+  (19016,1003) rho=3.225812 eps=0.00e0 path=158407.84610011 ratio=206.7682844891 score=1.89e-7 [nil (19,16)÷(1,3)]
+  (20029,3002) rho=0.097637 eps=0.00e0 path=33351.88791304 ratio=206.7682844917 score=1.92e-7 [nil (20,29)÷(3,2)]
+  (30017,7001) rho=0.094380 eps=0.00e0 path=11725.75448366 ratio=206.7682845124 score=2.12e-7 [nil (30,17)÷(7,1)]
+  (18010,1002) rho=2.490385 eps=0.00e0 path=83277.89101392 ratio=206.7682840871 score=2.13e-7 [nil (18,10)÷(1,2)]
+  (28004,9000) rho=0.031658 eps=0.00e0 path=662.67510916 ratio=206.7682840578 score=2.42e-7 [nil (28,4)÷(9,0)]
+  (29001,2002) rho=7.701629 eps=0.00e0 path=1969380.67609934 ratio=206.7682845458 score=2.46e-7 [nil (29,1)÷(2,2)]
+  (26029,6002) rho=0.045364 eps=0.00e0 path=33256.26803569 ratio=206.7682845460 score=2.46e-7 [nil (26,29)÷(6,2)]
+  (29012,2001) rho=2.122968 eps=0.00e0 path=155323.17954735 ratio=206.7682845728 score=2.73e-7 [nil (29,12)÷(2,1)]
+  (19029,6002) rho=0.044343 eps=0.00e0 path=33229.37280441 ratio=206.7682845975 score=2.98e-7 [nil (19,29)÷(6,2)]
+  (21029,2002) rho=0.189929 eps=0.00e0 path=33829.38164634 ratio=206.7682839972 score=3.03e-7 [nil (21,29)÷(2,2)]
+  (29023,7001) rho=0.186235 eps=0.00e0 path=22035.62047279 ratio=206.7682839801 score=3.20e-7 [nil (29,23)÷(7,1)]
+  (17016,8001) rho=0.061672 eps=0.00e0 path=10149.86877236 ratio=206.7682839278 score=3.72e-7 [nil (17,16)÷(8,1)]
+  (5016,7001) rho=0.069794 eps=0.00e0 path=10111.28261005 ratio=206.7682847004 score=4.00e-7 [nil (5,16)÷(7,1)]
+  (19029,5002) rho=0.053819 eps=0.00e0 path=33242.62895149 ratio=206.7682847018 score=4.02e-7 [nil (19,29)÷(5,2)]
+  (26020,1002) rho=0.954020 eps=0.00e0 path=40081.02119835 ratio=206.7682847035 score=4.03e-7 [nil (26,20)÷(1,2)]
+  (30012,2001) rho=0.927740 eps=0.00e0 path=36266.12468967 ratio=206.7682847108 score=4.11e-7 [nil (30,12)÷(2,1)]
+  (3029,7002) rho=0.037092 eps=0.00e0 path=33201.83803931 ratio=206.7682847385 score=4.39e-7 [nil (3,29)÷(7,2)]
+  (2029,9002) rho=0.028840 eps=0.00e0 path=33201.48054852 ratio=206.7682847480 score=4.48e-7 [nil (2,29)÷(9,2)]
+  (23017,1007) rho=5.526775 eps=0.00e0 path=649318.63949063 ratio=206.7682838492 score=4.51e-7 [nil (23,17)÷(1,7)]
+  (30007,2005) rho=8.379151 eps=0.00e0 path=2496542.12136092 ratio=206.7682847573 score=4.57e-7 [nil (30,7)÷(2,5)]
+  (21030,10000) rho=0.210892 eps=0.00e0 path=36304.89471912 ratio=206.7682847975 score=4.97e-7 [nil (21,30)÷(10,0)]
+  (14029,3002) rho=0.091460 eps=0.00e0 path=33266.07495509 ratio=206.7682848038 score=5.04e-7 [nil (14,29)÷(3,2)]
+  (9021,2000) rho=0.768827 eps=0.00e0 path=19300.15685127 ratio=206.7682837848 score=5.15e-7 [nil (9,21)÷(2,0)]
+  (3030,6002) rho=0.099041 eps=0.00e0 path=35534.06105234 ratio=206.7682848240 score=5.24e-7 [nil (3,30)÷(6,2)]
+  (28029,2001) rho=3.837256 eps=0.00e0 path=488941.48079397 ratio=206.7682837478 score=5.52e-7 [nil (28,29)÷(2,1)]
+  (15008,1003) rho=9.927730 eps=0.00e0 path=877998.40938213 ratio=206.7682848624 score=5.62e-7 [nil (15,8)÷(1,3)]
+  (30016,2006) rho=9.927730 eps=0.00e0 path=3511993.63752853 ratio=206.7682848624 score=5.62e-7 [nil (30,16)÷(2,6)]
+  (16011,9000) rho=0.085655 eps=0.00e0 path=4851.03759207 ratio=206.7682848897 score=5.90e-7 [nil (16,11)÷(9,0)]
+  (25023,7001) rho=0.184107 eps=0.00e0 path=21720.41876799 ratio=206.7682849585 score=6.59e-7 [nil (25,23)÷(7,1)]
+  (4029,3002) rho=0.086884 eps=0.00e0 path=33206.11742951 ratio=206.7682849849 score=6.85e-7 [nil (4,29)÷(3,2)]
+  (15006,1001) rho=3.060482 eps=0.00e0 path=84620.95904577 ratio=206.7682849953 score=6.95e-7 [nil (15,6)÷(1,1)]
+  (30012,2002) rho=3.060482 eps=0.00e0 path=338483.83618310 ratio=206.7682849953 score=6.95e-7 [nil (30,12)÷(2,2)]
+  (17016,7000) rho=0.161274 eps=0.00e0 path=10403.22146032 ratio=206.7682835924 score=7.08e-7 [nil (17,16)÷(7,0)]
+  (23023,1009) rho=7.094650 eps=0.00e0 path=1072064.79261343 ratio=206.7682835789 score=7.21e-7 [nil (23,23)÷(1,9)]
+  (20029,5002) rho=0.054039 eps=0.00e0 path=33247.46256339 ratio=206.7682850292 score=7.29e-7 [nil (20,29)÷(5,2)]
+  (3016,6001) rho=0.081375 eps=0.00e0 path=10108.82771315 ratio=206.7682850336 score=7.34e-7 [nil (3,16)÷(6,1)]
+  (10029,8002) rho=0.032564 eps=0.00e0 path=33205.53563077 ratio=206.7682850401 score=7.40e-7 [nil (10,29)÷(8,2)]
+  (19000,1005) rho=5.789288 eps=0.00e0 path=477658.14239429 ratio=206.7682850534 score=7.53e-7 [nil (19,0)÷(1,5)]
+  (12007,5000) rho=0.098746 eps=0.00e0 path=1989.87494723 ratio=206.7682835352 score=7.65e-7 [nil (12,7)÷(5,0)]
+
+--- Phase 1: Tetrahedral S³/2T Scan ---
+Tetrahedral S³/2T kernel compiled
+Using 4,794 mode pairs
+    Progress: 56.0% (536,870,472 evals, best: 1.028278e-5)
+    Progress: 100.0% (958,800,000 evals, best: 1.028278e-5)
+  Band 1/4 [thin fibers]: λ=[0.0010,0.1000] x 200,000 pts x 4,794 pairs = 958,800,000 evals | best: 1.028278e-5 (12.07s)
+    Progress: 56.0% (536,870,472 evals, best: 1.028278e-5)
+    Progress: 100.0% (958,800,000 evals, best: 1.028278e-5)
+  Band 2/4 [sub-round]: λ=[0.1000,1.0000] x 200,000 pts x 4,794 pairs = 958,800,000 evals | best: 1.028278e-5 (12.14s)
+    Progress: 56.0% (536,870,472 evals, best: 1.028278e-5)
+    Progress: 100.0% (958,800,000 evals, best: 1.028278e-5)
+  Band 3/4 [super-round]: λ=[1.0000,10.0000] x 200,000 pts x 4,794 pairs = 958,800,000 evals | best: 1.028278e-5 (12.30s)
+    Progress: 22.4% (536,870,472 evals, best: 3.276514e-6)
+    Progress: 44.8% (1,073,740,944 evals, best: 1.996789e-6)
+    Progress: 67.2% (1,610,611,416 evals, best: 6.366923e-7)
+    Progress: 89.6% (2,147,481,888 evals, best: 2.563632e-7)
+  Band 4/4 [target region]: λ=[0.0100,0.0500] x 500,000 pts x 4,794 pairs = 2,397,000,000 evals | best: 2.563632e-7 (30.37s)
+
+Tetrahedral S³/2T scan complete: 66.962s, 5,273,400,000 total evaluations, best score: 2.563632e-7
+  BEST: (56,52)÷(6,0) λ=0.0419590239 ratio=206.7682840436 score=2.563632e-7
+--- Phase 1 Summary ---
+Evaluated: 5,273,400,000 candidates in 66.96s
+Best score: 2.56e-7
+Top candidates:
+  (56052,6000) rho=0.041959 eps=0.00e0 path=327.06978020 ratio=206.7682840436 score=2.56e-7 [tetrahedral (56,52)÷(6,0)]
+  (44040,6000) rho=0.032258 eps=0.00e0 path=251.44771486 ratio=206.7682836633 score=6.37e-7 [tetrahedral (44,40)÷(6,0)]
+  (58042,8000) rho=0.025397 eps=0.00e0 path=263.96372795 ratio=206.7682862968 score=2.00e-6 [tetrahedral (58,42)÷(8,0)]
+  (52024,8000) rho=0.014516 eps=0.00e0 path=150.87100706 ratio=206.7682810235 score=3.28e-6 [tetrahedral (52,24)÷(8,0)]
+  (52036,6000) rho=0.029043 eps=0.00e0 path=226.39335457 ratio=206.7682880809 score=3.78e-6 [tetrahedral (52,36)÷(6,0)]
+  (28020,6000) rho=0.016125 eps=0.00e0 path=125.69572033 ratio=206.7682883330 score=4.03e-6 [tetrahedral (28,20)÷(6,0)]
+  (40034,8000) rho=0.020560 eps=0.00e0 path=213.69077450 ratio=206.7682785701 score=5.73e-6 [tetrahedral (40,34)÷(8,0)]
+  (34028,6000) rho=0.022578 eps=0.00e0 path=175.99527502 ratio=206.7682904499 score=6.15e-6 [tetrahedral (34,28)÷(6,0)]
+  (56036,6000) rho=0.029048 eps=0.00e0 path=226.42516083 ratio=206.7682905146 score=6.21e-6 [tetrahedral (56,36)÷(6,0)]
+  (60034,8000) rho=0.020568 eps=0.00e0 path=213.76894530 ratio=206.7682911232 score=6.82e-6 [tetrahedral (60,34)÷(8,0)]
+  (58024,6000) rho=0.019366 eps=0.00e0 path=150.96148837 ratio=206.7682911415 score=6.84e-6 [tetrahedral (58,24)÷(6,0)]
+  (48048,8000) rho=0.029026 eps=0.00e0 path=301.67655330 ratio=206.7682927749 score=8.47e-6 [tetrahedral (48,48)÷(8,0)]
+  (42038,8000) rho=0.022980 eps=0.00e0 path=238.83599331 ratio=206.7682929618 score=8.66e-6 [tetrahedral (42,38)÷(8,0)]
+  (38032,6000) rho=0.025806 eps=0.00e0 path=201.15627926 ratio=206.7682932727 score=8.97e-6 [tetrahedral (38,32)÷(6,0)]
+  (32032,6000) rho=0.025802 eps=0.00e0 path=201.12882321 ratio=206.7682751243 score=9.18e-6 [tetrahedral (32,32)÷(6,0)]
+  (58056,8000) rho=0.033881 eps=0.00e0 path=352.13987466 ratio=206.7682743013 score=1.00e-5 [tetrahedral (58,56)÷(8,0)]
+  (58054,6000) rho=0.043562 eps=0.00e0 path=339.56295876 ratio=206.7682731828 score=1.11e-5 [tetrahedral (58,54)÷(6,0)]
+  (56032,8000) rho=0.019356 eps=0.00e0 path=201.17722464 ratio=206.7682961814 score=1.19e-5 [tetrahedral (56,32)÷(8,0)]
+  (58046,8000) rho=0.027831 eps=0.00e0 path=289.25441735 ratio=206.7682717659 score=1.25e-5 [tetrahedral (58,46)÷(8,0)]
+  (52024,6000) rho=0.019362 eps=0.00e0 path=150.92906541 ratio=206.7682969356 score=1.26e-5 [tetrahedral (52,24)÷(6,0)]
+  (50046,6000) rho=0.037119 eps=0.00e0 path=289.33827487 ratio=206.7682970120 score=1.27e-5 [tetrahedral (50,46)÷(6,0)]
+  (56020,8000) rho=0.012098 eps=0.00e0 path=125.73577607 ratio=206.7682709935 score=1.33e-5 [tetrahedral (56,20)÷(8,0)]
+  (58050,6000) rho=0.040355 eps=0.00e0 path=314.56413520 ratio=206.7682994220 score=1.51e-5 [tetrahedral (58,50)÷(6,0)]
+  (48038,8000) rho=0.022982 eps=0.00e0 path=238.85928297 ratio=206.7683004050 score=1.61e-5 [tetrahedral (48,38)÷(8,0)]
+  (50038,6000) rho=0.030654 eps=0.00e0 path=238.95079667 ratio=206.7683007834 score=1.65e-5 [tetrahedral (50,38)÷(6,0)]
+  (60056,8000) rho=0.033883 eps=0.00e0 path=352.15732417 ratio=206.7682676788 score=1.66e-5 [tetrahedral (60,56)÷(8,0)]
+  (46036,6000) rho=0.029038 eps=0.00e0 path=226.35008627 ratio=206.7682674805 score=1.68e-5 [tetrahedral (46,36)÷(6,0)]
+  (56004,6000) rho=0.003228 eps=0.00e0 path=25.15838475 ratio=206.7682662499 score=1.81e-5 [tetrahedral (56,4)÷(6,0)]
+  (42024,6000) rho=0.019356 eps=0.00e0 path=150.88292332 ratio=206.7683028060 score=1.85e-5 [tetrahedral (42,24)÷(6,0)]
+  (52052,6000) rho=0.041953 eps=0.00e0 path=327.02304048 ratio=206.7683031745 score=1.89e-5 [tetrahedral (52,52)÷(6,0)]
+  (54036,6000) rho=0.029045 eps=0.00e0 path=226.40896136 ratio=206.7683034177 score=1.91e-5 [tetrahedral (54,36)÷(6,0)]
+  (28026,8000) rho=0.015720 eps=0.00e0 path=163.38622415 ratio=206.7682645960 score=1.97e-5 [tetrahedral (28,26)÷(8,0)]
+  (48030,6000) rho=0.024200 eps=0.00e0 path=188.63676825 ratio=206.7682645568 score=1.97e-5 [tetrahedral (48,30)÷(6,0)]
+  (40014,6000) rho=0.011291 eps=0.00e0 path=88.01034930 ratio=206.7683044223 score=2.01e-5 [tetrahedral (40,14)÷(6,0)]
+  (42036,8000) rho=0.021771 eps=0.00e0 path=226.26751652 ratio=206.7682635778 score=2.07e-5 [tetrahedral (42,36)÷(8,0)]
+  (58040,8000) rho=0.024194 eps=0.00e0 path=251.45395237 ratio=206.7682628484 score=2.15e-5 [tetrahedral (58,40)÷(8,0)]
+  (26020,8000) rho=0.012092 eps=0.00e0 path=125.67923115 ratio=206.7682624095 score=2.19e-5 [tetrahedral (26,20)÷(8,0)]
+  (52022,8000) rho=0.013306 eps=0.00e0 path=138.29842330 ratio=206.7683071664 score=2.29e-5 [tetrahedral (52,22)÷(8,0)]
+  (50018,8000) rho=0.010887 eps=0.00e0 path=113.14903507 ratio=206.7682610527 score=2.32e-5 [tetrahedral (50,18)÷(8,0)]
+  (36026,6000) rho=0.020966 eps=0.00e0 path=163.43162536 ratio=206.7683080395 score=2.37e-5 [tetrahedral (36,26)÷(6,0)]
+  (34004,8000) rho=0.002419 eps=0.00e0 path=25.13805198 ratio=206.7682600132 score=2.43e-5 [tetrahedral (34,4)÷(8,0)]
+  (44042,8000) rho=0.025393 eps=0.00e0 path=263.91713120 ratio=206.7682591550 score=2.51e-5 [tetrahedral (44,42)÷(8,0)]
+  (46030,6000) rho=0.024198 eps=0.00e0 path=188.62523403 ratio=206.7683099259 score=2.56e-5 [tetrahedral (46,30)÷(6,0)]
+  (44044,8000) rho=0.026608 eps=0.00e0 path=276.54959557 ratio=206.7682583262 score=2.60e-5 [tetrahedral (44,44)÷(8,0)]
+  (60052,8000) rho=0.031457 eps=0.00e0 path=326.94733644 ratio=206.7683103626 score=2.61e-5 [tetrahedral (60,52)÷(8,0)]
+  (54044,6000) rho=0.035498 eps=0.00e0 path=276.70394755 ratio=206.7682579100 score=2.64e-5 [tetrahedral (54,44)÷(6,0)]
+  (48020,8000) rho=0.012096 eps=0.00e0 path=125.71664340 ratio=206.7682562800 score=2.80e-5 [tetrahedral (48,20)÷(8,0)]
+  (58040,6000) rho=0.032271 eps=0.00e0 path=251.55244611 ratio=206.7682561338 score=2.82e-5 [tetrahedral (58,40)÷(6,0)]
+  (48048,6000) rho=0.038710 eps=0.00e0 path=301.74161290 ratio=206.7682553600 score=2.89e-5 [tetrahedral (48,48)÷(6,0)]
+  (60048,8000) rho=0.029032 eps=0.00e0 path=301.73719564 ratio=206.7682552947 score=2.90e-5 [tetrahedral (60,48)÷(8,0)]
+
+--- Phase 1: Octahedral S³/2O Scan ---
+Octahedral S³/2O kernel compiled
+Using 2,745 mode pairs
+    Progress: 97.8% (536,867,100 evals, best: 1.028278e-5)
+  Band 1/4 [thin fibers]: λ=[0.0010,0.1000] x 200,000 pts x 2,745 pairs = 549,000,000 evals | best: 1.028278e-5 (6.96s)
+    Progress: 97.8% (536,867,100 evals, best: 1.028278e-5)
+  Band 2/4 [sub-round]: λ=[0.1000,1.0000] x 200,000 pts x 2,745 pairs = 549,000,000 evals | best: 1.028278e-5 (6.98s)
+    Progress: 97.8% (536,867,100 evals, best: 1.028278e-5)
+  Band 3/4 [super-round]: λ=[1.0000,10.0000] x 200,000 pts x 2,745 pairs = 549,000,000 evals | best: 1.028278e-5 (7.11s)
+    Progress: 39.1% (536,867,100 evals, best: 1.996789e-6)
+    Progress: 78.2% (1,073,734,200 evals, best: 1.996789e-6)
+  Band 4/4 [target region]: λ=[0.0100,0.0500] x 500,000 pts x 2,745 pairs = 1,372,500,000 evals | best: 1.996789e-6 (17.41s)
+
+Octahedral S³/2O scan complete: 38.543s, 3,019,500,000 total evaluations, best score: 1.996789e-6
+  BEST: (58,42)÷(8,0) λ=0.0253974708 ratio=206.7682862968 score=1.996789e-6
+--- Phase 1 Summary ---
+Evaluated: 3,019,500,000 candidates in 38.54s
+Best score: 2.00e-6
+Top candidates:
+  (58042,8000) rho=0.025397 eps=0.00e0 path=263.96372795 ratio=206.7682862968 score=2.00e-6 [octahedral (58,42)÷(8,0)]
+  (52024,8000) rho=0.014516 eps=0.00e0 path=150.87100706 ratio=206.7682810235 score=3.28e-6 [octahedral (52,24)÷(8,0)]
+  (40034,8000) rho=0.020560 eps=0.00e0 path=213.69077450 ratio=206.7682785701 score=5.73e-6 [octahedral (40,34)÷(8,0)]
+  (60034,8000) rho=0.020568 eps=0.00e0 path=213.76894530 ratio=206.7682911232 score=6.82e-6 [octahedral (60,34)÷(8,0)]
+  (48048,8000) rho=0.029026 eps=0.00e0 path=301.67655330 ratio=206.7682927749 score=8.47e-6 [octahedral (48,48)÷(8,0)]
+  (42038,8000) rho=0.022980 eps=0.00e0 path=238.83599331 ratio=206.7682929618 score=8.66e-6 [octahedral (42,38)÷(8,0)]
+  (58056,8000) rho=0.033881 eps=0.00e0 path=352.13987466 ratio=206.7682743013 score=1.00e-5 [octahedral (58,56)÷(8,0)]
+  (56032,8000) rho=0.019356 eps=0.00e0 path=201.17722464 ratio=206.7682961814 score=1.19e-5 [octahedral (56,32)÷(8,0)]
+  (58046,8000) rho=0.027831 eps=0.00e0 path=289.25441735 ratio=206.7682717659 score=1.25e-5 [octahedral (58,46)÷(8,0)]
+  (56020,8000) rho=0.012098 eps=0.00e0 path=125.73577607 ratio=206.7682709935 score=1.33e-5 [octahedral (56,20)÷(8,0)]
+  (48038,8000) rho=0.022982 eps=0.00e0 path=238.85928297 ratio=206.7683004050 score=1.61e-5 [octahedral (48,38)÷(8,0)]
+  (60056,8000) rho=0.033883 eps=0.00e0 path=352.15732417 ratio=206.7682676788 score=1.66e-5 [octahedral (60,56)÷(8,0)]
+  (28026,8000) rho=0.015720 eps=0.00e0 path=163.38622415 ratio=206.7682645960 score=1.97e-5 [octahedral (28,26)÷(8,0)]
+  (42036,8000) rho=0.021771 eps=0.00e0 path=226.26751652 ratio=206.7682635778 score=2.07e-5 [octahedral (42,36)÷(8,0)]
+  (58040,8000) rho=0.024194 eps=0.00e0 path=251.45395237 ratio=206.7682628484 score=2.15e-5 [octahedral (58,40)÷(8,0)]
+  (26020,8000) rho=0.012092 eps=0.00e0 path=125.67923115 ratio=206.7682624095 score=2.19e-5 [octahedral (26,20)÷(8,0)]
+  (52022,8000) rho=0.013306 eps=0.00e0 path=138.29842330 ratio=206.7683071664 score=2.29e-5 [octahedral (52,22)÷(8,0)]
+  (50018,8000) rho=0.010887 eps=0.00e0 path=113.14903507 ratio=206.7682610527 score=2.32e-5 [octahedral (50,18)÷(8,0)]
+  (34004,8000) rho=0.002419 eps=0.00e0 path=25.13805198 ratio=206.7682600132 score=2.43e-5 [octahedral (34,4)÷(8,0)]
+  (44042,8000) rho=0.025393 eps=0.00e0 path=263.91713120 ratio=206.7682591550 score=2.51e-5 [octahedral (44,42)÷(8,0)]
+  (44044,8000) rho=0.026608 eps=0.00e0 path=276.54959557 ratio=206.7682583262 score=2.60e-5 [octahedral (44,44)÷(8,0)]
+  (60052,8000) rho=0.031457 eps=0.00e0 path=326.94733644 ratio=206.7683103626 score=2.61e-5 [octahedral (60,52)÷(8,0)]
+  (48020,8000) rho=0.012096 eps=0.00e0 path=125.71664340 ratio=206.7682562800 score=2.80e-5 [octahedral (48,20)÷(8,0)]
+  (60048,8000) rho=0.029032 eps=0.00e0 path=301.73719564 ratio=206.7682552947 score=2.90e-5 [octahedral (60,48)÷(8,0)]
+  (52026,8000) rho=0.015726 eps=0.00e0 path=163.44358790 ratio=206.7682552051 score=2.91e-5 [octahedral (52,26)÷(8,0)]
+  (54052,8000) rho=0.031453 eps=0.00e0 path=326.90577703 ratio=206.7683191612 score=3.49e-5 [octahedral (54,52)÷(8,0)]
+  (54024,8000) rho=0.014517 eps=0.00e0 path=150.87685736 ratio=206.7683221871 score=3.79e-5 [octahedral (54,24)÷(8,0)]
+  (34028,8000) rho=0.016931 eps=0.00e0 path=175.96635782 ratio=206.7683236184 score=3.93e-5 [octahedral (34,28)÷(8,0)]
+  (46016,8000) rho=0.009676 eps=0.00e0 path=100.56985771 ratio=206.7683279212 score=4.36e-5 [octahedral (46,16)÷(8,0)]
+  (36018,8000) rho=0.010884 eps=0.00e0 path=113.12412770 ratio=206.7683279888 score=4.37e-5 [octahedral (36,18)÷(8,0)]
+  (28020,8000) rho=0.012093 eps=0.00e0 path=125.68171201 ratio=206.7682401415 score=4.42e-5 [octahedral (28,20)÷(8,0)]
+  (60046,8000) rho=0.027832 eps=0.00e0 path=289.26863684 ratio=206.7683322143 score=4.79e-5 [octahedral (60,46)÷(8,0)]
+  (50028,8000) rho=0.016935 eps=0.00e0 path=176.00960149 ratio=206.7683323276 score=4.80e-5 [octahedral (50,28)÷(8,0)]
+  (38036,8000) rho=0.021769 eps=0.00e0 path=226.25428940 ratio=206.7683333442 score=4.90e-5 [octahedral (38,36)÷(8,0)]
+  (54048,8000) rho=0.029029 eps=0.00e0 path=301.70488422 ratio=206.7683346236 score=5.03e-5 [octahedral (54,48)÷(8,0)]
+  (42030,8000) rho=0.018142 eps=0.00e0 path=188.55634066 ratio=206.7682339238 score=5.04e-5 [octahedral (42,30)÷(8,0)]
+  (52028,8000) rho=0.016936 eps=0.00e0 path=176.01616813 ratio=206.7682323728 score=5.19e-5 [octahedral (52,28)÷(8,0)]
+  (44038,8000) rho=0.022981 eps=0.00e0 path=238.84340652 ratio=206.7682323699 score=5.19e-5 [octahedral (44,38)÷(8,0)]
+  (52020,8000) rho=0.012097 eps=0.00e0 path=125.72584066 ratio=206.7683403763 score=5.61e-5 [octahedral (52,20)÷(8,0)]
+  (40032,8000) rho=0.019351 eps=0.00e0 path=201.12072891 ratio=206.7683413924 score=5.71e-5 [octahedral (40,32)÷(8,0)]
+  (48034,8000) rho=0.020563 eps=0.00e0 path=213.71828075 ratio=206.7683442321 score=5.99e-5 [octahedral (48,34)÷(8,0)]
+  (46046,8000) rho=0.027823 eps=0.00e0 path=289.17802726 ratio=206.7683467001 score=6.24e-5 [octahedral (46,46)÷(8,0)]
+  (44032,8000) rho=0.019352 eps=0.00e0 path=201.13308336 ratio=206.7682205481 score=6.38e-5 [octahedral (44,32)÷(8,0)]
+  (32028,8000) rho=0.016930 eps=0.00e0 path=175.96211243 ratio=206.7682201382 score=6.42e-5 [octahedral (32,28)÷(8,0)]
+  (52030,8000) rho=0.018145 eps=0.00e0 path=188.58875390 ratio=206.7682186452 score=6.57e-5 [octahedral (52,30)÷(8,0)]
+  (40038,8000) rho=0.022979 eps=0.00e0 path=238.82893005 ratio=206.7683511508 score=6.69e-5 [octahedral (40,38)÷(8,0)]
+  (34022,8000) rho=0.013303 eps=0.00e0 path=138.25928354 ratio=206.7682161746 score=6.81e-5 [octahedral (34,22)÷(8,0)]
+  (42020,8000) rho=0.012095 eps=0.00e0 path=125.70423019 ratio=206.7683529705 score=6.87e-5 [octahedral (42,20)÷(8,0)]
+  (58058,8000) rho=0.035085 eps=0.00e0 path=364.65108663 ratio=206.7683534767 score=6.92e-5 [octahedral (58,58)÷(8,0)]
+  (44030,8000) rho=0.018143 eps=0.00e0 path=188.56227026 ratio=206.7683538229 score=6.95e-5 [octahedral (44,30)÷(8,0)]
+
+--- Phase 1: Dihedral S³/2D₃ Scan ---
+Dihedral S³/2D₃ kernel compiled
+Using 4,527 mode pairs
+    Progress: 59.3% (536,865,984 evals, best: 5.435452e-6)
+  Band 1/4 [thin fibers]: λ=[0.0010,0.1000] x 200,000 pts x 4,527 pairs = 905,400,000 evals | best: 3.214439e-6 (11.47s)
+    Progress: 59.3% (536,865,984 evals, best: 3.214439e-6)
+  Band 2/4 [sub-round]: λ=[0.1000,1.0000] x 200,000 pts x 4,527 pairs = 905,400,000 evals | best: 3.214439e-6 (11.43s)
+    Progress: 59.3% (536,865,984 evals, best: 3.214439e-6)
+  Band 3/4 [super-round]: λ=[1.0000,10.0000] x 200,000 pts x 4,527 pairs = 905,400,000 evals | best: 3.214439e-6 (11.59s)
+    Progress: 23.7% (536,865,984 evals, best: 3.214439e-6)
+    Progress: 47.4% (1,073,731,968 evals, best: 1.001941e-6)
+    Progress: 71.2% (1,610,597,952 evals, best: 3.829502e-7)
+    Progress: 94.9% (2,147,463,936 evals, best: 3.089611e-7)
+  Band 4/4 [target region]: λ=[0.0100,0.0500] x 500,000 pts x 4,527 pairs = 2,263,500,000 evals | best: 3.089611e-7 (28.24s)
+
+Dihedral S³/2D₃ scan complete: 62.818s, 4,979,700,000 total evaluations, best score: 3.089611e-7
+  BEST: (50,39)÷(4,0) λ=0.0472471945 ratio=206.7682846090 score=3.089611e-7
+--- Phase 1 Summary ---
+Evaluated: 4,979,700,000 candidates in 62.82s
+Best score: 3.09e-7
+Top candidates:
+  (50039,4000) rho=0.047247 eps=0.00e0 path=245.52731240 ratio=206.7682846090 score=3.09e-7 [dihedral (50,39)÷(4,0)]
+  (34027,4000) rho=0.032673 eps=0.00e0 path=169.78946507 ratio=206.7682839170 score=3.83e-7 [dihedral (34,27)÷(4,0)]
+  (20009,2000) rho=0.021789 eps=0.00e0 path=56.61490225 ratio=206.7682853019 score=1.00e-6 [dihedral (20,9)÷(2,0)]
+  (40018,4000) rho=0.021789 eps=0.00e0 path=113.22980452 ratio=206.7682853361 score=1.04e-6 [dihedral (40,18)÷(4,0)]
+  (46018,4000) rho=0.021797 eps=0.00e0 path=113.27262513 ratio=206.7682855204 score=1.22e-6 [dihedral (46,18)÷(4,0)]
+  (58042,8000) rho=0.025397 eps=0.00e0 path=263.96372795 ratio=206.7682862968 score=2.00e-6 [dihedral (58,42)÷(8,0)]
+  (38018,2000) rho=0.043712 eps=0.00e0 path=113.57741008 ratio=206.7682865955 score=2.30e-6 [dihedral (38,18)÷(2,0)]
+  (56033,2000) rho=0.080539 eps=0.00e0 path=209.26659484 ratio=206.7682875144 score=3.21e-6 [dihedral (56,33)÷(2,0)]
+  (52024,8000) rho=0.014516 eps=0.00e0 path=150.87100706 ratio=206.7682810235 score=3.28e-6 [dihedral (52,24)÷(8,0)]
+  (32030,4000) rho=0.036300 eps=0.00e0 path=188.63672401 ratio=206.7682810002 score=3.30e-6 [dihedral (32,30)÷(4,0)]
+  (22015,2000) rho=0.036324 eps=0.00e0 path=94.38134540 ratio=206.7682806177 score=3.68e-6 [dihedral (22,15)÷(2,0)]
+  (44039,10000) rho=0.018866 eps=0.00e0 path=245.10455902 ratio=206.7682805979 score=3.70e-6 [dihedral (44,39)÷(10,0)]
+  (52036,6000) rho=0.029043 eps=0.00e0 path=226.39335457 ratio=206.7682880809 score=3.78e-6 [dihedral (52,36)÷(6,0)]
+  (26012,4000) rho=0.014516 eps=0.00e0 path=75.43550286 ratio=206.7682791893 score=5.11e-6 [dihedral (26,12)÷(4,0)]
+  (56015,2000) rho=0.036609 eps=0.00e0 path=95.12341479 ratio=206.7682788645 score=5.44e-6 [dihedral (56,15)÷(2,0)]
+  (26018,2000) rho=0.043613 eps=0.00e0 path=113.32132029 ratio=206.7682899222 score=5.62e-6 [dihedral (26,18)÷(2,0)]
+  (56036,6000) rho=0.029048 eps=0.00e0 path=226.42516083 ratio=206.7682905146 score=6.21e-6 [dihedral (56,36)÷(6,0)]
+  (44039,4000) rho=0.047227 eps=0.00e0 path=245.42172340 ratio=206.7682906866 score=6.39e-6 [dihedral (44,39)÷(4,0)]
+  (58024,6000) rho=0.019366 eps=0.00e0 path=150.96148837 ratio=206.7682911415 score=6.84e-6 [dihedral (58,24)÷(6,0)]
+  (38009,2000) rho=0.021856 eps=0.00e0 path=56.78887673 ratio=206.7682914238 score=7.12e-6 [dihedral (38,9)÷(2,0)]
+  (58051,6000) rho=0.041170 eps=0.00e0 path=320.91735785 ratio=206.7682919687 score=7.67e-6 [dihedral (58,51)÷(6,0)]
+  (44039,8000) rho=0.023586 eps=0.00e0 path=245.13850705 ratio=206.7682922538 score=7.95e-6 [dihedral (44,39)÷(8,0)]
+  (48048,8000) rho=0.029026 eps=0.00e0 path=301.67655330 ratio=206.7682927749 score=8.47e-6 [dihedral (48,48)÷(8,0)]
+  (50012,2000) rho=0.029232 eps=0.00e0 path=75.95521993 ratio=206.7682756326 score=8.67e-6 [dihedral (50,12)÷(2,0)]
+  (56018,2000) rho=0.043931 eps=0.00e0 path=114.14778988 ratio=206.7682756092 score=8.69e-6 [dihedral (56,18)÷(2,0)]
+  (60027,6000) rho=0.021789 eps=0.00e0 path=169.84471354 ratio=206.7682935713 score=9.27e-6 [dihedral (60,27)÷(6,0)]
+  (56054,4000) rho=0.065398 eps=0.00e0 path=339.85253337 ratio=206.7682952509 score=1.10e-5 [dihedral (56,54)÷(4,0)]
+  (58054,6000) rho=0.043562 eps=0.00e0 path=339.56295876 ratio=206.7682731828 score=1.11e-5 [dihedral (58,54)÷(6,0)]
+  (34018,2000) rho=0.043675 eps=0.00e0 path=113.48117306 ratio=206.7682960656 score=1.18e-5 [dihedral (34,18)÷(2,0)]
+  (56030,2000) rho=0.073218 eps=0.00e0 path=190.24400408 ratio=206.7682720245 score=1.23e-5 [dihedral (56,30)÷(2,0)]
+  (56027,10000) rho=0.013063 eps=0.00e0 path=169.70825182 ratio=206.7682968455 score=1.25e-5 [dihedral (56,27)÷(10,0)]
+  (52024,6000) rho=0.019362 eps=0.00e0 path=150.92906541 ratio=206.7682969356 score=1.26e-5 [dihedral (52,24)÷(6,0)]
+  (42015,6000) rho=0.012098 eps=0.00e0 path=94.30183153 ratio=206.7682698549 score=1.44e-5 [dihedral (42,15)÷(6,0)]
+  (42033,6000) rho=0.026615 eps=0.00e0 path=207.46399634 ratio=206.7682990903 score=1.48e-5 [dihedral (42,33)÷(6,0)]
+  (40030,4000) rho=0.036315 eps=0.00e0 path=188.71626875 ratio=206.7682692709 score=1.50e-5 [dihedral (40,30)÷(4,0)]
+  (56054,2000) rho=0.131442 eps=0.00e0 path=341.52836762 ratio=206.7682691602 score=1.51e-5 [dihedral (56,54)÷(2,0)]
+  (52021,6000) rho=0.016942 eps=0.00e0 path=132.06294019 ratio=206.7682687998 score=1.55e-5 [dihedral (52,21)÷(6,0)]
+  (46036,6000) rho=0.029038 eps=0.00e0 path=226.35008627 ratio=206.7682674805 score=1.68e-5 [dihedral (46,36)÷(6,0)]
+  (58021,4000) rho=0.025453 eps=0.00e0 path=132.27247118 ratio=206.7683015265 score=1.72e-5 [dihedral (58,21)÷(4,0)]
+  (16015,2000) rho=0.036300 eps=0.00e0 path=94.31835529 ratio=206.7682662780 score=1.80e-5 [dihedral (16,15)÷(2,0)]
+  (24018,2000) rho=0.043600 eps=0.00e0 path=113.28810261 ratio=206.7682660598 score=1.82e-5 [dihedral (24,18)÷(2,0)]
+  (42024,6000) rho=0.019356 eps=0.00e0 path=150.88292332 ratio=206.7683028060 score=1.85e-5 [dihedral (42,24)÷(6,0)]
+  (60057,8000) rho=0.034487 eps=0.00e0 path=358.43738511 ratio=206.7682657846 score=1.85e-5 [dihedral (60,57)÷(8,0)]
+  (54036,6000) rho=0.029045 eps=0.00e0 path=226.40896136 ratio=206.7683034177 score=1.91e-5 [dihedral (54,36)÷(6,0)]
+  (60006,4000) rho=0.007274 eps=0.00e0 path=37.79870341 ratio=206.7683036829 score=1.94e-5 [dihedral (60,6)÷(4,0)]
+  (30003,2000) rho=0.007274 eps=0.00e0 path=18.89935171 ratio=206.7683036829 score=1.94e-5 [dihedral (30,3)÷(2,0)]
+  (60012,2000) rho=0.029328 eps=0.00e0 path=76.20424007 ratio=206.7682647988 score=1.95e-5 [dihedral (60,12)÷(2,0)]
+  (48030,6000) rho=0.024200 eps=0.00e0 path=188.63676825 ratio=206.7682645568 score=1.97e-5 [dihedral (48,30)÷(6,0)]
+  (52036,4000) rho=0.043613 eps=0.00e0 path=226.64219637 ratio=206.7682639453 score=2.04e-5 [dihedral (52,36)÷(4,0)]
+  (42036,8000) rho=0.021771 eps=0.00e0 path=226.26751652 ratio=206.7682635778 score=2.07e-5 [dihedral (42,36)÷(8,0)]
+
+--- Phase 2: Ultra-Fine Refinement ---
+  Refined 1/20: (10,15)÷(5,1) τ~0.05997134, width=1.0e-5, 10M pts, best: 1.826095e-10 (0.00s) [nil-fine]
+  Refined 2/20: (20,30)÷(10,2) τ~0.05997134, width=1.0e-5, 10M pts, best: 1.826095e-10 (0.00s) [nil-fine]
+  Refined 3/20: (17,29)÷(8,2) τ~0.03280119, width=1.0e-5, 10M pts, best: 7.258905e-11 (0.01s) [nil-fine]
+  Refined 4/20: (19,13)÷(0,1) σ~0.99578809, width=1.0e-5, 10M pts, best: 1.923581e-10 (0.12s) [lens-fine]
+  Refined 5/20: (27,15)÷(2,1) τ~0.43116027, width=1.0e-5, 10M pts, best: 1.759304e-11 (0.01s) [nil-fine]
+  Refined 6/20: (5,23)÷(4,0) τ~0.40139600, width=1.0e-5, 10M pts, best: 2.327738e-10 (0.00s) [nil-fine]
+  Refined 7/20: (29,15)÷(1,7) τ~3.95220390, width=1.0e-5, 10M pts, best: 1.435296e-11 (0.01s) [nil-fine]
+  Refined 8/20: (30,25)÷(2,6) τ~9.66953734, width=1.0e-5, 10M pts, best: 1.307399e-12 (0.01s) [nil-fine]
+  Refined 9/20: (30,21)÷(2,4) τ~6.27035654, width=1.0e-5, 10M pts, best: 1.222134e-12 (0.01s) [nil-fine]
+  Refined 10/20: (17,29)÷(7,2) τ~0.03761584, width=1.0e-5, 10M pts, best: 9.976020e-12 (0.01s) [nil-fine]
+  Refined 11/20: (16,7)÷(1,3) τ~6.06661413, width=1.0e-5, 10M pts, best: 5.371703e-12 (0.01s) [nil-fine]
+  Refined 12/20: (16,29)÷(6,2) τ~0.04401827, width=1.0e-5, 10M pts, best: 2.196998e-11 (0.01s) [nil-fine]
+  Refined 13/20: (19,16)÷(1,3) τ~3.22581245, width=1.0e-5, 10M pts, best: 1.054445e-11 (0.01s) [nil-fine]
+  Refined 14/20: (20,29)÷(3,2) τ~0.09763696, width=1.0e-5, 10M pts, best: 2.586376e-11 (0.01s) [nil-fine]
+  Refined 15/20: (30,17)÷(7,1) τ~0.09438003, width=1.0e-5, 10M pts, best: 5.140350e-10 (0.00s) [nil-fine]
+  Refined 16/20: (18,10)÷(1,2) τ~2.49038498, width=1.0e-5, 10M pts, best: 8.270717e-12 (0.01s) [nil-fine]
+  Refined 17/20: (28,4)÷(9,0) τ~0.03165818, width=1.0e-5, 10M pts, best: 5.493916e-10 (0.00s) [nil-fine]
+  Refined 18/20: (29,1)÷(2,2) τ~7.70162940, width=1.0e-5, 10M pts, best: 2.842171e-13 (0.01s) [nil-fine]
+  Refined 19/20: (26,29)÷(6,2) τ~0.04536359, width=1.0e-5, 10M pts, best: 7.239009e-11 (0.01s) [nil-fine]
+  Refined 20/20: (56,52)÷(6,0) λ~0.04195902, width=1.0e-5, 10M pts, best: 1.805716e-9 (0.12s) [tetrahedral-fine]
+  Ultra-deep refinement on top 5 regions (100M pts each)...
+    Ultra-deep 1/5: (29,1)÷(2,2) param~7.701629126771, 100M pts, score: 2.842171e-13 -> 0.000000e0 (0.08s) [nil-ultradeep]
+    Ultra-deep 2/5: (30,21)÷(2,4) param~6.270356559802, 100M pts, score: 1.222134e-12 -> 2.842171e-14 (0.09s) [nil-ultradeep]
+    Ultra-deep 3/5: (30,25)÷(2,6) param~9.669537365903, 100M pts, score: 1.307399e-12 -> 0.000000e0 (0.08s) [nil-ultradeep]
+    Ultra-deep 4/5: (16,7)÷(1,3) param~6.066614122775, 100M pts, score: 5.371703e-12 -> 5.684342e-14 (0.08s) [nil-ultradeep]
+    Ultra-deep 5/5: (18,10)÷(1,2) param~2.490384984489, 100M pts, score: 8.270717e-12 -> 5.684342e-14 (0.08s) [nil-ultradeep]
+  Running Helmholtz eigenvalue cross-check...
+  Helmholtz: 50,000 rho x 25,935 mode pairs = 268,435,456 evals, 0 hits
+  Running cavity resonance cross-check...
+  Cavity (Aspden): 100,000 rho x 30 (c1,c2) pairs = 3,000,000 evals, 3166 hits
+  Cavity (mode): 100,000 rho x 96 (n,j) pairs = 9,600,000 evals, 24367 hits
+Phase 2 complete: 1.225s, 2,459,350,000 evaluations, best score: 0.000000e0
+--- Phase 2 Summary ---
+Evaluated: 2,459,350,000 candidates in 1.23s
+Best score: 0.00e0
+Top candidates:
+  (29001,2002) rho=7.701629 eps=0.00e0 path=1969380.53470095 ratio=206.7682843000 score=0.00e0 [nil-ultradeep (29,1)÷(2,2)]
+  (30025,2006) rho=9.669537 eps=0.00e0 path=3346781.17787434 ratio=206.7682843000 score=0.00e0 [nil-ultradeep (30,25)÷(2,6)]
+  (30021,2004) rho=6.270357 eps=0.00e0 path=1414378.82821471 ratio=206.7682843000 score=2.84e-14 [nil-ultradeep (30,21)÷(2,4)]
+  (18010,1002) rho=2.490385 eps=0.00e0 path=83277.89125088 ratio=206.7682843000 score=5.68e-14 [nil-ultradeep (18,10)÷(1,2)]
+  (16007,1003) rho=6.066614 eps=0.00e0 path=373891.19351718 ratio=206.7682843000 score=5.68e-14 [nil-ultradeep (16,7)÷(1,3)]
+  (17029,7002) rho=0.037616 eps=0.00e0 path=33217.49275419 ratio=206.7682843000 score=9.98e-12 [nil-fine (17,29)÷(7,2)]
+  (19016,1003) rho=3.225812 eps=0.00e0 path=158407.84576105 ratio=206.7682843000 score=1.05e-11 [nil-fine (19,16)÷(1,3)]
+  (29015,1007) rho=3.952204 eps=0.00e0 path=527484.91952693 ratio=206.7682843000 score=1.44e-11 [nil-fine (29,15)÷(1,7)]
+  (27015,2001) rho=0.431160 eps=0.00e0 path=14232.77891649 ratio=206.7682843000 score=1.76e-11 [nil-fine (27,15)÷(2,1)]
+  (16029,6002) rho=0.044018 eps=0.00e0 path=33220.93159007 ratio=206.7682843000 score=2.20e-11 [nil-fine (16,29)÷(6,2)]
+  (20029,3002) rho=0.097637 eps=0.00e0 path=33351.88792151 ratio=206.7682843000 score=2.59e-11 [nil-fine (20,29)÷(3,2)]
+  (26029,6002) rho=0.045364 eps=0.00e0 path=33256.26803965 ratio=206.7682842999 score=7.24e-11 [nil-fine (26,29)÷(6,2)]
+  (17029,8002) rho=0.032801 eps=0.00e0 path=33213.62463379 ratio=206.7682843001 score=7.26e-11 [nil-fine (17,29)÷(8,2)]
+
+--- Phase 3: High-Precision CPU Analysis ---
+  Newton refinement on top candidates...
+Best: (29,1)÷(2,2) rho=7.701629126821 ratio=206.768284300044 score=4.445155e-11
+Koide Q = 0.66666051 (expected 2/3 = 0.66666667)
+Checking rho = 7.701629126821 against known constants:
+
+Checking tau/electron ratio for best geometries...
+  Found 1 tau/electron ratio candidates:
+    param=2.4903849845 (23,14)÷(0,1) ratio=3476.867189 score=6.128106e-1 [nil]
+Phase 3 complete: 0.005s, 13 candidates refined
+--- Phase 3 Summary ---
+Evaluated: 13 candidates in 0.01s
+Best score: 4.45e-11
+Top candidates:
+  (29001,2002) rho=7.701629 eps=0.00e0 path=1969380.53472653 ratio=206.7682843000 score=4.45e-11 [nil-f64 (29,1)÷(2,2)]
+  (30025,2006) rho=9.669537 eps=0.00e0 path=3346781.17783998 ratio=206.7682842998 score=1.72e-10 [nil-f64 (30,25)÷(2,6)]
+  (30021,2004) rho=6.270357 eps=0.00e0 path=1414378.82823700 ratio=206.7682843003 score=2.64e-10 [nil-f64 (30,21)÷(2,4)]
+  (16007,1003) rho=6.066614 eps=0.00e0 path=373891.19352331 ratio=206.7682843007 score=6.52e-10 [nil-f64 (16,7)÷(1,3)]
+  (27015,2001) rho=0.431160 eps=0.00e0 path=14232.77891525 ratio=206.7682843024 score=2.41e-9 [nil-f64 (27,15)÷(2,1)]
+  (19016,1003) rho=3.225812 eps=0.00e0 path=158407.84576565 ratio=206.7682843026 score=2.55e-9 [nil-f64 (19,16)÷(1,3)]
+  (18010,1002) rho=2.490385 eps=0.00e0 path=83277.89125406 ratio=206.7682843029 score=2.86e-9 [nil-f64 (18,10)÷(1,2)]
+  (20029,3002) rho=0.097637 eps=0.00e0 path=33351.88792136 ratio=206.7682843035 score=3.47e-9 [nil-f64 (20,29)÷(3,2)]
+  (29015,1007) rho=3.952204 eps=0.00e0 path=527484.91951380 ratio=206.7682842961 score=3.87e-9 [nil-f64 (29,15)÷(1,7)]
+  (26029,6002) rho=0.045364 eps=0.00e0 path=33256.26803953 ratio=206.7682843075 score=7.46e-9 [nil-f64 (26,29)÷(6,2)]
+  (16029,6002) rho=0.044018 eps=0.00e0 path=33220.93159003 ratio=206.7682843078 score=7.75e-9 [nil-f64 (16,29)÷(6,2)]
+  (17029,7002) rho=0.037616 eps=0.00e0 path=33217.49275423 ratio=206.7682842909 score=9.09e-9 [nil-f64 (17,29)÷(7,2)]
+  (17029,8002) rho=0.032801 eps=0.00e0 path=33213.62463383 ratio=206.7682842896 score=1.04e-8 [nil-f64 (17,29)÷(8,2)]
+
+Results saved to results.json
+
+=== Final Summary ===
+Phase 0: 259,482 evaluated, best score = 0.000000e0 (611.385s)
+  # 1: (1,18)÷(1,0) rho=0.7969236458 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,18)÷(1,0)]
+  # 2: (1,22)÷(1,0) rho=0.6520284375 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,22)÷(1,0)]
+  # 3: (1,27)÷(1,0) rho=0.5312824305 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,27)÷(1,0)]
+  # 4: (1,35)÷(1,0) rho=0.4098464464 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,35)÷(1,0)]
+  # 5: (1,36)÷(1,0) rho=0.3984618229 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,36)÷(1,0)]
+  # 6: (1,41)÷(1,0) rho=0.3498689177 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,41)÷(1,0)]
+  # 7: (1,43)÷(1,0) rho=0.3335959448 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,43)÷(1,0)]
+  # 8: (1,44)÷(1,0) rho=0.3260142187 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,44)÷(1,0)]
+  # 9: (1,51)÷(1,0) rho=0.2812671691 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,51)÷(1,0)]
+  #10: (1,54)÷(1,0) rho=0.2656412153 ratio=206.7682843000 score=0.000000e0 [torus-spectral (1,54)÷(1,0)]
+Phase 1: 482,402,100,000 evaluated, best score = 1.019430e-9 (0.000s)
+  # 1: (10,15)÷(5,1) rho=0.0599713399 ratio=206.7682843010 score=1.019430e-9 [nil (10,15)÷(5,1)]
+  # 2: (20,30)÷(10,2) rho=0.0599713399 ratio=206.7682843010 score=1.019430e-9 [nil (20,30)÷(10,2)]
+  # 3: (17,29)÷(8,2) rho=0.0328011856 ratio=206.7682842950 score=5.040505e-9 [nil (17,29)÷(8,2)]
+  # 4: (19,13)÷(0,1) rho=0.9957880916 ratio=206.7682842838 score=1.618614e-8 [lens (19,13)÷(0,1)]
+  # 5: (27,15)÷(2,1) rho=0.4311602703 ratio=206.7682843239 score=2.391891e-8 [nil (27,15)÷(2,1)]
+  # 6: (5,23)÷(4,0) rho=0.4013960048 ratio=206.7682842650 score=3.504221e-8 [nil (5,23)÷(4,0)]
+  # 7: (29,15)÷(1,7) rho=3.9522039044 ratio=206.7682843631 score=6.312587e-8 [nil (29,15)÷(1,7)]
+  # 8: (30,25)÷(2,6) rho=9.6695373391 ratio=206.7682842077 score=9.228472e-8 [nil (30,25)÷(2,6)]
+  # 9: (30,21)÷(2,4) rho=6.2703565407 ratio=206.7682841992 score=1.007545e-7 [nil (30,21)÷(2,4)]
+  #10: (17,29)÷(7,2) rho=0.0376158352 ratio=206.7682844242 score=1.242015e-7 [nil (17,29)÷(7,2)]
+Phase 2: 2,459,350,000 evaluated, best score = 0.000000e0 (1.225s)
+  # 1: (29,1)÷(2,2) rho=7.7016291268 ratio=206.7682843000 score=0.000000e0 [nil-ultradeep (29,1)÷(2,2)]
+  # 2: (30,25)÷(2,6) rho=9.6695373659 ratio=206.7682843000 score=0.000000e0 [nil-ultradeep (30,25)÷(2,6)]
+  # 3: (30,21)÷(2,4) rho=6.2703565598 ratio=206.7682843000 score=2.842171e-14 [nil-ultradeep (30,21)÷(2,4)]
+  # 4: (18,10)÷(1,2) rho=2.4903849845 ratio=206.7682843000 score=5.684342e-14 [nil-ultradeep (18,10)÷(1,2)]
+  # 5: (16,7)÷(1,3) rho=6.0666141228 ratio=206.7682843000 score=5.684342e-14 [nil-ultradeep (16,7)÷(1,3)]
+  # 6: (17,29)÷(7,2) rho=0.0376158359 ratio=206.7682843000 score=9.976020e-12 [nil-fine (17,29)÷(7,2)]
+  # 7: (19,16)÷(1,3) rho=3.2258124479 ratio=206.7682843000 score=1.054445e-11 [nil-fine (19,16)÷(1,3)]
+  # 8: (29,15)÷(1,7) rho=3.9522039036 ratio=206.7682843000 score=1.435296e-11 [nil-fine (29,15)÷(1,7)]
+  # 9: (27,15)÷(2,1) rho=0.4311602708 ratio=206.7682843000 score=1.759304e-11 [nil-fine (27,15)÷(2,1)]
+  #10: (16,29)÷(6,2) rho=0.0440182669 ratio=206.7682843000 score=2.196998e-11 [nil-fine (16,29)÷(6,2)]
+Phase 3: 13 evaluated, best score = 4.445155e-11 (0.005s)
+  # 1: (29,1)÷(2,2) rho=7.7016291268 ratio=206.7682843000 score=4.445155e-11 [nil-f64 (29,1)÷(2,2)]
+  # 2: (30,25)÷(2,6) rho=9.6695373659 ratio=206.7682842998 score=1.720082e-10 [nil-f64 (30,25)÷(2,6)]
+  # 3: (30,21)÷(2,4) rho=6.2703565599 ratio=206.7682843003 score=2.639240e-10 [nil-f64 (30,21)÷(2,4)]
+  # 4: (16,7)÷(1,3) rho=6.0666141228 ratio=206.7682843007 score=6.520509e-10 [nil-f64 (16,7)÷(1,3)]
+  # 5: (27,15)÷(2,1) rho=0.4311602708 ratio=206.7682843024 score=2.407830e-9 [nil-f64 (27,15)÷(2,1)]
+  # 6: (19,16)÷(1,3) rho=3.2258124480 ratio=206.7682843026 score=2.553577e-9 [nil-f64 (19,16)÷(1,3)]
+  # 7: (18,10)÷(1,2) rho=2.4903849845 ratio=206.7682843029 score=2.861924e-9 [nil-f64 (18,10)÷(1,2)]
+  # 8: (20,29)÷(3,2) rho=0.0976369580 ratio=206.7682843035 score=3.465544e-9 [nil-f64 (20,29)÷(3,2)]
+  # 9: (29,15)÷(1,7) rho=3.9522039035 ratio=206.7682842961 score=3.865011e-9 [nil-f64 (29,15)÷(1,7)]
+  #10: (26,29)÷(6,2) rho=0.0453635923 ratio=206.7682843075 score=7.463882e-9 [nil-f64 (26,29)÷(6,2)]
+
+=== Timing Breakdown ===
+  Phase 0 (spectral solve): 611.388s (20.6%)
+  Phase 1 (Torus geodesic): 1328.918s (44.7%)
+  Phase 1 (Berger sphere): 777.509s (26.2%)
+  Phase 1 (Lens space): 31.497s (1.1%)
+  Phase 1 (Poincaré S³/2I): 6.628s (0.2%)
+  Phase 1 (Nil manifold): 46.119s (1.6%)
+  Phase 1 (Tetrahedral S³/2T): 66.963s (2.3%)
+  Phase 1 (Octahedral S³/2O): 38.543s (1.3%)
+  Phase 1 (Dihedral S³/2D₃): 62.818s (2.1%)
+  Phase 2 (refinement):     1.225s (0.0%)
+  Phase 3 (CPU analysis):   0.005s (0.0%)
+  Total:                    2971.616s

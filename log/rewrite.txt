@@ -1,0 +1,321 @@
+╭───────────────────────────────────────────────────────────────────────────────────────────────────╮
+│ Plan to implement                                                                                 │
+│                                                                                                   │
+│ Plan: Unified Multi-Topology GPU Evaluator                                                        │
+│                                                                                                   │
+│ Context                                                                                           │
+│                                                                                                   │
+│ The project searches for topological geometries whose resonant mode ratios reproduce the          │
+│ muon/electron mass ratio (206.7682843). We currently support 3 topologies (torus, Berger sphere,  │
+│ lens space) with separate GPU kernels and ~500 lines of duplicated scan code in main.rs. The user │
+│  wants to:                                                                                        │
+│                                                                                                   │
+│ 1. Add many more topologies — Poincaré homology sphere, Nil geometry, binary polyhedral quotients │
+│ 2. Eliminate code duplication — one generic scan function that works for any topology             │
+│ 3. Expand spectral direct-solve — add closed-form solvers for new topologies                      │
+│ 4. Rewrite README.md — document the full multi-topology framework and all phases                  │
+│                                                                                                   │
+│ ---                                                                                               │
+│ Architecture: Unified Scan                                                                        │
+│                                                                                                   │
+│ Key Observation                                                                                   │
+│                                                                                                   │
+│ All 3 existing kernels (geodesic_scan, berger_scan, lens_scan) have the identical function        │
+│ signature:                                                                                        │
+│                                                                                                   │
+│ (num_param, param_min, param_step, p1_vals, q1_vals, p2_vals, q2_vals, num_pairs, block_results)  │
+│                                                                                                   │
+│                                                                                                   │
+│ The only difference is what happens inside each thread (different path-length computation). This  │
+│ means we can:                                                                                     │
+│                                                                                                   │
+│ 1. Keep separate .cu kernel files (each topology has its own physics) — no unified CUDA kernel    │
+│ needed                                                                                            │
+│ 2. Write one generic Rust scan function that takes a compiled kernel function + parameter bands,  │
+│ eliminating the 3x duplication in main.rs                                                         │
+│                                                                                                   │
+│ New Topologies to Add                                                                             │
+│                                                                                                   │
+│ ┌─────────────┬─────────────┬──────────────────┬───────────────────┬───────────────────────────── │
+│ ─┐                                                                                                │
+│ │  Topology   │   Shape     │ Path/Eigenvalue  │    GPU Kernel     │       Spectral Solver        │
+│  │                                                                                                │
+│ │             │  Parameter  │     Formula      │                   │                              │
+│  │                                                                                                │
+│ ├─────────────┼─────────────┼──────────────────┼───────────────────┼───────────────────────────── │
+│ ─┤                                                                                                │
+│ │ Poincaré    │             │ Same as Berger   │                   │                              │
+│  │                                                                                                │
+│ │ homology    │ λ           │ but with         │ poincare_scan.cu  │ solve_poincare_spectral()    │
+│  │                                                                                                │
+│ │ sphere      │ (squashing) │ selection rule   │                   │                              │
+│  │                                                                                                │
+│ │ (S³/2I)     │             │ filter on (j,m)  │                   │                              │
+│  │                                                                                                │
+│ ├─────────────┼─────────────┼──────────────────┼───────────────────┼───────────────────────────── │
+│ ─┤                                                                                                │
+│ │             │             │ Abelian:         │                   │                              │
+│  │                                                                                                │
+│ │ Nil         │ τ = k/(ab)  │ closed-form      │                   │                              │
+│  │                                                                                                │
+│ │ manifold    │ (twist)     │ ratio.           │ nil_scan.cu       │ solve_nil_spectral()         │
+│  │                                                                                                │
+│ │ M(a,b,k)    │             │ Non-abelian:     │                   │                              │
+│  │                                                                                                │
+│ │             │             │ Landau levels    │                   │                              │
+│  │                                                                                                │
+│ ├─────────────┼─────────────┼──────────────────┼───────────────────┼───────────────────────────── │
+│ ─┤                                                                                                │
+│ │ Binary      │             │ Berger           │ Reuse             │                              │
+│  │                                                                                                │
+│ │ dihedral    │ λ           │ eigenvalues with │ poincare_scan.cu  │ solve_dihedral_spectral()    │
+│  │                                                                                                │
+│ │ (S³/2D_n)   │ (squashing) │  D_n selection   │ with different    │                              │
+│  │                                                                                                │
+│ │             │             │ rule             │ mode list         │                              │
+│  │                                                                                                │
+│ ├─────────────┼─────────────┼──────────────────┼───────────────────┼───────────────────────────── │
+│ ─┤                                                                                                │
+│ │ Binary      │             │ Berger           │ Reuse             │                              │
+│  │                                                                                                │
+│ │ tetrahedral │ λ           │ eigenvalues with │ poincare_scan.cu  │ solve_tetrahedral_spectral() │
+│  │                                                                                                │
+│ │  (S³/2T)    │ (squashing) │  2T selection    │ with different    │                              │
+│  │                                                                                                │
+│ │             │             │ rule             │ mode list         │                              │
+│  │                                                                                                │
+│ ├─────────────┼─────────────┼──────────────────┼───────────────────┼───────────────────────────── │
+│ ─┤                                                                                                │
+│ │ Binary      │             │ Berger           │ Reuse             │                              │
+│  │                                                                                                │
+│ │ octahedral  │ λ           │ eigenvalues with │ poincare_scan.cu  │ solve_octahedral_spectral()  │
+│  │                                                                                                │
+│ │ (S³/2O)     │ (squashing) │  2O selection    │ with different    │                              │
+│  │                                                                                                │
+│ │             │             │ rule             │ mode list         │                              │
+│  │                                                                                                │
+│ └─────────────┴─────────────┴──────────────────┴───────────────────┴───────────────────────────── │
+│ ─┘                                                                                                │
+│                                                                                                   │
+│ Why Separate Kernels (Not One Unified Kernel)                                                     │
+│                                                                                                   │
+│ A single kernel with if (topology == TORUS) ... else if ... would cause warp divergence — all     │
+│ threads in a warp must execute the same branch. Since all threads in a launch process the same    │
+│ topology, separate kernels have zero overhead and maximum occupancy. The Rust-side generic        │
+│ function handles the dispatch.                                                                    │
+│                                                                                                   │
+│ ---                                                                                               │
+│ File Changes                                                                                      │
+│                                                                                                   │
+│ Modified Files                                                                                    │
+│                                                                                                   │
+│ File: src/main.rs (~1800→~900 lines)                                                              │
+│ Changes: Replace run_phase1_allpairs, run_phase1_berger, run_phase1_lens with single              │
+│   run_topology_scan(). Add Poincaré/Nil/polyhedral Phase 1 scans. Simplify Phase 2 to use same    │
+│   generic.                                                                                        │
+│ ────────────────────────────────────────                                                          │
+│ File: src/spectral.rs (~777→~1100 lines)                                                          │
+│ Changes: Add solve_poincare_spectral(), solve_nil_spectral(), solve_dihedral_spectral(),          │
+│   solve_tetrahedral_spectral(), solve_octahedral_spectral(). Add selection rule helpers.          │
+│ ────────────────────────────────────────                                                          │
+│ File: src/physics.rs                                                                              │
+│ Changes: Add poincare_allowed_modes(), nil_eigenvalue(), dihedral_allowed(),                      │
+│ tetrahedral_allowed(),                                                                            │
+│   octahedral_allowed(). Add CPU reference functions for new topologies.                           │
+│ ────────────────────────────────────────                                                          │
+│ File: src/verify.rs                                                                               │
+│ Changes: Add verification tests for Poincaré selection rule, Nil eigenvalues.                     │
+│ ────────────────────────────────────────                                                          │
+│ File: README.md                                                                                   │
+│ Changes: Complete rewrite documenting all topologies, all phases, current results.                │
+│                                                                                                   │
+│ New Files                                                                                         │
+│                                                                                                   │
+│ File: kernels/poincare_scan.cu                                                                    │
+│ Purpose: Squashed S³ quotient scan — takes a mode-pair list that's pre-filtered by the selection  │
+│   rule on the Rust side. Reuses compute_berger_path_length from common.cuh (or a new              │
+│   compute_squashed_s3_path_length).                                                               │
+│ ────────────────────────────────────────                                                          │
+│ File: kernels/nil_scan.cu                                                                         │
+│ Purpose: Nil manifold scan — closed-form eigenvalue ratio (no quadrature), similar to             │
+│ lens_scan.cu                                                                                      │
+│   in structure.                                                                                   │
+│                                                                                                   │
+│ No Changes Needed                                                                                 │
+│                                                                                                   │
+│ File: kernels/geodesic_path.cu                                                                    │
+│ Reason: Unchanged — torus scan still works                                                        │
+│ ────────────────────────────────────────                                                          │
+│ File: kernels/berger_sphere.cu                                                                    │
+│ Reason: Unchanged — Berger scan still works                                                       │
+│ ────────────────────────────────────────                                                          │
+│ File: kernels/lens_space.cu                                                                       │
+│ Reason: Unchanged — lens scan still works                                                         │
+│ ────────────────────────────────────────                                                          │
+│ File: kernels/common.cuh                                                                          │
+│ Reason: Unchanged — existing GL quadrature and reduction primitives sufficient. New kernels       │
+│ include                                                                                           │
+│   it as before.                                                                                   │
+│ ────────────────────────────────────────                                                          │
+│ File: src/gpu.rs                                                                                  │
+│ Reason: Unchanged — compile_kernel / compile_kernel_multi already generic                         │
+│ ────────────────────────────────────────                                                          │
+│ File: src/results.rs                                                                              │
+│ Reason: Unchanged — ResultCollector already topology-agnostic                                     │
+│ ────────────────────────────────────────                                                          │
+│ File: src/search.rs                                                                               │
+│ Reason: Unchanged                                                                                 │
+│                                                                                                   │
+│ ---                                                                                               │
+│ Detailed Implementation                                                                           │
+│                                                                                                   │
+│ Step 1: Generic run_topology_scan() in main.rs                                                    │
+│                                                                                                   │
+│ Extract the common scan pattern into:                                                             │
+│                                                                                                   │
+│ struct TopologyScan {                                                                             │
+│     name: &'static str,          // "torus", "berger", etc.                                       │
+│     kernel_path: &'static str,   // "kernels/geodesic_path.cu"                                    │
+│     kernel_func: &'static str,   // "geodesic_scan"                                               │
+│     param_name: &'static str,    // "rho", "λ", "σ", "τ"                                          │
+│     method_prefix: &'static str, // "geodesic", "berger", "lens"                                  │
+│     bands: Vec<(f64, f64, u32, &'static str)>, // (min, max, num_points, desc)                    │
+│     max_winding: i32,                                                                             │
+│ }                                                                                                 │
+│                                                                                                   │
+│ fn run_topology_scan(                                                                             │
+│     gpu: &gpu::GpuContext,                                                                        │
+│     running: &Arc<AtomicBool>,                                                                    │
+│     scan: &TopologyScan,                                                                          │
+│ ) -> Result<SearchResult, Box<dyn std::error::Error>>                                             │
+│                                                                                                   │
+│ This replaces ~600 lines of near-identical code (run_phase1_allpairs + run_phase1_berger +        │
+│ run_phase1_lens) with ~150 lines.                                                                 │
+│                                                                                                   │
+│ Step 2: Mode-Pair Generation Per Topology                                                         │
+│                                                                                                   │
+│ For S³ quotient topologies (Poincaré, dihedral, tetrahedral, octahedral), modes are Berger sphere │
+│  modes filtered by a group-theoretic selection rule. The key function:                            │
+│                                                                                                   │
+│ // In physics.rs                                                                                  │
+│ fn poincare_allowed_modes(max_j: i32) -> Vec<(i32, i32)>  // (j, m) pairs                         │
+│ fn dihedral_allowed_modes(n: i32, max_j: i32) -> Vec<(i32, i32)>                                  │
+│ fn tetrahedral_allowed_modes(max_j: i32) -> Vec<(i32, i32)>                                       │
+│ fn octahedral_allowed_modes(max_j: i32) -> Vec<(i32, i32)>                                        │
+│                                                                                                   │
+│ For the GPU kernel, these filtered mode pairs get uploaded just like the existing winding-pair    │
+│ arrays. The kernel itself is identical to berger_scan — the selection rule filtering happens on   │
+│ the CPU side.                                                                                     │
+│                                                                                                   │
+│ For Nil manifold, mode pairs are (ℓ, j, m) triplets with abelian eigenvalues:                     │
+│                                                                                                   │
+│ λ_{ℓ,j,m}(τ) = (2πℓτ)² + (4π|ℓ|τ)(j + 1/2) + (2πm)²                                               │
+│                                                                                                   │
+│                                                                                                   │
+│ The ratio is closed-form (like lens space), so no quadrature needed.                              │
+│                                                                                                   │
+│ Step 3: New GPU Kernels                                                                           │
+│                                                                                                   │
+│ kernels/poincare_scan.cu — Identical structure to berger_sphere.cu. Since mode pairs are          │
+│ pre-filtered on CPU, the kernel just computes Berger path lengths for the given pairs. Can        │
+│ literally reuse compute_berger_path_length by including common.cuh plus the berger_integrand      │
+│ device function (either copy it or put it in common.cuh).                                         │
+│                                                                                                   │
+│ Actually, the simplest approach: move berger_integrand and compute_berger_path_length into        │
+│ common.cuh so both berger_sphere.cu and poincare_scan.cu can use them. This is a small addition   │
+│ to common.cuh.                                                                                    │
+│                                                                                                   │
+│ kernels/nil_scan.cu — Closed-form arithmetic kernel, similar to lens_space.cu:                    │
+│ // Nil abelian eigenvalue ratio                                                                   │
+│ double e1 = (2*PI*l1*tau)*(2*PI*l1*tau) + ...;                                                    │
+│ double e2 = (2*PI*l2*tau)*(2*PI*l2*tau) + ...;                                                    │
+│ ratio = e1 / e2;                                                                                  │
+│                                                                                                   │
+│ Step 4: Spectral Solvers                                                                          │
+│                                                                                                   │
+│ Poincaré homology sphere S³/2I:                                                                   │
+│ - Selection rule: j must be even (j=2l), and l must be expressible as 6a+10b or 15+6a+10b for     │
+│ non-negative integers a,b                                                                         │
+│ - Surviving j values ≤ 60: {0, 12, 20, 24, 30, 32, 36, 40, 42, 44, 48, 50, 52, 54, 56, 60}        │
+│ - Eigenvalue: same as Berger E(j,m) = j(j+2) + m²(1/λ²-1), but only for allowed j                 │
+│ - Direct solve: same algebraic equation as Berger, but restricted to allowed (j,m) pairs          │
+│                                                                                                   │
+│ Nil manifold:                                                                                     │
+│ - Abelian eigenvalues: λ_{m,n}(τ) = (2πmτ)² + (2πn)²                                              │
+│ - Same structure as flat torus! Direct solve: τ² = (m₁²−T·m₂²)/(T·n₂²−n₁²)                        │
+│ - Non-abelian (Landau levels): more complex, GPU scan better                                      │
+│                                                                                                   │
+│ Binary polyhedral groups (2D_n, 2T, 2O):                                                          │
+│ - All use the same Berger eigenvalue formula                                                      │
+│ - Different selection rules on (j,m):                                                             │
+│   - 2D_n: j even, m ≡ 0 mod n                                                                     │
+│   - 2T: j ∈ {0,6,8,12,14,18,...} specific pattern from representation theory                      │
+│   - 2O: j ∈ {0,8,12,16,18,20,...} specific pattern                                                │
+│                                                                                                   │
+│ Step 5: Rewrite main.rs Pipeline                                                                  │
+│                                                                                                   │
+│ Phase 0: Spectral direct-solve (all topologies, CPU, milliseconds)                                │
+│   - Torus eigenvalues → exact ρ                                                                   │
+│   - Berger eigenvalues → exact λ                                                                  │
+│   - Lens direct → exact σ                                                                         │
+│   - Poincaré eigenvalues → exact λ (filtered modes)                                               │
+│   - Nil abelian → exact τ                                                                         │
+│   - Binary polyhedral → exact λ (filtered modes)                                                  │
+│                                                                                                   │
+│ Phase 1: GPU coarse scan (all topologies in sequence, seconds)                                    │
+│   - Torus geodesic scan (existing)                                                                │
+│   - Berger sphere scan (existing)                                                                 │
+│   - Lens space scan (existing)                                                                    │
+│   - Poincaré scan (NEW — pre-filtered modes)                                                      │
+│   - Nil scan (NEW — closed-form)                                                                  │
+│   All using generic run_topology_scan()                                                           │
+│                                                                                                   │
+│ Phase 2: Topology-aware refinement (seconds to minutes)                                           │
+│   - Ultra-fine + ultra-deep passes around Phase 1 hits                                            │
+│   - Uses same generic with narrower bands                                                         │
+│   - Helmholtz + cavity cross-checks (existing)                                                    │
+│                                                                                                   │
+│ Phase 3: High-precision CPU analysis (minutes)                                                    │
+│   - f64 refinement for all topology types                                                         │
+│   - Newton's method for geodesic topologies                                                       │
+│   - Tau/electron dual-ratio check                                                                 │
+│   - Koide formula check                                                                           │
+│   - Recognizable constant identification                                                          │
+│                                                                                                   │
+│                                                                                                   │
+│ Step 6: README.md Rewrite                                                                         │
+│                                                                                                   │
+│ Complete rewrite covering:                                                                        │
+│ - Scientific context (Williamson/van der Mark, Aspden)                                            │
+│ - All 8+ topologies and their mathematical formulations                                           │
+│ - Phase 0-3 pipeline description                                                                  │
+│ - Current best results per topology                                                               │
+│ - Project structure (updated file list)                                                           │
+│ - Build/run instructions                                                                          │
+│ - TODO list (updated)                                                                             │
+│                                                                                                   │
+│ ---                                                                                               │
+│ Implementation Order                                                                              │
+│                                                                                                   │
+│ 1. Add Berger path-length device functions to kernels/common.cuh                                  │
+│ 2. Create kernels/poincare_scan.cu and kernels/nil_scan.cu                                        │
+│ 3. Add selection rule functions and Nil CPU reference to src/physics.rs                           │
+│ 4. Add Poincaré, Nil, and polyhedral spectral solvers to src/spectral.rs                          │
+│ 5. Add verification tests to src/verify.rs                                                        │
+│ 6. Refactor src/main.rs: extract TopologyScan struct + run_topology_scan()                        │
+│ 7. Wire new topologies into Phase 0, Phase 1, Phase 2, Phase 3                                    │
+│ 8. Rewrite README.md                                                                              │
+│ 9. Build, run tests, run full simulation                                                          │
+│                                                                                                   │
+│ ---                                                                                               │
+│ Verification                                                                                      │
+│                                                                                                   │
+│ 1. cargo test — all existing 28 tests must still pass, plus new topology tests                    │
+│ 2. cargo build --release — clean compilation                                                      │
+│ 3. cargo run --release — full pipeline runs without errors, new topologies produce candidates     │
+│ 4. Check that Poincaré solutions are a strict subset of Berger solutions (same eigenvalue         │
+│ formula, fewer modes)                                                                             │
+│ 5. Check that Nil abelian solutions match flat torus spectral solutions in structure              │
+│ 6. Verify Phase 0 spectral solutions have score < 1e-6 for all new topologies                     │
+│ 7. Verify GPU-CPU consistency for new topology candidates                                         │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────╯

@@ -1,0 +1,280 @@
+warning: constant `TARGET_UNCERTAINTY` is never used
+  --> src/physics.rs:11:11
+   |
+11 | pub const TARGET_UNCERTAINTY: f64 = 0.0000052;
+   |           ^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `ASPDEN_VALUE` is never used
+  --> src/physics.rs:22:11
+   |
+22 | pub const ASPDEN_VALUE: f64 = 206.7683078;
+   |           ^^^^^^^^^^^^
+
+warning: constant `HBAR` is never used
+  --> src/physics.rs:27:11
+   |
+27 | pub const HBAR: f64 = 1.054571817e-34;            // J*s
+   |           ^^^^
+
+warning: methods `best` and `save_json` are never used
+   --> src/results.rs:61:12
+    |
+44  | impl ResultCollector {
+    | -------------------- methods in this implementation
+...
+61  |     pub fn best(&self) -> Option<&GeometryCandidate> {
+    |            ^^^^
+...
+109 |     pub fn save_json(&self, path: &str) -> Result<(), Box<dyn std::error::Error>> {
+    |            ^^^^^^^^^
+
+warning: fields `rho_min`, `rho_max`, `num_rho`, and `max_winding` are never read
+ --> src/search.rs:4:9
+  |
+3 | pub struct Phase1Params {
+  |            ------------ fields in this struct
+4 |     pub rho_min: f64,
+  |         ^^^^^^^
+5 |     pub rho_max: f64,
+  |         ^^^^^^^
+6 |     pub num_rho: u32,
+  |         ^^^^^^^
+7 |     pub max_winding: i32,
+  |         ^^^^^^^^^^^
+
+warning: struct `Phase2Params` is never constructed
+  --> src/search.rs:21:12
+   |
+21 | pub struct Phase2Params {
+   |            ^^^^^^^^^^^^
+
+warning: fields `candidates` and `quadrature_points` are never read
+  --> src/search.rs:31:9
+   |
+30 | pub struct Phase3Params {
+   |            ------------ fields in this struct
+31 |     pub candidates: Vec<GeometryCandidate>,
+   |         ^^^^^^^^^^
+32 |     pub quadrature_points: usize,
+   |         ^^^^^^^^^^^^^^^^^
+
+warning: function `generate_rho_values` is never used
+  --> src/search.rs:45:8
+   |
+45 | pub fn generate_rho_values(min: f64, max: f64, count: u32) -> Vec<f64> {
+   |        ^^^^^^^^^^^^^^^^^^^
+
+warning: function `estimate_search_size` is never used
+  --> src/search.rs:54:8
+   |
+54 | pub fn estimate_search_size(params: &Phase1Params, num_pq: usize) -> u64 {
+   |        ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `generate_batches` is never used
+  --> src/search.rs:60:8
+   |
+60 | pub fn generate_batches(total: u64, batch_size: u64) -> Vec<(u64, u64)> {
+   |        ^^^^^^^^^^^^^^^^
+
+warning: function `check_tau_poincare_spectral` is never used
+   --> src/spectral.rs:747:4
+    |
+747 | fn check_tau_poincare_spectral(lambda: f64, max_j: i32) -> (f64, String) {
+    |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `check_aspden_reproduction` is never used
+   --> src/verify.rs:283:8
+    |
+283 | pub fn check_aspden_reproduction(value: f64) -> bool {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `verify_double_loop_limit` is never used
+   --> src/verify.rs:318:8
+    |
+318 | pub fn verify_double_loop_limit() -> bool {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `verify_path_length_ratio_symmetry` is never used
+   --> src/verify.rs:340:8
+    |
+340 | pub fn verify_path_length_ratio_symmetry() -> bool {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `physics` (bin "physics") generated 14 warnings
+    Finished `release` profile [optimized] target(s) in 0.05s
+     Running `target/release/physics --williamson-only`
+=== Williamson/van der Mark Constrained Search (standalone) ===
+Target muon/electron mass ratio: 206.7682843000
+
+Verifying CPU reference (torus)... OK
+Verifying CPU reference (Berger)... OK
+Verifying Poincaré selection rule... OK
+Verifying Nil eigenvalues... OK
+Verifying polyhedral subset chain... OK
+Verifying Williamson model... OK
+GPU initialized: device 0
+
+
+============================================================
+=== Williamson/van der Mark Constrained Search ===
+============================================================
+Electron = (p_e, 2) double-loop | Target ratio: 206.7682843000
+
+Williamson model constants:
+  Model charge q/e = 2.281829 (paper: ~0.91)
+  Alpha' = 3.799544e-2 (alpha = 7.297353e-3)
+  g-factor = 2.012094 (QED: 2.00231930436)
+  Major radius R = 1.942472e-13 m
+  Compton wavelength = 2.426310e-12 m
+
+--- Phase W0: Spectral Direct-Solve ---
+  Found 34146 geodesic solutions (score < 1e-6) in 100.521s
+  Top spectral solutions:
+    # 1: e=(1,2) mu=(5,414) rho=0.0945272678 ratio=206.7682843000 score=0.00e0
+    # 2: e=(1,2) mu=(11,414) rho=0.0946331623 ratio=206.7682843000 score=0.00e0
+    # 3: e=(1,2) mu=(12,414) rho=0.0946585858 ratio=206.7682843000 score=0.00e0
+    # 4: e=(1,2) mu=(15,414) rho=0.0947482840 ratio=206.7682843000 score=0.00e0
+    # 5: e=(1,2) mu=(20,414) rho=0.0949429503 ratio=206.7682843000 score=0.00e0
+    # 6: e=(1,2) mu=(22,414) rho=0.0950368173 ratio=206.7682843000 score=0.00e0
+    # 7: e=(1,2) mu=(27,414) rho=0.0953121946 ratio=206.7682843000 score=0.00e0
+    # 8: e=(1,2) mu=(28,414) rho=0.0953743437 ratio=206.7682843000 score=0.00e0
+    # 9: e=(1,2) mu=(29,414) rho=0.0954388812 ratio=206.7682843000 score=0.00e0
+    #10: e=(1,2) mu=(37,414) rho=0.0960429972 ratio=206.7682843000 score=0.00e0
+
+--- Phase W1: GPU Constrained Scan ---
+  Muon candidate modes: 250,000 (all (p,q) with 1 <= p,q <= 500)
+  Williamson kernel compiled
+    p_e= 1 band 1/4 (thin torus): 125,000,000,000 evals, best: 4.450840e-10 (1667.98s)
+    p_e= 1 band 2/4 (moderate): 125,000,000,000 evals, best: 1.374190e-10 (1651.40s)
+    p_e= 1 band 3/4 (thick): 50,000,000,000 evals, best: 1.374190e-10 (660.58s)
+    p_e= 1 band 4/4 (near-sphere): 50,000,000,000 evals, best: 1.374190e-10 (660.52s)
+  p_e= 1: 350,000,000,000 evals across 4 bands, best: 1.374190e-10 (4640.48s)
+    p_e= 3 band 1/4 (thin torus): 125,000,000,000 evals, best: 8.415668e-11 (1651.59s)
+    p_e= 3 band 2/4 (moderate): 125,000,000,000 evals, best: 8.415668e-11 (1651.61s)
+    p_e= 3 band 3/4 (thick): 50,000,000,000 evals, best: 8.415668e-11 (660.20s)
+    p_e= 3 band 4/4 (near-sphere): 50,000,000,000 evals, best: 8.415668e-11 (656.89s)
+  p_e= 3: 350,000,000,000 evals across 4 bands, best: 8.415668e-11 (4620.30s)
+    p_e= 5 band 1/4 (thin torus): 125,000,000,000 evals, best: 4.266099e-11 (1651.62s)
+    p_e= 5 band 2/4 (moderate): 125,000,000,000 evals, best: 3.726086e-11 (1651.66s)
+    p_e= 5 band 3/4 (thick): 50,000,000,000 evals, best: 3.726086e-11 (657.41s)
+    p_e= 5 band 4/4 (near-sphere): 50,000,000,000 evals, best: 3.726086e-11 (655.91s)
+  p_e= 5: 350,000,000,000 evals across 4 bands, best: 3.726086e-11 (4616.61s)
+    p_e= 7 band 1/4 (thin torus): 125,000,000,000 evals, best: 5.456968e-12 (1651.63s)
+    p_e= 7 band 2/4 (moderate): 125,000,000,000 evals, best: 5.456968e-12 (1651.23s)
+    p_e= 7 band 3/4 (thick): 50,000,000,000 evals, best: 5.456968e-12 (656.05s)
+    p_e= 7 band 4/4 (near-sphere): 50,000,000,000 evals, best: 5.456968e-12 (655.91s)
+  p_e= 7: 350,000,000,000 evals across 4 bands, best: 5.456968e-12 (4614.81s)
+    p_e= 9 band 1/4 (thin torus): 125,000,000,000 evals, best: 5.456968e-12 (1651.50s)
+    p_e= 9 band 2/4 (moderate): 125,000,000,000 evals, best: 5.456968e-12 (1652.80s)
+    p_e= 9 band 3/4 (thick): 50,000,000,000 evals, best: 5.456968e-12 (660.67s)
+    p_e= 9 band 4/4 (near-sphere): 50,000,000,000 evals, best: 5.456968e-12 (656.22s)
+  p_e= 9: 350,000,000,000 evals across 4 bands, best: 5.456968e-12 (4621.19s)
+    p_e=11 band 1/4 (thin torus): 125,000,000,000 evals, best: 5.456968e-12 (1651.91s)
+    p_e=11 band 2/4 (moderate): 125,000,000,000 evals, best: 5.456968e-12 (1645.99s)
+    p_e=11 band 3/4 (thick): 50,000,000,000 evals, best: 5.456968e-12 (655.95s)
+    p_e=11 band 4/4 (near-sphere): 50,000,000,000 evals, best: 5.456968e-12 (655.96s)
+  p_e=11: 350,000,000,000 evals across 4 bands, best: 5.456968e-12 (4609.81s)
+    p_e=13 band 1/4 (thin torus): 125,000,000,000 evals, best: 5.456968e-12 (1651.59s)
+    p_e=13 band 2/4 (moderate): 125,000,000,000 evals, best: 5.456968e-12 (1644.39s)
+    p_e=13 band 3/4 (thick): 50,000,000,000 evals, best: 5.456968e-12 (655.93s)
+    p_e=13 band 4/4 (near-sphere): 50,000,000,000 evals, best: 5.456968e-12 (655.94s)
+  p_e=13: 350,000,000,000 evals across 4 bands, best: 5.456968e-12 (4607.85s)
+    p_e=15 band 1/4 (thin torus): 125,000,000,000 evals, best: 5.456968e-12 (1659.83s)
+    p_e=15 band 2/4 (moderate): 125,000,000,000 evals, best: 5.456968e-12 (1644.16s)
+    p_e=15 band 3/4 (thick): 50,000,000,000 evals, best: 5.456968e-12 (656.07s)
+    p_e=15 band 4/4 (near-sphere): 50,000,000,000 evals, best: 5.456968e-12 (656.06s)
+  p_e=15: 350,000,000,000 evals across 4 bands, best: 5.456968e-12 (4616.11s)
+
+  Fine refinement around top 20 GPU hits...
+    refine 1/20: e=(7,2) mu=(229,415) best=5.456968e-12 (ultra-deep done)
+    refine 2/20: e=(7,2) mu=(338,417) best=2.160050e-12 (ultra-deep done)
+    refine 3/20: e=(5,2) mu=(41,418) best=1.392664e-12 (ultra-deep done)
+    refine 4/20: e=(5,2) mu=(64,413) best=1.392664e-12 (ultra-deep done)
+    refine 5/20: e=(9,2) mu=(55,414) best=0.000000e0 (ultra-deep done)
+    refine 6/20: e=(3,2) mu=(6,414) best=0.000000e0
+    refine 7/20: e=(1,2) mu=(342,403) best=0.000000e0
+    refine 8/20: e=(3,2) mu=(302,445) best=0.000000e0
+    refine 9/20: e=(1,2) mu=(250,405) best=0.000000e0
+    refine 10/20: e=(9,2) mu=(436,414) best=0.000000e0
+    refine 11/20: e=(3,2) mu=(50,413) best=0.000000e0
+    refine 12/20: e=(13,2) mu=(37,416) best=0.000000e0
+    refine 13/20: e=(11,2) mu=(423,429) best=0.000000e0
+    refine 14/20: e=(1,2) mu=(239,413) best=0.000000e0
+    refine 15/20: e=(15,2) mu=(442,417) best=0.000000e0
+    refine 16/20: e=(3,2) mu=(276,417) best=0.000000e0
+    refine 17/20: e=(9,2) mu=(264,416) best=0.000000e0
+    refine 18/20: e=(7,2) mu=(224,447) best=0.000000e0
+    refine 19/20: e=(11,2) mu=(500,499) best=0.000000e0
+    refine 20/20: e=(13,2) mu=(218,500) best=0.000000e0
+
+Phase W1 complete: 36954.641s, 2,800,550,000,000 evaluations, best score: 0.000000e0
+
+--- Phase W2: Newton Refinement ---
+  Refining 59 candidates with Newton's method...
+  Best Newton residual: 0.000000e0
+    # 1: e=(1,2) mu=(11,414) rho=0.09463316232666 ratio=206.76828430000000 residual=0.000000e0
+    # 2: e=(1,2) mu=(12,414) rho=0.09465858578908 ratio=206.76828430000000 residual=0.000000e0
+    # 3: e=(1,2) mu=(22,414) rho=0.09503681733879 ratio=206.76828430000000 residual=0.000000e0
+    # 4: e=(1,2) mu=(29,414) rho=0.09543888117681 ratio=206.76828430000000 residual=0.000000e0
+    # 5: e=(7,2) mu=(338,417) rho=0.03809544406100 ratio=206.76828430000000 residual=0.000000e0
+    # 6: e=(5,2) mu=(41,418) rho=0.05892416087402 ratio=206.76828430000000 residual=0.000000e0
+    # 7: e=(3,2) mu=(6,414) rho=0.03156410512244 ratio=206.76828430000000 residual=0.000000e0
+    # 8: e=(9,2) mu=(264,416) rho=0.02453645672566 ratio=206.76828430000000 residual=0.000000e0
+    # 9: e=(3,2) mu=(276,417) rho=0.09632658926598 ratio=206.76828430000000 residual=0.000000e0
+    #10: e=(13,2) mu=(37,416) rho=0.01681789067189 ratio=206.76828430000000 residual=0.000000e0
+  Newton refinement: 0.785s
+
+--- Phase W3: Physical Validation ---
+  Validated 42 candidates in 5.790s
+
+============================================================
+=== Williamson Constrained Search Results ===
+============================================================
+Total time: 37061.736s
+  Phase W0 (spectral):  100.521s, 34146 solutions
+  Phase W1 (GPU):       36954.641s, 2,800,550,000,000 evaluations
+  Phase W2 (Newton):    0.785s, 58 refined
+  Phase W3 (validate):  5.790s, 42 validated
+
+Williamson Model Constants:
+  Charge ratio q/e  = 2.281829
+  g-factor          = 2.012094
+  Major radius R    = 1.942472e-13 m
+  alpha'            = 3.799544e-2
+
+Top 10 Williamson Candidates:
+------------------------------------------------------------------------------------------------------------------------
+  # e(p,2)  mu(p,q)    rho            ratio            score   L_electron       L_muon  tau_score    tau
+------------------------------------------------------------------------------------------------------------------------
+  1 ( 1,2) ( 11,414) 0.0946331623 206.768284300000 0.000000e0 12.58049312 2601.24697706 3.45e3 (50,50)
+  2 ( 1,2) ( 12,414) 0.0946585858 206.768284300000 0.000000e0 12.58050073 2601.24855243 3.45e3 (50,50)
+  3 ( 1,2) ( 22,414) 0.0950368173 206.768284300000 0.000000e0 12.58061433 2601.27204032 3.45e3 (50,50)
+  4 ( 1,2) ( 29,414) 0.0954388812 206.768284300000 0.000000e0 12.58073559 2601.29711251 3.45e3 (50,50)
+  5 ( 7,2) (338,417) 0.0380954441 206.768284300000 0.000000e0 12.67765982 2621.33797032 3.45e3 (50,50)
+  6 ( 5,2) ( 41,418) 0.0589241609 206.768284300000 0.000000e0 12.70221596 2626.41540039 3.45e3 (50,50)
+  7 ( 3,2) (  6,414) 0.0315641051 206.768284300000 0.000000e0 12.58045448 2601.23898948 3.45e3 (50,50)
+  8 ( 9,2) (264,416) 0.0245364567 206.768284300000 0.000000e0 12.64276119 2614.12203906 3.45e3 (50,50)
+  9 ( 3,2) (276,417) 0.0963265893 206.768284300000 0.000000e0 12.69746308 2625.43265669 3.45e3 (50,50)
+ 10 (13,2) ( 37,416) 0.0168178907 206.768284300000 0.000000e0 12.64124245 2613.80801237 3.45e3 (50,50)
+
+=== Best Williamson Candidate ===
+  Electron mode:  (1, 2)
+  Muon mode:      (11, 414)
+  Torus rho:      0.09463316232666
+  L_electron:     12.5804931151
+  L_muon:         2601.2469770633
+  Ratio L_mu/L_e: 206.76828430000000
+  Score:          0.000000e0
+  Physical R:     1.942472e-13 m
+  Physical r:     1.838223e-14 m (tube radius)
+  Charge q/e:     2.281829
+  g-factor:       2.012094
+  Tau mode:       none found (best score 3.45e3)
+
+Results saved to williamson_results.json
+
+Williamson search found 42 candidates, best score: 0.000000e0
+
+Total time: 37061.737s

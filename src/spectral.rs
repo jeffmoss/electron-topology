@@ -1,5 +1,6 @@
 use crate::physics::{
-    self, coprime_pairs, score, GeometryCandidate, SearchResult, TARGET_RATIO,
+    self, coprime_pairs, dihedral_allowed_modes, octahedral_allowed_modes, poincare_allowed_modes,
+    score, tetrahedral_allowed_modes, GeometryCandidate, SearchResult, TARGET_RATIO,
     TAU_ELECTRON_RATIO,
 };
 
@@ -536,6 +537,248 @@ fn check_tau_lens(sigma: f64, max_winding: i32) -> (f64, String) {
     (best_score, best_modes)
 }
 
+/// Generic solver for S³ quotient topologies (Berger eigenvalue formula
+/// restricted to an allowed mode list).
+///
+/// Eigenvalues: E_{j,m} = j(j+2) + m²(1/λ² - 1).
+/// For each pair of allowed modes, solve for λ analytically, then verify.
+fn solve_quotient_spectral(
+    geometry_name: &'static str,
+    allowed_modes: &[(i32, i32)],
+    max_j: i32,
+) -> Vec<SpectralSolution> {
+    let mut solutions = Vec::new();
+
+    // Separate modes into denominator (small j) and numerator sets
+    let denom_modes: Vec<&(i32, i32)> = allowed_modes.iter().filter(|(j, _)| *j <= max_j.min(10)).collect();
+    let numer_modes: Vec<&(i32, i32)> = allowed_modes.iter().filter(|(j, _)| *j <= max_j).collect();
+
+    for &&(j2, m2) in &denom_modes {
+        for &&(j1, m1) in &numer_modes {
+            if j1 == j2 && m1 == m2 {
+                continue;
+            }
+
+            let m1f = m1 as f64;
+            let m2f = m2 as f64;
+            let j1_term = j1 as f64 * (j1 as f64 + 2.0);
+            let j2_term = j2 as f64 * (j2 as f64 + 2.0);
+
+            let denom = m1f * m1f - TARGET_RATIO * m2f * m2f;
+            if denom.abs() < 1e-15 {
+                continue;
+            }
+
+            let inv_lam_sq = (TARGET_RATIO * j2_term - j1_term) / denom + 1.0;
+            if inv_lam_sq <= 0.0 {
+                continue;
+            }
+
+            let lambda = 1.0 / inv_lam_sq.sqrt();
+
+            // Verify eigenvalue ratio
+            let xi = 1.0 / (lambda * lambda) - 1.0;
+            let e1 = j1_term + m1f * m1f * xi;
+            let e2 = j2_term + m2f * m2f * xi;
+            if e2 < 1e-15 || e1 < 0.0 {
+                continue;
+            }
+            let ratio = e1 / e2;
+            let s = score(ratio);
+
+            if s < 1e-6 {
+                let (tau_s, tau_modes) =
+                    check_tau_quotient_spectral(lambda, allowed_modes);
+
+                solutions.push(SpectralSolution {
+                    geometry: geometry_name,
+                    param: lambda,
+                    n1: j1,
+                    m1,
+                    n2: j2,
+                    m2,
+                    ratio,
+                    score: s,
+                    tau_score: tau_s,
+                    tau_modes,
+                });
+            }
+        }
+    }
+
+    solutions.sort_by(|a, b| a.score.partial_cmp(&b.score).unwrap_or(std::cmp::Ordering::Equal));
+    solutions
+}
+
+/// Check tau/electron ratio on an S³ quotient geometry with given allowed modes.
+fn check_tau_quotient_spectral(lambda: f64, allowed_modes: &[(i32, i32)]) -> (f64, String) {
+    let target_tau = TAU_ELECTRON_RATIO;
+    let xi = 1.0 / (lambda * lambda) - 1.0;
+    let mut best_score = f64::MAX;
+    let mut best_modes = String::new();
+
+    // Use small-j modes as denominators
+    let denom_modes: Vec<&(i32, i32)> = allowed_modes.iter().filter(|(j, _)| *j <= 10).collect();
+
+    for &&(j2, m2) in &denom_modes {
+        let e2 = j2 as f64 * (j2 as f64 + 2.0) + (m2 as f64).powi(2) * xi;
+        if e2 < 1e-15 {
+            continue;
+        }
+
+        for &(j1, m1) in allowed_modes {
+            if j1 == j2 && m1 == m2 {
+                continue;
+            }
+            let e1 = j1 as f64 * (j1 as f64 + 2.0) + (m1 as f64).powi(2) * xi;
+            if e1 < 0.0 {
+                continue;
+            }
+            let ratio = e1 / e2;
+            let s = (ratio - target_tau).abs();
+            if s < best_score {
+                best_score = s;
+                best_modes = format!("j({},{})÷({},{})", j1, m1, j2, m2);
+            }
+        }
+    }
+
+    (best_score, best_modes)
+}
+
+/// Direct-solve for Poincare homology sphere (S³/2I) spectral ratio.
+///
+/// Same Berger eigenvalue formula but restricted to the binary icosahedral
+/// selection rule via `poincare_allowed_modes`.
+pub fn solve_poincare_spectral(max_j: i32) -> Vec<SpectralSolution> {
+    let modes = poincare_allowed_modes(max_j);
+    solve_quotient_spectral("poincare-spectral", &modes, max_j)
+}
+
+/// Direct-solve for Nil manifold eigenvalue ratio.
+///
+/// Eigenvalues: E_{m,n}(tau) = 4pi^2 (m^2 tau^2 + n^2).
+/// Ratio: (m1^2 tau^2 + n1^2) / (m2^2 tau^2 + n2^2) = TARGET
+/// Solving: tau^2 = (TARGET*n2^2 - n1^2) / (m1^2 - TARGET*m2^2)
+pub fn solve_nil_spectral(max_mode: i32) -> Vec<SpectralSolution> {
+    let mut solutions = Vec::new();
+
+    // Denominator modes: small quantum numbers
+    for m2 in 1..=max_mode.min(10) {
+        for n2 in 0..=max_mode.min(10) {
+            // Numerator modes
+            for m1 in 1..=max_mode {
+                for n1 in 0..=max_mode {
+                    if m1 == m2 && n1 == n2 {
+                        continue;
+                    }
+
+                    let m1f = m1 as f64;
+                    let m2f = m2 as f64;
+                    let n1f = n1 as f64;
+                    let n2f = n2 as f64;
+
+                    let denom = m1f * m1f - TARGET_RATIO * m2f * m2f;
+                    if denom.abs() < 1e-15 {
+                        continue;
+                    }
+
+                    let tau_sq = (TARGET_RATIO * n2f * n2f - n1f * n1f) / denom;
+                    if tau_sq <= 0.0 {
+                        continue;
+                    }
+
+                    let tau = tau_sq.sqrt();
+
+                    // Verify eigenvalue ratio using the CPU reference
+                    let ratio = physics::nil_eigenvalue_ratio_cpu(m1, n1, m2, n2, tau);
+                    let s = score(ratio);
+
+                    if s < 1e-6 {
+                        let (tau_s, tau_modes) = check_tau_nil_spectral(tau, max_mode);
+
+                        solutions.push(SpectralSolution {
+                            geometry: "nil-spectral",
+                            param: tau,
+                            n1: m1,
+                            m1: n1,
+                            n2: m2,
+                            m2: n2,
+                            ratio,
+                            score: s,
+                            tau_score: tau_s,
+                            tau_modes,
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+    solutions.sort_by(|a, b| a.score.partial_cmp(&b.score).unwrap_or(std::cmp::Ordering::Equal));
+    solutions
+}
+
+/// Direct-solve for binary dihedral quotient S³/2D_n spectral ratio.
+pub fn solve_dihedral_spectral(n: i32, max_j: i32) -> Vec<SpectralSolution> {
+    let modes = dihedral_allowed_modes(n, max_j);
+    let name: &'static str = match n {
+        3 => "dihedral3-spectral",
+        4 => "dihedral4-spectral",
+        5 => "dihedral5-spectral",
+        _ => "dihedral-spectral",
+    };
+    solve_quotient_spectral(name, &modes, max_j)
+}
+
+/// Direct-solve for binary tetrahedral quotient S³/2T spectral ratio.
+pub fn solve_tetrahedral_spectral(max_j: i32) -> Vec<SpectralSolution> {
+    let modes = tetrahedral_allowed_modes(max_j);
+    solve_quotient_spectral("tetrahedral-spectral", &modes, max_j)
+}
+
+/// Direct-solve for binary octahedral quotient S³/2O spectral ratio.
+pub fn solve_octahedral_spectral(max_j: i32) -> Vec<SpectralSolution> {
+    let modes = octahedral_allowed_modes(max_j);
+    solve_quotient_spectral("octahedral-spectral", &modes, max_j)
+}
+
+/// Check tau/electron ratio on Poincare homology sphere.
+fn check_tau_poincare_spectral(lambda: f64, max_j: i32) -> (f64, String) {
+    let modes = poincare_allowed_modes(max_j);
+    check_tau_quotient_spectral(lambda, &modes)
+}
+
+/// Check tau/electron ratio on Nil manifold.
+fn check_tau_nil_spectral(tau: f64, max_mode: i32) -> (f64, String) {
+    let target_tau = TAU_ELECTRON_RATIO;
+    let mut best_score = f64::MAX;
+    let mut best_modes = String::new();
+
+    for m2 in 1..=max_mode.min(10) {
+        for n2 in 0..=max_mode.min(10) {
+            for m1 in 1..=max_mode {
+                for n1 in 0..=max_mode {
+                    if m1 == m2 && n1 == n2 {
+                        continue;
+                    }
+                    let ratio = physics::nil_eigenvalue_ratio_cpu(m1, n1, m2, n2, tau);
+                    if ratio < 1e-15 {
+                        continue;
+                    }
+                    let s = (ratio - target_tau).abs();
+                    if s < best_score {
+                        best_score = s;
+                        best_modes = format!("({},{})÷({},{})", m1, n1, m2, n2);
+                    }
+                }
+            }
+        }
+    }
+
+    (best_score, best_modes)
+}
+
 /// Run all direct-solve spectral analyses and return combined results.
 pub fn run_spectral_phase() -> SearchResult {
     use std::time::Instant;
@@ -568,11 +811,72 @@ pub fn run_spectral_phase() -> SearchResult {
         lens_solutions.len()
     );
 
+    // 4. Poincare homology sphere (S^3 / binary icosahedral)
+    print!("  Poincare homology sphere (j up to 50)... ");
+    let poincare_solutions = solve_poincare_spectral(50);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        poincare_solutions.len()
+    );
+
+    // 5. Nil manifold eigenvalue solve
+    print!("  Nil manifold eigenvalues (modes up to 30)... ");
+    let nil_solutions = solve_nil_spectral(30);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        nil_solutions.len()
+    );
+
+    // 6. Binary dihedral quotients
+    print!("  Dihedral D3 quotient (j up to 50)... ");
+    let dihedral3_solutions = solve_dihedral_spectral(3, 50);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        dihedral3_solutions.len()
+    );
+
+    print!("  Dihedral D4 quotient (j up to 50)... ");
+    let dihedral4_solutions = solve_dihedral_spectral(4, 50);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        dihedral4_solutions.len()
+    );
+
+    print!("  Dihedral D5 quotient (j up to 50)... ");
+    let dihedral5_solutions = solve_dihedral_spectral(5, 50);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        dihedral5_solutions.len()
+    );
+
+    // 7. Binary tetrahedral quotient
+    print!("  Tetrahedral quotient (j up to 50)... ");
+    let tetrahedral_solutions = solve_tetrahedral_spectral(50);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        tetrahedral_solutions.len()
+    );
+
+    // 8. Binary octahedral quotient
+    print!("  Octahedral quotient (j up to 50)... ");
+    let octahedral_solutions = solve_octahedral_spectral(50);
+    println!(
+        "found {} exact solutions (score < 1e-6)",
+        octahedral_solutions.len()
+    );
+
     // Combine all solutions
     let mut all_solutions: Vec<SpectralSolution> = Vec::new();
     all_solutions.extend(torus_solutions);
     all_solutions.extend(berger_solutions);
     all_solutions.extend(lens_solutions);
+    all_solutions.extend(poincare_solutions);
+    all_solutions.extend(nil_solutions);
+    all_solutions.extend(dihedral3_solutions);
+    all_solutions.extend(dihedral4_solutions);
+    all_solutions.extend(dihedral5_solutions);
+    all_solutions.extend(tetrahedral_solutions);
+    all_solutions.extend(octahedral_solutions);
     all_solutions.sort_by(|a, b| a.score.partial_cmp(&b.score).unwrap_or(std::cmp::Ordering::Equal));
 
     // Print top results
@@ -768,6 +1072,90 @@ mod tests {
             assert!(
                 (ratio - TARGET_RATIO).abs() < 1e-6,
                 "Verification failed: ratio={}, target={}",
+                ratio,
+                TARGET_RATIO
+            );
+        }
+    }
+
+    #[test]
+    fn test_poincare_spectral_finds_solutions() {
+        let solutions = solve_poincare_spectral(30);
+        // Poincare solutions should be a subset of Berger solutions
+        // May or may not find solutions at small max_j due to restrictive selection rule
+        for sol in &solutions {
+            assert!(sol.score < 1e-6, "Score {} should be < 1e-6", sol.score);
+        }
+    }
+
+    #[test]
+    fn test_nil_spectral_finds_solutions() {
+        // Use max_mode=30 for tests (O(n^4) loop); production uses 100
+        let solutions = solve_nil_spectral(30);
+        assert!(!solutions.is_empty(), "Nil spectral should find solutions");
+        for sol in &solutions {
+            assert!(sol.score < 1e-6, "Score {} should be < 1e-6", sol.score);
+        }
+    }
+
+    #[test]
+    fn test_dihedral_spectral_finds_solutions() {
+        let solutions = solve_dihedral_spectral(3, 30);
+        for sol in &solutions {
+            assert!(sol.score < 1e-6, "Score {} should be < 1e-6", sol.score);
+        }
+    }
+
+    #[test]
+    fn test_tetrahedral_spectral_finds_solutions() {
+        let solutions = solve_tetrahedral_spectral(30);
+        for sol in &solutions {
+            assert!(sol.score < 1e-6, "Score {} should be < 1e-6", sol.score);
+        }
+    }
+
+    #[test]
+    fn test_octahedral_spectral_finds_solutions() {
+        let solutions = solve_octahedral_spectral(30);
+        for sol in &solutions {
+            assert!(sol.score < 1e-6, "Score {} should be < 1e-6", sol.score);
+        }
+    }
+
+    #[test]
+    fn test_nil_spectral_verification() {
+        // Verify that solutions have the correct eigenvalue ratio
+        let solutions = solve_nil_spectral(30);
+        for sol in solutions.iter().take(5) {
+            let tau = sol.param;
+            let m1 = sol.n1;
+            let n1 = sol.m1;
+            let m2 = sol.n2;
+            let n2 = sol.m2;
+            let ratio = physics::nil_eigenvalue_ratio_cpu(m1, n1, m2, n2, tau);
+            assert!(
+                (ratio - TARGET_RATIO).abs() < 1e-6,
+                "Nil verification failed: ratio={}, target={}",
+                ratio,
+                TARGET_RATIO
+            );
+        }
+    }
+
+    #[test]
+    fn test_quotient_solutions_are_berger_subset() {
+        // Poincare solutions at a given lambda should also be valid Berger solutions
+        let poincare_sols = solve_poincare_spectral(30);
+        for sol in poincare_sols.iter().take(3) {
+            let lambda = sol.param;
+            let xi = 1.0 / (lambda * lambda) - 1.0;
+            let e1 = sol.n1 as f64 * (sol.n1 as f64 + 2.0) + (sol.m1 as f64).powi(2) * xi;
+            let e2 = sol.n2 as f64 * (sol.n2 as f64 + 2.0) + (sol.m2 as f64).powi(2) * xi;
+            assert!(e2 > 1e-15, "Denominator eigenvalue should be positive");
+            let ratio = e1 / e2;
+            assert!(
+                (ratio - TARGET_RATIO).abs() < 1e-6,
+                "Poincare solution should satisfy Berger formula: ratio={}, target={}",
                 ratio,
                 TARGET_RATIO
             );

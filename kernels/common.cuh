@@ -196,6 +196,30 @@ __device__ double compute_path_length(int p, int q, double rho) {
 }
 
 // ---------------------------------------------------------------------------
+// Device function: Berger sphere path-length integrand
+//
+// integrand(t) = sqrt( q^2 + lambda^2*p^2 + 2*lambda^2*p*q*cos(q*t) )
+// ---------------------------------------------------------------------------
+__device__ double berger_integrand(double t, int p, int q, double lambda) {
+    double pf = (double)p;
+    double qf = (double)q;
+    double lam2 = lambda * lambda;
+    double cos_qt = cos(qf * t);
+    return sqrt(qf * qf + lam2 * pf * pf + 2.0 * lam2 * pf * qf * cos_qt);
+}
+
+// ---------------------------------------------------------------------------
+// Device function: compute Berger sphere path length via 64-point GL quadrature
+// ---------------------------------------------------------------------------
+__device__ double compute_berger_path_length(int p, int q, double lambda) {
+    double sum = 0.0;
+    for (int i = 0; i < 64; i++) {
+        sum += GL_WEIGHTS[i] * berger_integrand(GL_NODES[i], p, q, lambda);
+    }
+    return sum;
+}
+
+// ---------------------------------------------------------------------------
 // Warp-level reduction: find minimum score, carrying associated CandidateResult
 //
 // After this call, lane 0 of the warp holds the best (lowest-score) candidate.

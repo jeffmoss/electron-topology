@@ -25,7 +25,11 @@
       "WebFetch(domain:groupprops.subwiki.org)",
       "WebFetch(domain:people.maths.bris.ac.uk)",
       "WebFetch(domain:golem.ph.utexas.edu)",
-      "WebFetch(domain:link.springer.com)"
+      "WebFetch(domain:link.springer.com)",
+      "Bash(tee:*)",
+      "Bash(nvidia-smi:*)",
+      "Bash(ps:*)",
+      "Bash(kill:*)"
     ]
   }
 }
