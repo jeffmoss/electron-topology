@@ -15,7 +15,17 @@
       "Bash(dpkg:*)",
       "Bash(sudo apt install:*)",
       "Bash(curl:*)",
-      "Bash(/home/jmoss/.local/bin/pip install:*)"
+      "Bash(/home/jmoss/.local/bin/pip install:*)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "WebFetch(domain:ncatlab.org)",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:www.math.miami.edu)",
+      "WebFetch(domain:en-academic.com)",
+      "WebFetch(domain:nlab-pages.s3.us-east-2.amazonaws.com)",
+      "WebFetch(domain:groupprops.subwiki.org)",
+      "WebFetch(domain:people.maths.bris.ac.uk)",
+      "WebFetch(domain:golem.ph.utexas.edu)",
+      "WebFetch(domain:link.springer.com)"
     ]
   }
 }
