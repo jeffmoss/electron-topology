@@ -84,6 +84,49 @@ pub fn path_length_cpu(p: i32, q: i32, rho: f64, num_points: usize) -> f64 {
     sum * dt
 }
 
+/// CPU reference implementation of Berger sphere path length using trapezoidal rule.
+///
+/// The Berger sphere is S^3 with the Hopf fiber scaled by parameter lambda.
+/// A (p,q) closed curve has path length:
+///   L(p, q, lambda) = integral_0^{2pi} sqrt( q^2 + lambda^2*p^2 + 2*lambda^2*p*q*cos(q*t) ) dt
+///
+/// Special cases:
+///   L(1, 0, lambda) = 2*pi*lambda   (pure Hopf fiber)
+///   L(0, 1, lambda) = 2*pi          (base S^2 great circle)
+pub fn berger_path_length_cpu(p: i32, q: i32, lambda: f64, num_points: usize) -> f64 {
+    let n = num_points;
+    let dt = 2.0 * std::f64::consts::PI / n as f64;
+    let pf = p as f64;
+    let qf = q as f64;
+    let lam2 = lambda * lambda;
+
+    let integrand = |t: f64| -> f64 {
+        let cos_qt = (qf * t).cos();
+        (qf * qf + lam2 * pf * pf + 2.0 * lam2 * pf * qf * cos_qt).sqrt()
+    };
+
+    // Trapezoidal rule
+    let mut sum = 0.5 * (integrand(0.0) + integrand(2.0 * std::f64::consts::PI));
+    for i in 1..n {
+        sum += integrand(i as f64 * dt);
+    }
+    sum * dt
+}
+
+/// CPU reference implementation of lens space L(n,1) path-length ratio.
+///
+/// On a lens space with shape parameter sigma, closed geodesics with
+/// winding numbers (a,b) have length proportional to:
+///   sqrt(a^2 * sigma^2 + b^2 * (1 - sigma^2))
+///
+/// The ratio L1/L2 is independent of n (the common 2*pi/n factor cancels).
+pub fn lens_path_ratio_cpu(a1: i32, b1: i32, a2: i32, b2: i32, sigma: f64) -> f64 {
+    let s2 = sigma * sigma;
+    let l1 = ((a1 as f64).powi(2) * s2 + (b1 as f64).powi(2) * (1.0 - s2)).sqrt();
+    let l2 = ((a2 as f64).powi(2) * s2 + (b2 as f64).powi(2) * (1.0 - s2)).sqrt();
+    if l2 > 1e-15 { l1 / l2 } else { 0.0 }
+}
+
 fn gcd(a: i32, b: i32) -> i32 {
     let (mut a, mut b) = (a.abs(), b.abs());
     while b != 0 {
@@ -151,5 +194,37 @@ mod tests {
         let rho = 0.3;
         let l = path_length_cpu(0, 1, rho, 1000);
         assert!((l - 2.0 * std::f64::consts::PI * (1.0 + rho)).abs() < 0.01);
+    }
+
+    #[test]
+    fn test_berger_path_length_fiber() {
+        // (1,0): pure Hopf fiber, length = 2*pi*lambda
+        let lambda = 0.5;
+        let l = berger_path_length_cpu(1, 0, lambda, 1000);
+        assert!((l - 2.0 * std::f64::consts::PI * lambda).abs() < 0.01);
+    }
+
+    #[test]
+    fn test_berger_path_length_base() {
+        // (0,1): base great circle, length = 2*pi
+        let lambda = 2.0;
+        let l = berger_path_length_cpu(0, 1, lambda, 1000);
+        assert!((l - 2.0 * std::f64::consts::PI).abs() < 0.01);
+    }
+
+    #[test]
+    fn test_lens_round_sphere() {
+        // On round S^3 (sigma = 1/sqrt(2)), L(a,b) = sqrt((a^2+b^2)/2)
+        let sigma = std::f64::consts::FRAC_1_SQRT_2;
+        let ratio = lens_path_ratio_cpu(10, 3, 1, 1, sigma);
+        let expected = (100.0 + 9.0_f64).sqrt() / (1.0 + 1.0_f64).sqrt();
+        assert!((ratio - expected).abs() < 1e-10);
+    }
+
+    #[test]
+    fn test_lens_degenerate() {
+        // sigma -> 1: only a matters, ratio = a1/a2
+        let ratio = lens_path_ratio_cpu(207, 0, 1, 0, 0.9999);
+        assert!((ratio - 207.0).abs() < 0.01);
     }
 }

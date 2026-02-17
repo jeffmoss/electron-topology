@@ -1,4 +1,4 @@
-use crate::physics::{path_length_cpu, ASPDEN_VALUE};
+use crate::physics::{berger_path_length_cpu, path_length_cpu, ASPDEN_VALUE};
 
 /// Test known analytical results for torus knot path lengths.
 ///
@@ -45,6 +45,44 @@ pub fn verify_known_values() -> bool {
     }
 
     ok_10 && ok_01 && ok_11
+}
+
+/// Test known analytical results for Berger sphere path lengths.
+///
+/// Returns true if all checks pass within tolerance.
+pub fn verify_berger_values() -> bool {
+    let tol = 1e-3;
+    let pi2 = 2.0 * std::f64::consts::PI;
+    let n = 10_000;
+    let mut all_ok = true;
+
+    // (1,0): pure Hopf fiber, length = 2*pi*lambda for several lambda values
+    for &lambda in &[0.25, 0.5, 1.0, 2.0, 5.0] {
+        let l = berger_path_length_cpu(1, 0, lambda, n);
+        let expected = pi2 * lambda;
+        if (l - expected).abs() > tol {
+            eprintln!(
+                "VERIFY FAIL: Berger (1,0) lambda={} path = {:.8}, expected {:.8}",
+                lambda, l, expected
+            );
+            all_ok = false;
+        }
+    }
+
+    // (0,1): base great circle, length = 2*pi for several lambda values
+    for &lambda in &[0.25, 0.5, 1.0, 2.0, 5.0] {
+        let l = berger_path_length_cpu(0, 1, lambda, n);
+        let expected = pi2;
+        if (l - expected).abs() > tol {
+            eprintln!(
+                "VERIFY FAIL: Berger (0,1) lambda={} path = {:.8}, expected {:.8}",
+                lambda, l, expected
+            );
+            all_ok = false;
+        }
+    }
+
+    all_ok
 }
 
 /// High-precision CPU reference path length using 1000-point quadrature.
@@ -108,6 +146,11 @@ mod tests {
         // (1,0) at rho=0.5: path = 2*pi*0.5 = pi
         let l = cpu_reference_check(0.5, 1, 0);
         assert!((l - pi2 * 0.5).abs() < 0.01);
+    }
+
+    #[test]
+    fn test_verify_berger_values() {
+        assert!(verify_berger_values());
     }
 
     #[test]
